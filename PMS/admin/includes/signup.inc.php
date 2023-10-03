@@ -26,10 +26,29 @@ if (isset($_POST['register'])) {
     include "../classes/signup.classes.php";
     include "../controllers/signup.controller.php";
 
-    $signup = new SignupController($emp_fname, $emp_mname, $emp_lname, $emp_fingerprint, $role_id, $processed_by);
+    $signup = new SignupEmpController($emp_fname, $emp_mname, $emp_lname, $emp_fingerprint, $role_id, $processed_by);
 
 
-    $signup->signupUser();
+    $signup->signup();
 
     header("location: ../pages/employees.php");
 }
+if (isset($_POST['position'])) {
+
+    $role_name = $_POST['fname'];
+    $role_rate = $_POST['mname'];
+    $processed_by = $_POST['processed-by'];
+
+
+    include "../classes/db.classes.php";
+    include "../classes/signup.classes.php";
+    include "../controllers/signup.controller.php";
+
+    $addpos = new AddPositionController($role_name, $role_rate, $processed_by);
+
+
+    $addpos->setPositionHandler();
+
+    header("location: ../pages/positions.php");
+}
+

@@ -1,6 +1,6 @@
 <?php
 
-class Signup extends Db
+class SignupEmp extends Db
 {
 
     protected function setUser($emp_fname, $emp_mname, $emp_lname, $emp_fingerprint, $role_id, $processed_by)
@@ -19,65 +19,21 @@ class Signup extends Db
     }
 }
 
-class SignupUser extends Db
+class AddPosition extends Db
 {
 
-    protected function setUserEmp($empID, $position, $username, $password, $userstatus, $processed_by, $create)
+    protected function setPosition($role_name, $role_rate, $processed_by)
     {
 
-        $stmt = $this->connect()->prepare('INSERT INTO tbl_users( emp_id, username, password, role_id, status, processed_by) VALUES  (?,?,?,?,?,?);');
-
-        $pwdHashed = password_hash($password, PASSWORD_DEFAULT);
-
-        if (!$stmt->execute(array($empID, $username, $pwdHashed, $position, $userstatus, $processed_by))) {
+        $stmt = $this->connect()->prepare('INSERT INTO tbl_roles( role_name, role_rate, processed_by) VALUES  (?,?,?);');
+        if (!$stmt->execute(array($role_name, $role_rate, $processed_by))) {
             $stmt = null;
             header("location: ../index.php?error=StatementFailed");
-            exit();
-        }
-
-        $stmt = $this->connect()->prepare('INSERT INTO tbl_logs (action, processed_by) VALUES (?,?);');
-
-        if (!$stmt->execute(array($create, $processed_by))) {
-            $stmt = null;
-            header("location: ../admin/EmployeeManagement.php?error=StatementFailed");
             exit();
         }
         $stmt = null;
     }
 
-    protected function checkUser($username)
-    {
-        $stmt = $this->connect()->prepare('SELECT user_id FROM tbl_users WHERE username = ?');
-
-        if (!$stmt->execute(array($username))) {
-            $stmt = null;
-            header("location: ../index.php?error=StatementFailed");
-            exit();
-        }
-        $resultCheck = '';
-        if ($stmt->rowCount() > 0) {
-            $resultCheck = false;
-        } else {
-            $resultCheck = true;
-        }
-        return $resultCheck;
-    }
-    // protected function checkEmail($emailAdd){
-    //     $stmt = $this->connect()->prepare('SELECT emp_id FROM tbl_employees WHERE  email=?');
-
-    //     if (!$stmt->execute(array($emailAdd))) {
-    //         $stmt = null;
-    //         header("location: ../admin/index.php?error=StatementFailed");
-    //         exit();
-    //     }
-    //     $resultCheck = true;
-    //     if ($stmt->rowCount() > 0) {
-    //         $resultCheck = false;
-    //     } else {
-    //         $resultCheck = true;
-    //     }
-    //     return $resultCheck;
-    // }
 }
 
 class addCategory extends Db

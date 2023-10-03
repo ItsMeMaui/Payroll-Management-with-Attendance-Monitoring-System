@@ -1,7 +1,7 @@
 
 <?php
 
-class SignupController extends Signup
+class SignupEmpController extends SignupEmp
 {
 
     private $emp_fname;
@@ -22,7 +22,7 @@ class SignupController extends Signup
         $this->processed_by = $processed_by;
     }
 
-    public function signupUser()
+    public function signup()
     {
 
 
@@ -75,3 +75,59 @@ class SignupController extends Signup
         return $result;
     }
 }
+
+class AddPositionController extends AddPosition
+{
+
+    private $role_name;
+    private $role_rate;
+    private $processed_by;
+
+    public function __construct($role_name, $role_rate, $processed_by)
+    {
+
+        $this->role_name = $role_name;
+        $this->role_rate = $role_rate;
+        $this->processed_by = $processed_by;
+    }
+
+    public function setPositionHandler()
+    {
+
+
+        if ($this->invalid_input_role_name() == false) {
+            header("location: ../pages/positions.php?error=InvalidInputPositionName");
+            exit();
+        }
+        if ($this->invalid_input_role_rate() == false) {
+            header("location: ../pages/positions.php?error=InvalidInputPositionRate");
+            exit();
+        }
+
+
+        $this->setPosition($this->role_name, $this->role_rate, $this->processed_by);
+    }
+
+
+    private function invalid_input_role_name()
+    {
+        $result = "";
+        if (!preg_match('/^[a-zA-Z- ]{1,30}$/', $this->role_name)) {
+            $result = false;
+        } else {
+            $result = true;
+        }
+        return $result;
+    }
+    private function invalid_input_role_rate()
+    {
+        $result = "";
+        if (!preg_match('/^[0-9]/', $this->role_rate)) {
+            $result = false;
+        } else {
+            $result = true;
+        }
+        return $result;
+    }
+}
+
