@@ -11,10 +11,24 @@
       $('#lnameIDvalue').val(data[3]);
       $('#roleIDvalue').val(data[5]);
       $('#fingerprintIDvalue').val(data[7]);
+      console.log(data);
+    })
+  });
+</script>
 
-
-
-
+<script>
+  $(document).ready(function() {
+    $("body").on("click", ".editrolebtnclass", function(event) {
+      $tr = $(this).closest('tr');
+      var data = $tr.children("td").map(function() {
+        return $(this).text();
+      }).get();
+      $('#updateRoleID').val(data[0]);
+      $('#positionID').val(data[1]);
+      $('#positionRate').val(data[2]);
+      $('#lnameIDvalue').val(data[3]);
+      $('#roleIDvalue').val(data[5]);
+      $('#fingerprintIDvalue').val(data[7]);
       console.log(data);
     })
   });

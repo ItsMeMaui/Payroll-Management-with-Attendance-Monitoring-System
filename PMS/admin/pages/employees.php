@@ -178,13 +178,7 @@ $result_employees = mysqli_query($conn, $get_employees);
 
   </div>
 </div>
-<script>
-  function toggleDarkMode() {
-    const body = document.body;
-    body.classList.toggle('dark-mode'); // Toggle the 'dark-mode' class
-    // You can add logic here to save the user's preference (e.g., in local storage)
-  }
-</script>
+
 <?php
 include_once '../components/modals/addUser.php';
 include_once '../components/modals/editemployee.php';

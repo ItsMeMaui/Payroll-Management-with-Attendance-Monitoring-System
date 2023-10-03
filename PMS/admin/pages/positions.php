@@ -107,6 +107,9 @@ $result_roles = mysqli_query($conn, $get_roles);
                     Role Rate
                   </th>
                   <th scope="col" class="px-6 py-3">
+                    Processed By
+                  </th>
+                  <th scope="col" class="px-6 py-3">
                     Created At
                   </th>
                   <th scope="col" class="px-6 py-3">
@@ -123,11 +126,12 @@ $result_roles = mysqli_query($conn, $get_roles);
                      <td class="text-center"><?php echo $row['role_id'] ?></td>
                      <td class="text-center"><?php echo ucwords($row['role_name']) ?></td>
                      <td class="text-center"><?php echo $row['role_rate'] ?></td>
+                     <td class="text-center"><?php echo ucwords($row['processed_by']) ?></td>
                      <td class="text-center"><?php echo $row['created_date'] ?></td>
                      <td class="text-center">
                         <div class="row flex items-center text-center justify-center">
                           <div class="col-6 ">
-                            <button data-modal-target="defaultModal" data-modal-toggle="defaultModal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 editrolebtnclass" type="button">
+                            <button data-modal-target="editpositionModal" data-modal-toggle="editpositionModal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 editrolebtnclass" type="button">
                               Edit
                             </button>
                            </div>
@@ -145,5 +149,6 @@ $result_roles = mysqli_query($conn, $get_roles);
 
 <?php
 include_once '../components/modals/addposition.php';
+include_once '../components/modals/editposition.php';
 include_once '../footer.php';
 ?>
