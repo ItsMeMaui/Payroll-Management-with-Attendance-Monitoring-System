@@ -9,11 +9,12 @@ $dbPassword = "";
 $dbName = "pmswa";
 
 $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
-$get_employees = "SELECT *, DATE_FORMAT(tbl_employees.created_at, '%M %d %Y') as created_date
+$get_employees = "SELECT *, DATE_FORMAT(tbl_attendances.attendance_date, '%M %d, %Y') as attendance_date
                 FROM tbl_employees
-                INNER JOIN tbl_roles
-                ON tbl_employees.role_id = tbl_roles.role_id
-                ORDER BY tbl_employees.created_at DESC;";
+                INNER JOIN tbl_attendances
+                ON tbl_employees.emp_id = tbl_attendances.emp_id
+            
+                ORDER BY tbl_attendances.created_at DESC;";
 $result_employees = mysqli_query($conn, $get_employees);
 ?>
 
@@ -30,7 +31,10 @@ $result_employees = mysqli_query($conn, $get_employees);
     .dataTables_length label {
       color: white !important;
     }
-
+    .dataTables_filter  {
+      padding: 10px;
+      color: white !important;
+    }
     .dataTables_filter label {
       color: white !important;
     }
@@ -57,7 +61,13 @@ $result_employees = mysqli_query($conn, $get_employees);
     div.dataTables_info {
       color: black !important;
     }
+    .dataTables_filter  {
+      padding: 10px;
 
+    }
+    .dataTables_length{
+      padding: padding: 10px;;
+    }
     .dataTables_length label {
       color: black !important;
     }
@@ -94,60 +104,42 @@ $result_employees = mysqli_query($conn, $get_employees);
               <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                   <th scope="col" class="px-6 py-3">
-                    Employee ID
-                  </th>
-                  <th scope="col" class="hidden">
-                    First Name
-                  </th>
-                  <th scope="col" class="hidden">
-                    Middle Name
-                  </th>
-                  <th scope="col" class="hidden">
-                    Last Name
+                      Employee ID
                   </th>
                   <th scope="col" class="px-6 py-3">
-                    Employee
-                  </th>
-                  <th scope="col " class="hidden">
-                    Role ID
+                      Employee
                   </th>
                   <th scope="col " class="px-6 py-3">
-                    Role
-                  </th>
-                  <th scope="col" class="hidden">
-                    Fingerprint
+                      Time In
                   </th>
                   <th scope="col" class="px-6 py-3">
-                    Processed By
+                      Time Out
                   </th>
                   <th scope="col" class="px-6 py-3">
-                    Created At
+                      Attendance Date
                   </th>
-     
+                  <th scope="col" class="px-6 py-3">
+                      Total Hour
+                  </th>
                 </tr>
               </thead>
 
               <tbody>
-                <?php
-                while ($row = mysqli_fetch_array($result_employees)) {
-                ?>
-                  <tr>
-                    <td class="text-center"><?php echo $row['emp_id'] ?></td>
-                    <td class="hidden"> <?php echo $row['emp_fname'] ?></td>
-                    <td class="hidden"> <?php echo $row['emp_mname'] ?></td>
+                    <?php
+                    while ($row = mysqli_fetch_array($result_employees)) {
+                    ?>
+                        <tr>
+                            <td class="text-center"><?php echo $row['emp_id'] ?></td>
 
-                    <td class="hidden"><?php echo $row['emp_lname'] ?> </td>
-                    <td class="text-center"><?php echo $row['emp_fname'] ?> <?php echo " " ?><?php echo $row['emp_mname'] ?><?php echo " " ?><?php echo " " ?><?php echo $row['emp_lname'] ?></td>
-                    <td class="hidden"><?php echo $row['role_id'] ?></td>
-                    <td class="text-center"><?php echo ucwords($row['role_name']) ?></td>
-                    <td class="hidden"> <?php echo $row['emp_fingerprint'] ?></td>
-                    <td class="text-center"><?php echo $row['processed_by'] ?></td>
-                    <td class="text-center"><?php echo $row['created_date'] ?></td>
-                    
-                  </tr>
-                <?php } ?>
+                            <td class="text-center"><?php echo $row['emp_fname'] ?><?php echo ' ' ?><?php echo $row['emp_mname'] ?><?php echo ' ' ?> <?php echo $row['emp_lname'] ?></td>
+                            <td class="text-center"><?php echo $row['attendance_timein'] ?></td>
+                            <td class="text-center"><?php echo $row['attendance_timeout'] ?></td>
 
-              </tbody>
+                            <td class="text-center"><?php echo $row['attendance_date'] ?></td>
+                            <td class="text-center"><?php echo $row['attendance_hour'] ?></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
             </table>
           </div>
         </div>
