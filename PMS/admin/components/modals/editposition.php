@@ -15,6 +15,7 @@
                     <span class="sr-only">Add Position</span>
                 </button>
             </div>
+            
             <!-- Modal body -->
             <div class="p-6 space-y-6">
                 <form action="../includes/signup.inc.php" method="POST">
