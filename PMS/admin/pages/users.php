@@ -151,8 +151,8 @@ $result_employees = mysqli_query($conn, $get_employees);
               <tr>
                 <td class="text-center"><?php echo $row['emp_id'] ?></td>
                 <td class="text-center"><?php echo $row['emp_fname'] ?> <?php echo " " ?><?php echo $row['emp_mname'] ?><?php echo " " ?><?php echo " " ?><?php echo $row['emp_lname'] ?></td>
-                <td class="text-center"><?php echo $row['emp_username'] ?></td>
-                <td class="hidden"><?php echo $row['emp_password'] ?></td>
+                <td class="text-center"><?php echo $row['user_username'] ?></td>
+                <td class="hidden"><?php echo $row['user_password'] ?></td>
                 <td class="text-center"><?php echo $row['processed_by'] ?></td>
                 <td class="text-center"><?php echo $row['created_date'] ?></td>
                 <td class="text-center">
