@@ -9,9 +9,6 @@ if (isset($_POST['editemp'])) {
     $update_processed_by = $_POST['processed-by'];
     $updateUser = $_POST['empID'];
 
-
-
-
     include "../classes/db.classes.php";
     include "../classes/update.classes.php";
     include "../controllers/update.controller.php";
@@ -24,28 +21,24 @@ if (isset($_POST['editemp'])) {
     header("location: ../pages/employees.php");
 }
 
-if (isset($_POST['editemp'])) {
+if (isset($_POST['update_user'])) {
 
-    $update_emp_fname = ucwords($_POST['fname']);
-    $update_emp_mname = ucwords($_POST['mname']);
-    $update_emp_lname = ucwords($_POST['lname']);
-    $update_emp_fingerprint = $_POST['fingerprint'];
-    $update_role_id = $_POST['role'];
+    $current_username = $_POST['update_current_username'];
+    $update_user_id = $_POST['update_user_id'];
+    $update_username = $_POST['update_user_username'];
+    $update_current_password = $_POST['userpwd'];
+    $update_new_password = $_POST['update_user_password'];
+    $update_repeat_password = $_POST['update_user_rpt_password'];
     $update_processed_by = $_POST['processed-by'];
-    $updateUser = $_POST['empID'];
-
-
-
 
     include "../classes/db.classes.php";
     include "../classes/update.classes.php";
     include "../controllers/update.controller.php";
 
-    $signup = new updateEmpController($update_emp_fname, $update_emp_mname, $update_emp_lname, $update_emp_fingerprint, $update_role_id, $update_processed_by, $updateUser);
+    $update_user = new updateUserController($current_username,$update_username, $update_current_password, $update_new_password, $update_repeat_password, $update_processed_by, $update_user_id);
 
+    $update_user->userupdatehandler();
 
-    $signup->empupdate();
-
-    header("location: ../pages/employees.php");
+    header("location: ../pages/users.php");
 }
 

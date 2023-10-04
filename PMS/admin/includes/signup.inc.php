@@ -43,8 +43,10 @@ if (isset($_POST['register_user'])) {
 
 if (isset($_POST['position'])) {
 
-    $role_name = $_POST['fname'];
-    $role_rate = $_POST['mname'];
+    $role_name = $_POST['position_name'];
+    $role_rate = $_POST['position_rate'];
+    $role_rate_per_hour = $role_rate/8;
+
     $processed_by = $_POST['processed-by'];
 
 
@@ -52,7 +54,7 @@ if (isset($_POST['position'])) {
     include "../classes/signup.classes.php";
     include "../controllers/signup.controller.php";
 
-    $addpos = new AddPositionController($role_name, $role_rate, $processed_by);
+    $addpos = new AddPositionController($role_name, $role_rate,$role_rate_per_hour ,$processed_by);
 
 
     $addpos->setPositionHandler();
