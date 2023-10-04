@@ -25,7 +25,7 @@ class SignupUser extends Db
     protected function setUser($emp_id, $emp_username, $emp_password, $processed_by)
     {
 
-        $stmt = $this->connect()->prepare('INSERT INTO tbl_users( emp_id, emp_username, emp_password, processed_by) VALUES  (?,?,?,?);');
+        $stmt = $this->connect()->prepare('INSERT INTO tbl_users( emp_id, user_username, user_password, processed_by) VALUES  (?,?,?,?);');
 
         $pwdHashed = password_hash($emp_password, PASSWORD_DEFAULT);
         if (!$stmt->execute(array($emp_id, $emp_username, $pwdHashed, $processed_by))) {
