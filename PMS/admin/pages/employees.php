@@ -27,14 +27,18 @@ $result_employees = mysqli_query($conn, $get_employees);
     div.dataTables_info {
       color: white !important;
     }
-
+    .dataTables_length{
+      padding: 10px;;
+    }
     .dataTables_length label {
       color: white !important;
     }
-    .dataTables_filter  {
+
+    .dataTables_filter {
       padding: 10px;
       color: white !important;
     }
+
     .dataTables_filter label {
       color: white !important;
     }
@@ -53,6 +57,7 @@ $result_employees = mysqli_query($conn, $get_employees);
       color: white;
     }
   }
+
   @media (prefers-color-scheme: light) {
     div.dataTables_wrapper {
       color: black !important;
@@ -61,13 +66,17 @@ $result_employees = mysqli_query($conn, $get_employees);
     div.dataTables_info {
       color: black !important;
     }
-    .dataTables_filter  {
+
+    .dataTables_filter {
       padding: 10px;
 
     }
-    .dataTables_length{
-      padding: padding: 10px;;
+
+    .dataTables_length {
+      padding: padding: 10px;
+      ;
     }
+
     .dataTables_length label {
       color: black !important;
     }
