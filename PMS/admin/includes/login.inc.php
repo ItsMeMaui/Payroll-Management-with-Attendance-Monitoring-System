@@ -138,5 +138,22 @@ if (isset($_POST['login'])) {
 }
 
 
-if (isset($_POST['loginAdmin'])) {
+if (isset($_POST['login_admin'])) {
+    $user_username = $_POST['username'];
+    $user_password = $_POST['password'];
+
+
+    include "../classes/db.classes.php";
+    include "../classes/login.classes.php";
+    include "../controllers/login.controller.php";
+
+    $login = new loginController($user_username, $user_password);
+    $login->loginUserHandler();
+
+
+    if (($_SESSION['role_name']) == 'admin') {
+      header("location: ../pages/dashboard.php");
+    } else{
+      header("location: ../../index.php");
+    }
 }
