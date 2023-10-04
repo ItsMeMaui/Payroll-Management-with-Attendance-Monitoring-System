@@ -27,7 +27,9 @@ $result_employees = mysqli_query($conn, $get_employees);
     div.dataTables_info {
       color: white !important;
     }
-
+    .dataTables_length{
+      padding: 10px;;
+    }
     .dataTables_length label {
       color: white !important;
     }
@@ -66,7 +68,7 @@ $result_employees = mysqli_query($conn, $get_employees);
 
     }
     .dataTables_length{
-      padding: padding: 10px;;
+      padding: 10px;;
     }
     .dataTables_length label {
       color: black !important;

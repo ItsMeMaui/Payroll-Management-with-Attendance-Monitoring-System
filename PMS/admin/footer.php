@@ -65,7 +65,13 @@
   let table4 = new DataTable('.users_table', {
     order: [0, 'desc']
   });
+  let table5 = new DataTable('.payroll_table', {
+    order: [0, 'desc']
+  });
 </script>
+
+
+
 
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
