@@ -152,13 +152,15 @@ class AddPositionController extends AddPosition
 
     private $role_name;
     private $role_rate;
+    private $role_rate_per_hour;
     private $processed_by;
 
-    public function __construct($role_name, $role_rate, $processed_by)
+    public function __construct($role_name, $role_rate, $role_rate_per_hour,$processed_by)
     {
 
         $this->role_name = $role_name;
         $this->role_rate = $role_rate;
+        $this->role_rate_per_hour = $role_rate_per_hour;
         $this->processed_by = $processed_by;
     }
 
@@ -176,7 +178,7 @@ class AddPositionController extends AddPosition
         }
 
 
-        $this->setPosition($this->role_name, $this->role_rate, $this->processed_by);
+        $this->setPosition($this->role_name, $this->role_rate, $this->role_rate_per_hour ,$this->processed_by);
     }
 
 

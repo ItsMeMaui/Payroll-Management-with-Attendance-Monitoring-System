@@ -1,5 +1,13 @@
 <?php
 
+
+$dbServername = "Localhost";
+$dbUsername = "root";
+$dbPassword = "";
+$dbName = "pmswa";
+
+$conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
+
 class updateEmp extends Db
 {
     protected function updateEmpAcc($update_emp_fname, $update_emp_mname, $update_emp_lname, $update_emp_fingerprint, $update_role_id, $update_processed_by, $updateUser)
@@ -20,17 +28,46 @@ class updateEmp extends Db
 
 class updateUser extends Db
 {
-    protected function updateUserpAcc($update_emp_fname, $update_emp_mname, $update_emp_lname, $update_emp_fingerprint, $update_role_id, $update_processed_by, $updateUser)
+
+    protected function updateUserAcc($current_username,$update_username, $update_current_password, $update_new_password, $update_repeat_password, $update_processed_by, $update_user_id)
     {
 
-
-        $stmt = $this->connect()->prepare('UPDATE tbl_employees SET   emp_fname=?,emp_mname=?,emp_lname=?,emp_fingerprint=?,role_id=?, processed_by=?,created_at = NOW() WHERE emp_id   =?;');
-
-
-        if (!$stmt->execute(array($update_emp_fname, $update_emp_mname, $update_emp_lname, $update_emp_fingerprint, $update_role_id, $update_processed_by, $updateUser))) {
+        $stmt = $this->connect()->prepare('SELECT tbl_users.user_password FROM tbl_users WHERE tbl_users.user_username=?');
+        if (!$stmt->execute(array($current_username))) {
             $stmt = null;
-            header("location: ../pages/employees.php?error=StatementFailed");
+            header("location: ../admin/pages.php?error=StatementFailed");
             exit();
+        }
+        if ($stmt->rowCount() == 0) {
+            $stmt = null;
+            header("location: ../pages/users.php?error=UserNotFound");
+            exit();
+        }
+        $pwdHashed = $stmt->fetch(PDO::FETCH_ASSOC);
+        $checkPwd = password_verify($update_new_password, $pwdHashed["user_password"]);
+
+        if ($checkPwd == false) {
+            $stmt = null;
+            header("location: ../pages/users.php?error=WrongInputPassword");
+            exit();
+        } else {
+            if ($update_new_password != $update_repeat_password) {
+                $stmt = null;
+                header("location: ../pages/users.php?error=PasswordnotMatched");
+                exit();
+            } else {
+            
+                $stmt = $this->connect()->prepare('UPDATE tbl_users SET  user_username=?,user_password=?,processed_by=?,created_at = NOW() WHERE user_id =?;');
+                $pwdHashed = password_hash($update_new_password, PASSWORD_DEFAULT);
+
+                if (!$stmt->execute(array($update_username, $pwdHashed, $update_processed_by ,$update_user_id))) {
+                    $stmt = null;
+                    header("location: ../pages/users.php?error=StatementFailed");
+                    exit();
+                }
+
+                $stmt = null;
+            }
         }
     }
 }

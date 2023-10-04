@@ -13,88 +13,7 @@ $result_employees = mysqli_query($conn, $get_employees);
 ?>
 
 
-<style>
-  @media (prefers-color-scheme: dark) {
-    div.dataTables_wrapper {
-      color: white !important;
-    }
 
-    div.dataTables_info {
-      color: white !important;
-    }
-    .dataTables_length{
-      padding: 10px;;
-    }
-    .dataTables_length label {
-      color: white !important;
-    }
-
-    .dataTables_filter {
-      padding: 10px;
-      color: white !important;
-    }
-
-    .dataTables_filter label {
-      color: white !important;
-    }
-
-    .dataTables_paginate a {
-      color: white !important;
-    }
-
-    /* Default text color for light mode */
-    .text-dark-mode-light {
-      color: black;
-    }
-
-    /* Text color for dark mode */
-    .dark-mode .text-dark-mode-light {
-      color: white;
-    }
-  }
-
-  @media (prefers-color-scheme: light) {
-    div.dataTables_wrapper {
-      color: black !important;
-    }
-
-    div.dataTables_info {
-      color: black !important;
-    }
-
-    .dataTables_filter {
-      padding: 10px;
-
-    }
-
-    .dataTables_length {
-      padding: 10px;
-      ;
-    }
-
-    .dataTables_length label {
-      color: black !important;
-    }
-
-    .dataTables_filter label {
-      color: black !important;
-    }
-
-    .dataTables_paginate a {
-      color: black !important;
-    }
-
-    /* Default text color for light mode */
-    .text-dark-mode-light {
-      color: black;
-    }
-
-    /* Text color for dark mode */
-    .dark-mode .text-dark-mode-light {
-      color: black;
-    }
-  }
-</style>
 
 
 <div class="p-4 md:ml-64 overflow-y-auto dark:bg-gray-900 h-screen dark:text-white text-black">
@@ -102,44 +21,69 @@ $result_employees = mysqli_query($conn, $get_employees);
     <h1 class="text-4xl">Payroll</h1>
     <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
 
+
+
+
     <div class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+
+      <div class="flex flex-col justify-end gap-5">
+
+        <div date-rangepicker class="flex justify-end items-center">
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+              </svg>
+            </div>
+            <input name="start" type="text" id="start_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start">
+          </div>
+          <span class="mx-4 text-gray-500">to</span>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+              </svg>
+            </div>
+            <input name="end" type="text" id="end_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end">
+          </div>
+        </div>
+        <div class="flex justify-end gap-5">
+          <button id="filter" class="p-3 bg-cyan-800 rounded-lg">Filter</button>
+          <button id="reset" class="p-3 bg-red-500 rounded-lg">Reset</button>
+
+        </div>
+
+      </div>
+
+
       <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-1">
-        <table class="w-full text-sm text-gray-500 dark:text-black text-center payroll_table" id="payroll_tableID">
+        <table class="w-full text-sm text-gray-500 dark:text-black text-center" id="records_table">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              <th scope="col" class="px-6 py-3">
-                Employee
+            <tr class="text-center">
+              <th scope="col" class="hidden ">
+                Attendance ID
+              </th>
+              <th scope="col " class="hidden">
+                Employee ID
               </th>
               <th scope="col " class="px-6 py-3">
                 Employee Name
               </th>
               <th scope="col" class="px-6 py-3">
-                Action
+                Attendance Date
               </th>
+              <th scope="col" class="px-6 py-3">
+                Time In
+              </th>
+              <th scope="col " class="px-6 py-3">
+                Time Out
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Total Hours
+              </th>
+
             </tr>
           </thead>
-          <tbody>
-            <?php
-            while ($row = mysqli_fetch_array($result_employees)) {
-            ?>
-              <tr>
-                <td class="text-center"><?php echo $row['emp_id'] ?></td>
-                <td class="text-center"><?php echo $row['emp_fname'] ?> <?php echo " " ?><?php echo $row['emp_mname'] ?><?php echo " " ?><?php echo " " ?><?php echo $row['emp_lname'] ?></td>
-                <td class="text-center">
-                  <div class="row flex items-center text-center justify-center">
-                    <div class="col-6 ">
-
-                      <button data-modal-target="defaultModal" data-modal-toggle="defaultModal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 editempbtnclass" type="button">
-                        Payslip
-                      </button>
-                    </div>
-
-                  </div>
-                </td>
-              </tr>
-            <?php } ?>
-
-          </tbody>
         </table>
       </div>
     </div>

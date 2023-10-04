@@ -41,11 +41,11 @@ class SignupUser extends Db
 class AddPosition extends Db
 {
 
-    protected function setPosition($role_name, $role_rate, $processed_by)
+    protected function setPosition($role_name, $role_rate, $role_rate_per_hour,$processed_by)
     {
 
-        $stmt = $this->connect()->prepare('INSERT INTO tbl_roles( role_name, role_rate, processed_by) VALUES  (?,?,?);');
-        if (!$stmt->execute(array($role_name, $role_rate, $processed_by))) {
+        $stmt = $this->connect()->prepare('INSERT INTO tbl_roles( role_name, role_rate, role_rate_per_hour,processed_by) VALUES  (?,?,?,?);');
+        if (!$stmt->execute(array($role_name, $role_rate, $role_rate_per_hour, $processed_by))) {
             $stmt = null;
             header("location: ../index.php?error=StatementFailed");
             exit();
