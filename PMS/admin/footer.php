@@ -33,6 +33,21 @@
     })
   });
 </script>
+
+<script>
+  $(document).ready(function() {
+    $("body").on("click", ".edituserbtnclass", function(event) {
+      $tr = $(this).closest('tr');
+      var data = $tr.children("td").map(function() {
+        return $(this).text();
+      }).get();
+      $('#updateuserIDvalue').val(data[0]);
+      $('#updateusernameID').val(data[2]);
+      $('#updatepasswordID').val(data[3]);
+      console.log(data);
+    })
+  });
+</script>
 </body>
 
 
@@ -45,6 +60,9 @@
     order: [0, 'desc']
   });
   let table3 = new DataTable('.roles_table', {
+    order: [0, 'desc']
+  });
+  let table4 = new DataTable('.users_table', {
     order: [0, 'desc']
   });
 </script>

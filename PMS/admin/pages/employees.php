@@ -189,7 +189,7 @@ $result_employees = mysqli_query($conn, $get_employees);
 </div>
 
 <?php
-include_once '../components/modals/addUser.php';
+include_once '../components/modals/addemployee.php';
 include_once '../components/modals/editemployee.php';
 
 include_once '../footer.php';
