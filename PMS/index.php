@@ -110,19 +110,18 @@ $result_employees = mysqli_query($conn, $get_employees);
 
                 ?>
                 <div>
-                    <button type="submit" name="login" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full  px-5 py-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                    <button type="submit" id="submitButton" name="login" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-3 text-center dark:bg-blue-600 dark:focus:ring-blue-800 disabled:opacity-50 disabled:pointer-events-none">
+                        Submit
+                    </button>
+
                 </div>
             </form>
         </div>
     </div>
 
-
-
-
-
 </body>
 
-
+<!-- for the running time, current day, and current date -->
 <script type="text/javascript">
     const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -155,6 +154,39 @@ $result_employees = mysqli_query($conn, $get_employees);
     setInterval(updateCurrentTime, 1000);
 </script>
 
+<!-- disabling login form depends on the time and day -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        function isSunday() {
+            const today = new Date();
+            return today.getDay() === 0;
+        }
+
+
+        function isWithinTimeRange() {
+            const today = new Date();
+            const hours = today.getHours();
+            const minutes = today.getMinutes();
+
+
+            const currentTimeInMinutes = hours * 60 + minutes;
+            const startTimeInMinutes = 7 * 60 + 30; // 7:30 AM
+            const endTimeInMinutes = 16 * 60 + 30; // 4:30 PM
+
+            return currentTimeInMinutes >= startTimeInMinutes && currentTimeInMinutes <= endTimeInMinutes;
+        }
+
+        // Get the submit button element
+        const submitButton = document.getElementById("submitButton");
+
+        // Check if it's Sunday or outside the time range
+        if (isSunday() || !isWithinTimeRange()) {
+            submitButton.disabled = true;
+        }
+    });
+</script>
+
 <!-- tables -->
 <script>
     let table = new DataTable('.table');
@@ -168,9 +200,6 @@ $result_employees = mysqli_query($conn, $get_employees);
 <!-- flowbite -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
 
-<!-- bootstrap -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
 
 </html>

@@ -9,11 +9,10 @@ $dbPassword = "";
 $dbName = "pmswa";
 
 $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
-$get_employees = "SELECT *, DATE_FORMAT(tbl_attendances.attendance_date, '%M %d, %Y') as attendance_date
+$get_employees = "SELECT *,DATE_FORMAT(tbl_attendances.created_at, '%M %d, %Y')  as create_updated,DATE_FORMAT(tbl_attendances.attendance_date, '%M %d, %Y') as attendance_date
                 FROM tbl_employees
                 INNER JOIN tbl_attendances
                 ON tbl_employees.emp_id = tbl_attendances.emp_id
-            
                 ORDER BY tbl_attendances.created_at DESC;";
 $result_employees = mysqli_query($conn, $get_employees);
 ?>
@@ -47,6 +46,9 @@ $result_employees = mysqli_query($conn, $get_employees);
                   <th scope="col" class="px-6 py-3">
                       Total Hour
                   </th>
+                  <th scope="col" class="hidden">
+                      Created At
+                  </th>
                 </tr>
               </thead>
 
@@ -56,13 +58,13 @@ $result_employees = mysqli_query($conn, $get_employees);
                     ?>
                         <tr>
                             <td class="text-center"><?php echo $row['emp_id'] ?></td>
-
                             <td class="text-center"><?php echo $row['emp_fname'] ?><?php echo ' ' ?><?php echo $row['emp_mname'] ?><?php echo ' ' ?> <?php echo $row['emp_lname'] ?></td>
                             <td class="text-center"><?php echo $row['attendance_timein'] ?></td>
                             <td class="text-center"><?php echo $row['attendance_timeout'] ?></td>
-
                             <td class="text-center"><?php echo $row['attendance_date'] ?></td>
                             <td class="text-center"><?php echo $row['attendance_hour'] ?></td>
+                            <td class="hidden"><?php echo $row['create_updated'] ?></td>
+
                         </tr>
                     <?php } ?>
                 </tbody>
