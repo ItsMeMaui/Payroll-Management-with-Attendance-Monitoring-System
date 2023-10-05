@@ -1,4 +1,12 @@
 <?php
+
+session_start();
+if (($_SESSION['role_name']) =='admin') {
+} else {
+  header("location: ../index.php");
+}
+
+
 $dbServername = "Localhost";
 $dbUsername = "root";
 $dbPassword = "";

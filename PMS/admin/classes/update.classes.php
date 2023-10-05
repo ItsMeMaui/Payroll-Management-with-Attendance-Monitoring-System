@@ -1,13 +1,6 @@
 <?php
 
 
-$dbServername = "Localhost";
-$dbUsername = "root";
-$dbPassword = "";
-$dbName = "pmswa";
-
-$conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
-
 class updateEmp extends Db
 {
     protected function updateEmpAcc($update_emp_fname, $update_emp_mname, $update_emp_lname, $update_emp_fingerprint, $update_role_id, $update_processed_by, $updateUser)

@@ -71,7 +71,7 @@
     order: [9, 'desc']
   });
   let table2 = new DataTable('.attendance_table', {
-    order: [0, 'desc']
+    order: [6, 'desc']
   });
   let table3 = new DataTable('.roles_table', {
     order: [0, 'desc']
@@ -141,7 +141,7 @@
             {
               "data": "attendance_date",
               "render": function(data, type, row, meta) {
-                return moment(row.attendance_date).format('MM DD YYYY')
+                return moment(row.attendance_date).format('MM-DD-YYYY')
               }
             },
             {

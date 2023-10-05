@@ -49,8 +49,8 @@ class Db
 
                     FROM tbl_attendances a
                     JOIN tbl_employees e ON a.emp_id = e.emp_id
-                    WHERE DATE_FORMAT(a.attendance_date, '%m/%d/%Y') >= '10/01/2023'
-                  AND DATE_FORMAT(a.attendance_date, '%m/%d/%Y') <= '10/04/2023';";
+                    WHERE DATE_FORMAT(a.attendance_date, '%m/%d/%Y') >= '$start_date'
+                  AND DATE_FORMAT(a.attendance_date, '%m/%d/%Y') <= '$end_date';";
                 
             if($sql = $this->conn->query($query)){
                 while($row = mysqli_fetch_assoc($sql)){
