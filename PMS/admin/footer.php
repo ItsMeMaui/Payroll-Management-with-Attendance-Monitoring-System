@@ -1,4 +1,3 @@
-
 <!-- moment js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 
@@ -52,7 +51,7 @@
       $('#updateuserIDvalue').val(data[7]);
       $('#updateusernameID').val(data[2]);
       $('#update_current_username').val(data[2]);
-      
+
       $('#currentPasswordID').val(data[3]);
 
 
@@ -101,8 +100,62 @@
 <!-- flowbite -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 <script>
+  // setup block
+      var ctx = document.getElementById('donut-chartjs').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: <?php echo json_encode(array_keys($donut_array)) ?>,
+
+            datasets: [{
+                label: 'Total Employees',
+                data: <?php echo json_encode(array_values($donut_array)) ?>,
+                backgroundColor: [
+                    getRandomColor(),
+                    getRandomColor(),
+                    getRandomColor(),
+                    getRandomColor()
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var date = new Date(Date.now() - 0 * 24 * 60 * 60 * 1000);
+        var defaultDate = date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
+        document.getElementById("datetimepicker-dashboard").flatpickr({
+            inline: true,
+            prevArrow: "<span title=\"Previous month\">&laquo;</span>",
+            nextArrow: "<span title=\"Next month\">&raquo;</span>",
+            defaultDate: defaultDate,
+
+        });
+    });
+</script>
+
+
+<!-- <script>
   function fetch(start_date, end_date) {
     $.ajax({
       url: "../classes/records.php",
@@ -190,6 +243,6 @@
       fetch();
   });
 </script>
-
+ -->
 
 </html>
