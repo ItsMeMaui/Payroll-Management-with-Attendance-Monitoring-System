@@ -36,12 +36,30 @@ class SignupUser extends Db
 
         $stmt = null;
     }
+
+    protected function checkUser($emp_username)
+    {
+        $stmt = $this->connect()->prepare('SELECT user_id FROM tbl_users WHERE user_username = ?');
+
+        if (!$stmt->execute(array($emp_username))) {
+            $stmt = null;
+            header("location: ../index.php?error=StatementFailed");
+            exit();
+        }
+        $resultCheck = '';
+        if ($stmt->rowCount() > 0) {
+            $resultCheck = false;
+        } else {
+            $resultCheck = true;
+        }
+        return $resultCheck;
+    }
 }
 
 class AddPosition extends Db
 {
 
-    protected function setPosition($role_name, $role_rate, $role_rate_per_hour,$processed_by)
+    protected function setPosition($role_name, $role_rate, $role_rate_per_hour, $processed_by)
     {
 
         $stmt = $this->connect()->prepare('INSERT INTO tbl_roles( role_name, role_rate, role_rate_per_hour,processed_by) VALUES  (?,?,?,?);');
@@ -52,6 +70,4 @@ class AddPosition extends Db
         }
         $stmt = null;
     }
-
 }
-

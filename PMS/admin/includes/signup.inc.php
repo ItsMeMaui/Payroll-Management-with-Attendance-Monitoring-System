@@ -45,7 +45,7 @@ if (isset($_POST['position'])) {
 
     $role_name = $_POST['position_name'];
     $role_rate = $_POST['position_rate'];
-    $role_rate_per_hour = $role_rate/8;
+    $role_rate_per_hour = (int)$role_rate/8;
 
     $processed_by = $_POST['processed-by'];
 

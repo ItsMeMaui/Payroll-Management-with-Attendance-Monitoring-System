@@ -25,17 +25,20 @@ class SignupEmpController extends SignupEmp
     public function signupemphandler()
     {
 
-
+        if ($this->missing_input() == false) {
+            header("location: ../pages/employees.php?error=MissingSomeInputFields");
+            exit();
+        }
         if ($this->invalid_input_fname() == false) {
-            header("location: ../admin/EmployeeManagement.php?error=InvalidInputFname");
+            header("location: ../pages/employees.php?error=InvalidInputFname");
             exit();
         }
         if ($this->invalid_input_mnane() == false) {
-            header("location: ../admin/EmployeeManagement.php?error=InvalidInputMname");
+            header("location: ../pages/employees.php?error=InvalidInputMname");
             exit();
         }
         if ($this->invalid_input_lname() == false) {
-            header("location: ../admin/EmployeeManagement.php?error=InvalidInputLname");
+            header("location: ../pages/employees.php?error=InvalidInputLname");
             exit();
         }
 
@@ -43,7 +46,16 @@ class SignupEmpController extends SignupEmp
         $this->setEmp($this->emp_fname, $this->emp_mname, $this->emp_lname, $this->emp_fingerprint, $this->role_id, $this->processed_by);
     }
 
-
+    private function missing_input()
+    {
+        $result = "";
+        if ($this->emp_fname == "" || $this->emp_mname == "" || $this->emp_lname == "" || $this->emp_fingerprint == "" || $this->role_id == "" || $this->processed_by == "") {
+            $result = false;
+        } else {
+            $result = true;
+        }
+        return $result;
+    }
     private function invalid_input_fname()
     {
         $result = "";
@@ -96,55 +108,52 @@ class SignupUserController extends SignupUser
 
     public function signupuserhandler()
     {
-
-
-        // if ($this->invalid_input_fname() == false) {
-        //     header("location: ../admin/EmployeeManagement.php?error=InvalidInputFname");
-        //     exit();
-        // }
-        // if ($this->invalid_input_mnane() == false) {
-        //     header("location: ../admin/EmployeeManagement.php?error=InvalidInputMname");
-        //     exit();
-        // }
-        // if ($this->invalid_input_lname() == false) {
-        //     header("location: ../admin/EmployeeManagement.php?error=InvalidInputLname");
-        //     exit();
-        // }
+        if ($this->missing_input() == false) {
+            header("location: ../pages/users.php?error=MissingSomeInputFields");
+            exit();
+        }
+        if ($this->invalid_input_username() == false) {
+            header("location: ../pages/users.php?error=InvalidUsername");
+            exit();
+        }
+        if ($this->uidTakenCheck() == false) {
+            header("location: ../pages/users.php?error=UsernameAlreadyTaken");
+            exit();
+        }
 
         $this->setUser($this->emp_id, $this->emp_username, $this->emp_password, $this->processed_by);
     }
 
-
-    // private function invalid_input_fname()
-    // {
-    //     $result = "";
-    //     if (!preg_match('/^[a-zA-Z- ]{1,30}$/', $this->emp_fname)) {
-    //         $result = false;
-    //     } else {
-    //         $result = true;
-    //     }
-    //     return $result;
-    // }
-    // private function invalid_input_mnane()
-    // {
-    //     $result = "";
-    //     if (!preg_match('/^[a-zA-Z- ]{1,30}$/', $this->emp_mname)) {
-    //         $result = false;
-    //     } else {
-    //         $result = true;
-    //     }
-    //     return $result;
-    // }
-    // private function invalid_input_lname()
-    // {
-    //     $result = "";
-    //     if (!preg_match('/^[a-zA-Z- ]{1,30}$/', $this->emp_lname)) {
-    //         $result = false;
-    //     } else {
-    //         $result = true;
-    //     }
-    //     return $result;
-    // }
+    private function missing_input()
+    {
+        $result = "";
+        if ($this->emp_id == "" || $this->emp_username == "" || $this->emp_password == "" || $this->processed_by == "") {
+            $result = false;
+        } else {
+            $result = true;
+        }
+        return $result;
+    }
+    private function invalid_input_username()
+    {
+        $result = "";
+        if (!preg_match('/^[a-zA-Z- ]{8,20}$/', $this->emp_username)) {
+            $result = false;
+        } else {
+            $result = true;
+        }
+        return $result;
+    }
+    private function uidTakenCheck()
+    {
+        $result = '';
+        if (!$this->checkUser($this->emp_username)) {
+            $result = false;
+        } else {
+            $result = true;
+        }
+        return $result;
+    }
 }
 
 class AddPositionController extends AddPosition
@@ -155,7 +164,7 @@ class AddPositionController extends AddPosition
     private $role_rate_per_hour;
     private $processed_by;
 
-    public function __construct($role_name, $role_rate, $role_rate_per_hour,$processed_by)
+    public function __construct($role_name, $role_rate, $role_rate_per_hour, $processed_by)
     {
 
         $this->role_name = $role_name;
@@ -167,7 +176,10 @@ class AddPositionController extends AddPosition
     public function setPositionHandler()
     {
 
-
+        if ($this->missing_input() == false) {
+            header("location: ../pages/positions.php?error=MissingSomeInputFields");
+            exit();
+        }
         if ($this->invalid_input_role_name() == false) {
             header("location: ../pages/positions.php?error=InvalidInputPositionName");
             exit();
@@ -178,14 +190,23 @@ class AddPositionController extends AddPosition
         }
 
 
-        $this->setPosition($this->role_name, $this->role_rate, $this->role_rate_per_hour ,$this->processed_by);
+        $this->setPosition($this->role_name, $this->role_rate, $this->role_rate_per_hour, $this->processed_by);
     }
-
+    private function missing_input()
+    {
+        $result = "";
+        if ($this->role_name == "" || $this->role_rate == "" || $this->role_rate_per_hour == "" || $this->processed_by == "") {
+            $result = false;
+        } else {
+            $result = true;
+        }
+        return $result;
+    }
 
     private function invalid_input_role_name()
     {
         $result = "";
-        if (!preg_match('/^[a-zA-Z- ]{1,30}$/', $this->role_name)) {
+        if (!preg_match('/^[a-zA-Z- ]{5,30}$/', $this->role_name)) {
             $result = false;
         } else {
             $result = true;
@@ -203,4 +224,3 @@ class AddPositionController extends AddPosition
         return $result;
     }
 }
-
