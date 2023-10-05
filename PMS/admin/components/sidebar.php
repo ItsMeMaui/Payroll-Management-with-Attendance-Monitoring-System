@@ -14,7 +14,7 @@
             </svg>
          </button>
          <div class="flex justify-center ">
-            <img class="rounded-full w-40 h-40 mt-5 ring-2 ring-gray-300 dark:ring-gray-500 p-1 " src="../images/profile.png" alt="image description">
+            <img class="rounded-full w-50 h-40 mt-5 " src="../images/mrflogo.png" alt="image description">
          </div>
          <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
 

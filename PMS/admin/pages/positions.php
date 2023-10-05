@@ -15,10 +15,9 @@ $result_roles = mysqli_query($conn, $get_roles);
 
 ?>
 
-?>
 
-<div class="p-4 md:ml-64 overflow-y-auto dark:bg-gray-900 text-black dark:text-white h-screen">
-   <div class="p-4 border-2 border-gray-200  mt-16 border-dashed rounded-lg dark:border-gray-700 ">
+<div class="p-4 md:ml-64 overflow-y-auto dark:bg-gray-900 h-screen dark:text-white text-black">
+   <div class="p-4 border-2 border-gray-200 mt-16 border-dashed rounded-lg dark:border-gray-700">
 
       <h1 class="text-4xl">Positions</h1>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
