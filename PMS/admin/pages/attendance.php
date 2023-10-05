@@ -24,52 +24,52 @@ $result_employees = mysqli_query($conn, $get_employees);
         <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
 
         <div class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-          <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-1">
-            <table class="w-full text-sm text-gray-500 dark:text-black text-center attendance_table">
-              <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                  <th scope="col" class="px-6 py-3">
-                      Employee ID
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                      Employee
-                  </th>
-                  <th scope="col " class="px-6 py-3">
-                      Time In
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                      Time Out
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                      Attendance Date
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                      Total Hour
-                  </th>
-                  <th scope="col" class="hidden">
-                      Created At
-                  </th>
-                </tr>
-              </thead>
-
-              <tbody>
-                    <?php
-                    while ($row = mysqli_fetch_array($result_employees)) {
-                    ?>
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-1">
+                <table class="w-full text-sm text-gray-500 dark:text-black text-center attendance_table">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <td class="text-center"><?php echo $row['emp_id'] ?></td>
-                            <td class="text-center"><?php echo $row['emp_fname'] ?><?php echo ' ' ?><?php echo $row['emp_mname'] ?><?php echo ' ' ?> <?php echo $row['emp_lname'] ?></td>
-                            <td class="text-center"><?php echo $row['attendance_timein'] ?></td>
-                            <td class="text-center"><?php echo $row['attendance_timeout'] ?></td>
-                            <td class="text-center"><?php echo $row['attendance_date'] ?></td>
-                            <td class="text-center"><?php echo $row['attendance_hour'] ?></td>
-                            <td class="hidden"><?php echo $row['create_updated'] ?></td>
-
+                            <th scope="col" class="px-6 py-3">
+                                Employee ID
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Employee
+                            </th>
+                            <th scope="col " class="px-6 py-3">
+                                Time In
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Time Out
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Attendance Date
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Total Hour
+                            </th>
+                            <th scope="col" class="hidden">
+                                Created At
+                            </th>
                         </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-          </div>
+                    </thead>
+
+                    <tbody>
+                        <?php
+                        while ($row = mysqli_fetch_array($result_employees)) {
+                        ?>
+                            <tr>
+                                <td class="text-center"><?php echo $row['emp_id'] ?></td>
+                                <td class="text-center"><?php echo $row['emp_fname'] ?><?php echo ' ' ?><?php echo $row['emp_mname'] ?><?php echo ' ' ?> <?php echo $row['emp_lname'] ?></td>
+                                <td class="text-center"><?php echo $row['attendance_timein'] ?></td>
+                                <td class="text-center"><?php echo $row['attendance_timeout'] ?></td>
+                                <td class="text-center"><?php echo $row['attendance_date'] ?></td>
+                                <td class="text-center"><?php echo $row['attendance_hour'] ?></td>
+                                <td class="hidden"><?php echo $row['create_updated'] ?></td>
+
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

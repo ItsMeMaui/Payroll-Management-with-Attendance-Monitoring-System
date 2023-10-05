@@ -61,12 +61,12 @@ $result_reports_name = mysqli_query($conn, $get_reports_name);
                         <div class="mb-6 flex flex-col text-left">
                             <label for="countries" class="block mb-2 text-1xl font-medium text-gray-900 dark:text-white ">Select Specific Employee</label>
                             <select required id="roleID" name="selecteduser" class="bg-gray-50 border border-gray-300 text-gray-900 text-1xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected disabled value="">Select an Employee</option>
-                            <?php
-                            while ($row = mysqli_fetch_array($result_reports_name)) { ?>
-                                <option class="text-1xl " value='<?php echo $row[0] ?>'><?php echo ucwords($row[1]) ?> <?php echo ucwords($row[3]) ?></option>
-                            <?php } ?>
-                        </select>
+                                <option selected disabled value="">Select an Employee</option>
+                                <?php
+                                while ($row = mysqli_fetch_array($result_reports_name)) { ?>
+                                    <option class="text-1xl " value='<?php echo $row[0] ?>'><?php echo ucwords($row[1]) ?> <?php echo ucwords($row[3]) ?></option>
+                                <?php } ?>
+                            </select>
 
                         </div>
                         <div date-rangepicker class="flex items-center grid grid-cols-3 ">
@@ -89,7 +89,7 @@ $result_reports_name = mysqli_query($conn, $get_reports_name);
                             </div>
                         </div>
                         <div class="flex justify-center items-center text-center mt-5">
-                            <button type="submit" name="generateSpecificReport" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md w-[25%]  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Generate PDF</button>
+                            <button type="submit" name="generateSpecificReport" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md md:w-[25%]  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Generate PDF</button>
                         </div>
 
                     </form>
@@ -116,7 +116,7 @@ $result_reports_name = mysqli_query($conn, $get_reports_name);
                             </div>
                         </div>
                         <div class="flex justify-center items-center text-center mt-5">
-                            <button type="submit" name="generateBC" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md w-[25%]  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Generate PDF</button>
+                            <button type="submit" name="generateBC" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md md:w-[25%]   px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Generate PDF</button>
                         </div>
                     </form>
                 </div>

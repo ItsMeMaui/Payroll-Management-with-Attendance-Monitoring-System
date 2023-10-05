@@ -18,11 +18,10 @@ class updateEmp extends Db
     }
 }
 
-
 class updateUser extends Db
 {
 
-    protected function updateUserAcc($current_username,$update_username, $update_current_password, $update_new_password, $update_repeat_password, $update_processed_by, $update_user_id)
+    protected function updateUserAcc($current_username, $update_username, $update_current_password, $update_new_password, $update_repeat_password, $update_processed_by, $update_user_id)
     {
 
         $stmt = $this->connect()->prepare('SELECT tbl_users.user_password FROM tbl_users WHERE tbl_users.user_username=?');
@@ -49,18 +48,32 @@ class updateUser extends Db
                 header("location: ../pages/users.php?error=PasswordnotMatched");
                 exit();
             } else {
-            
                 $stmt = $this->connect()->prepare('UPDATE tbl_users SET  user_username=?,user_password=?,processed_by=?,created_at = NOW() WHERE user_id =?;');
                 $pwdHashed = password_hash($update_new_password, PASSWORD_DEFAULT);
 
-                if (!$stmt->execute(array($update_username, $pwdHashed, $update_processed_by ,$update_user_id))) {
+                if (!$stmt->execute(array($update_username, $pwdHashed, $update_processed_by, $update_user_id))) {
                     $stmt = null;
                     header("location: ../pages/users.php?error=StatementFailed");
                     exit();
                 }
-
                 $stmt = null;
             }
+        }
+    }
+}
+
+class updateRole extends Db
+{
+
+    protected function updateRole($update_role_name, $update_role_rate, $role_rate_per_hour, $update_processed_by, $update_role_id)
+    {
+
+        $stmt = $this->connect()->prepare('UPDATE tbl_roles SET   role_name=?,role_rate=?,role_rate_per_hour=?, processed_by=?,created_at = NOW() WHERE role_id   =?;');
+
+        if (!$stmt->execute(array($update_role_name, $update_role_rate, $role_rate_per_hour, $update_processed_by, $update_role_id))) {
+            $stmt = null;
+            header("location: ../pages/employees.php?error=StatementFailed");
+            exit();
         }
     }
 }

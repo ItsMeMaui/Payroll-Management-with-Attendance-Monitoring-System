@@ -42,3 +42,21 @@ if (isset($_POST['update_user'])) {
     header("location: ../pages/users.php");
 }
 
+if (isset($_POST['update_role'])) {
+    
+    $update_role_id = $_POST['update_role_id'];
+    $update_role_name = $_POST['update_role_name'];
+    $update_role_rate = $_POST['update_role_rate'];
+    $role_rate_per_hour = (int)$update_role_rate/8;
+    $update_processed_by = $_POST['processed-by'];
+
+    include "../classes/db.classes.php";
+    include "../classes/update.classes.php";
+    include "../controllers/update.controller.php";
+
+    $update_user = new updateRoleController($update_role_name,$update_role_rate, $role_rate_per_hour,$update_processed_by, $update_role_id);
+
+    $update_user->roleupdatehandler();
+
+    header("location: ../pages/positions.php");
+}

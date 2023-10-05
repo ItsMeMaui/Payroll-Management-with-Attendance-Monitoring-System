@@ -16,6 +16,9 @@ $get_employees = "SELECT *, DATE_FORMAT(tbl_attendances.attendance_date, '%M %d,
                 WHERE tbl_attendances.attendance_date = '$current_date'
                 ORDER BY tbl_attendances.created_at DESC;";
 $result_employees = mysqli_query($conn, $get_employees);
+
+$current_hour = date('G');
+$current_minute = date('i');
 ?>
 
 <!DOCTYPE html>
@@ -35,10 +38,19 @@ $result_employees = mysqli_query($conn, $get_employees);
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
 
+    <!-- fonts google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="./admin/style.css">
 </head>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
+</style>
 
 <body>
 
@@ -91,7 +103,20 @@ $result_employees = mysqli_query($conn, $get_employees);
             <form class="flex flex-col gap-5" action="./admin/includes/login.inc.php" method="POST">
                 <p class="text-4xl text-center dark:text-white text-black" id="formattedDate"></p>
                 <p class="text-3xl text-center dark:text-white text-black font-bold" id="currentTime"></p>
-                <p class="text-2xl text-center dark:text-white text-black">Scan your registered fingerprint</p>
+                <?php
+
+                if ($current_hour >= 7 && ($current_hour < 12 || ($current_hour == 12 && $current_minute <= 30))) {
+                    echo "<p class='text-4xl text-center dark:text-white text-black'>Good Morning! </p>
+                    <p class='text-2xl text-center dark:text-white text-black'>Scan your registered fingerprint</p>";
+                } elseif ($current_hour >= 13 && ($current_hour < 18 || ($current_hour == 18 && $current_minute <= 0))) {
+                    echo "<p class='text-4xl text-center dark:text-white text-black'>Good Afternoon! </p>
+                    <p class='text-2xl text-center dark:text-white text-black'>Scan your registered fingerprint</p>";
+                } else {
+                    echo "<p class='text-4xl text-center dark:text-white text-black'>Good Evening! </p>
+                    <p class='text-2xl text-center dark:text-white text-black'>Sorry, login unavailable now. Open from 7:30am to 6:00pm. </p>";
+                }
+                ?>
+                <!-- <p class="text-2xl text-center dark:text-white text-black">Scan your registered fingerprint</p> -->
                 <select name="action" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option value="time-in" selected>Time In</option>
                     <option value="time-out">Time Out</option>
@@ -120,6 +145,8 @@ $result_employees = mysqli_query($conn, $get_employees);
     </div>
 
 </body>
+
+
 
 <!-- for the running time, current day, and current date -->
 <script type="text/javascript">
@@ -156,7 +183,7 @@ $result_employees = mysqli_query($conn, $get_employees);
 
 <!-- disabling login form depends on the time and day -->
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
 
         function isSunday() {
             const today = new Date();

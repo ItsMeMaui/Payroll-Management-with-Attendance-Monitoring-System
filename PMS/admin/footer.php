@@ -2,6 +2,39 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 
 
+
+<script type="text/javascript">
+  const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+  const currentDate = new Date();
+  const dayOfWeek = daysOfWeek[currentDate.getDay()];
+  const day = currentDate.getDate();
+  const month = months[currentDate.getMonth()];
+  const year = currentDate.getFullYear();
+
+  const displayDateDashboard = `${dayOfWeek}, ${month}. ${day < 10 ? '0' : ''}${day}, ${year}`;
+
+
+  document.getElementById("displayDateDashboard").textContent = displayDateDashboard;
+
+  function updateCurrentTime() {
+
+    const currentDate = new Date();
+    const hours = currentDate.getHours();
+    const minutes = currentDate.getMinutes();
+    const seconds = currentDate.getSeconds();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const hours12 = hours % 12 || 12;
+    const displayFormattedTime = `${hours12 < 10 ? '0' : ''}${hours12}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds} ${ampm}`;
+
+    document.getElementById("displayCurrentTimeDashboard").textContent = displayFormattedTime;
+  }
+
+  updateCurrentTime();
+  setInterval(updateCurrentTime, 1000);
+</script>
+
 <!-- edit employee -->
 <script>
   $(document).ready(function() {
@@ -24,17 +57,15 @@
 <!-- edit role -->
 <script>
   $(document).ready(function() {
-    $("body").on("click", ".editrolebtnclass", function(event) {
+    $("body").on("click", ".editpositionbtnclass", function(event) {
       $tr = $(this).closest('tr');
       var data = $tr.children("td").map(function() {
         return $(this).text();
       }).get();
       $('#updateRoleID').val(data[0]);
-      $('#positionID').val(data[1]);
-      $('#positionRate').val(data[2]);
-      $('#lnameIDvalue').val(data[3]);
-      $('#roleIDvalue').val(data[5]);
-      $('#fingerprintIDvalue').val(data[7]);
+      $('#updateRoleName').val(data[1]);
+      $('#updateRoleRate').val(data[2]);
+
       console.log(data);
     })
   });
@@ -105,53 +136,59 @@
 
 <script>
   // setup block
-      var ctx = document.getElementById('donut-chartjs').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: <?php echo json_encode(array_keys($donut_array)) ?>,
+  var ctx = document.getElementById('donut-chartjs').getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: <?php echo json_encode(array_keys($donut_array)) ?>,
 
-            datasets: [{
-                label: 'Total Employees',
-                data: <?php echo json_encode(array_values($donut_array)) ?>,
-                backgroundColor: [
-                    getRandomColor(),
-                    getRandomColor(),
-                    getRandomColor(),
-                    getRandomColor()
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false
+      datasets: [{
+        label: 'Total Employees',
+        data: <?php echo json_encode(array_values($donut_array)) ?>,
+        backgroundColor: [
+          getRandomColor(),
+          getRandomColor(),
+          getRandomColor(),
+          getRandomColor()
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'bottom'
         }
-    });
-
-    function getRandomColor() {
-        const letters = '0123456789ABCDEF';
-        let color = '#';
-        for (let i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
+      }
     }
+  });
 
+  function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
 </script>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var date = new Date(Date.now() - 0 * 24 * 60 * 60 * 1000);
-        var defaultDate = date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
-        document.getElementById("datetimepicker-dashboard").flatpickr({
-            inline: true,
-            prevArrow: "<span title=\"Previous month\">&laquo;</span>",
-            nextArrow: "<span title=\"Next month\">&raquo;</span>",
-            defaultDate: defaultDate,
 
-        });
+<!-- dashboard calendar -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var date = new Date(Date.now() - (-1) * 24 * 60 * 60 * 1000);
+    var defaultDate = date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
+    document.getElementById("datetimepicker-dashboard").flatpickr({
+      inline: true,
+      prevArrow: "<span title=\"Previous month\">&laquo;</span>",
+      nextArrow: "<span title=\"Next month\">&raquo;</span>",
+      defaultDate: defaultDate,
+
     });
+  });
 </script>
 
 
