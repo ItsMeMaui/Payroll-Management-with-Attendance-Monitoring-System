@@ -37,7 +37,7 @@ $result_employees = mysqli_query($conn, $get_employees);
 
     <div class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-1">
-        <table class="w-full text-sm text-gray-500 dark:text-black text-center employee_table">
+        <table class="w-full text-sm text-gray-500 dark:text-black text-center" id="employees_table">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" class="px-6 py-3">
@@ -54,6 +54,9 @@ $result_employees = mysqli_query($conn, $get_employees);
               </th>
               <th scope="col" class="px-6 py-3">
                 Employee
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Status
               </th>
               <th scope="col " class="hidden">
                 Role ID
@@ -76,7 +79,7 @@ $result_employees = mysqli_query($conn, $get_employees);
             </tr>
           </thead>
 
-          <tbody>
+          <tbody >
             <?php
             while ($row = mysqli_fetch_array($result_employees)) {
             ?>
@@ -87,6 +90,7 @@ $result_employees = mysqli_query($conn, $get_employees);
 
                 <td class="hidden"><?php echo $row['emp_lname'] ?> </td>
                 <td class="text-center"><?php echo $row['emp_fname'] ?> <?php echo " " ?><?php echo $row['emp_mname'] ?><?php echo " " ?><?php echo " " ?><?php echo $row['emp_lname'] ?></td>
+                <td class="text-center"><?php echo $row['emp_status'] ?></td>
                 <td class="hidden"><?php echo $row['role_id'] ?></td>
                 <td class="text-center"><?php echo ucwords($row['role_name']) ?></td>
                 <td class="hidden"> <?php echo $row['emp_fingerprint'] ?></td>
@@ -96,7 +100,7 @@ $result_employees = mysqli_query($conn, $get_employees);
                   <div class="row flex items-center text-center justify-center">
                     <div class="col-6 ">
 
-                      <button data-modal-target="defaultModal" data-modal-toggle="defaultModal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 editempbtnclass" type="button">
+                      <button data-modal-target="defaultModal"  data-modal-toggle="defaultModal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 editempbtnclass" type="button">
                         Edit
                       </button>
                     </div>

@@ -3,13 +3,13 @@
 class SignupEmp extends Db
 {
 
-    protected function setEmp($emp_fname, $emp_mname, $emp_lname, $emp_fingerprint, $role_id, $processed_by)
+    protected function setEmp($emp_fname, $emp_mname, $emp_lname, $emp_fingerprint, $status, $role_id ,$processed_by)
     {
 
-        $stmt = $this->connect()->prepare('INSERT INTO tbl_employees( emp_fname, emp_mname, emp_lname, emp_fingerprint, role_id,processed_by) VALUES  (?,?,?,?,?,?);');
+        $stmt = $this->connect()->prepare('INSERT INTO tbl_employees( emp_fname, emp_mname, emp_lname, emp_fingerprint, emp_status,role_id,processed_by) VALUES  (?,?,?,?,?,?,?);');
 
 
-        if (!$stmt->execute(array($emp_fname, $emp_mname, $emp_lname, $emp_fingerprint, $role_id, $processed_by))) {
+        if (!$stmt->execute(array($emp_fname, $emp_mname, $emp_lname, $emp_fingerprint, $status,$role_id, $processed_by))) {
             $stmt = null;
             header("location: ../index.php?error=StatementFailed");
             exit();

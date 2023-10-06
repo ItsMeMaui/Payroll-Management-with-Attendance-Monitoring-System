@@ -65,7 +65,7 @@ if (isset($_POST['generateBC'])) {
 	JOIN
 	    tbl_roles r ON e.role_id = r.role_id
 	WHERE
-	    DATE_FORMAT(a.attendance_date, '%m/%d/%Y') BETWEEN '$start' AND '$end' 
+	    DATE_FORMAT(a.attendance_date, '%m/%d/%Y') BETWEEN '$start' AND '$end' and e.emp_status = 'Active'
 	GROUP BY
 	    e.emp_id, e.emp_fname, e.emp_mname, e.emp_lname, r.role_rate_per_hour";
     $result = $conn->query($select);
@@ -148,7 +148,7 @@ if (isset($_POST['generateSpecificReport'])) {
 	JOIN
 	    tbl_roles r ON e.role_id = r.role_id
 	WHERE
-	    DATE_FORMAT(a.attendance_date, '%m/%d/%Y') BETWEEN '$start' AND '$end' AND e.emp_id = '$user'
+	    DATE_FORMAT(a.attendance_date, '%m/%d/%Y') BETWEEN '$start' AND '$end' AND e.emp_id = '$user' and e.emp_status = 'Active'
 	GROUP BY
 	    e.emp_id, e.emp_fname, e.emp_mname, e.emp_lname, r.role_rate_per_hour";
     $result = mysqli_query($conn, $select);
@@ -193,7 +193,7 @@ if (isset($_POST['generateSpecificReport'])) {
 	JOIN
 	    tbl_roles r ON e.role_id = r.role_id
 	WHERE
-	    DATE_FORMAT(a.attendance_date, '%m/%d/%Y') BETWEEN '$start' AND '$end' AND e.emp_id = '$user'
+	    DATE_FORMAT(a.attendance_date, '%m/%d/%Y') BETWEEN '$start' AND '$end' AND e.emp_id = '$user' and e.emp_status = 'Active'
 	GROUP BY
 	    e.emp_id, e.emp_fname, e.emp_mname, e.emp_lname, r.role_rate_per_hour";
 

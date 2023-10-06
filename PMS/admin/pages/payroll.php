@@ -8,6 +8,7 @@ $get_employees = "SELECT *, DATE_FORMAT(tbl_employees.created_at, '%M %d, %Y') a
                 FROM tbl_employees
                 INNER JOIN tbl_roles
                 ON tbl_employees.role_id = tbl_roles.role_id
+                WHERE tbl_employees.emp_status = 'Active'
                 ORDER BY tbl_employees.created_at DESC;";
 $result_employees = mysqli_query($conn, $get_employees);
 
@@ -17,15 +18,16 @@ $get_employees = "SELECT *
                         ON e.emp_id = u.emp_id
                     INNER JOIN tbl_roles r
                         ON r.role_id = e.role_id
+                    WHERE e.emp_status = 'Active'
                     GROUP BY u.user_id";
 $result_employees = mysqli_query($conn, $get_employees);
 
 
 
 $get_reports_name = "SELECT e.*, r.*
-                    FROM tbl_employees e
-                    INNER JOIN tbl_roles r ON e.role_id = r.role_id;";
-
+        FROM tbl_employees e
+        INNER JOIN tbl_roles r ON e.role_id = r.role_id
+        WHERE e.emp_status = 'Active'";
 $result_reports_name = mysqli_query($conn, $get_reports_name);
 ?>
 

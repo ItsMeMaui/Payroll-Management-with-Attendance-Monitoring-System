@@ -33,7 +33,9 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/datepicker.min.js"></script>
-
+<!-- Include Flowbite Modal CSS and JavaScript via CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flowbite@1.1.0/dist/flowbite.css">
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@1.1.0/dist/flowbite.js"></script>
   <!-- datatables.net -->
   <link href="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-1.13.6/b-2.4.2/b-html5-2.4.2/b-print-2.4.2/datatables.min.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>

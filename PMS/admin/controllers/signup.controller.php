@@ -8,16 +8,18 @@ class SignupEmpController extends SignupEmp
     private $emp_mname;
     private $emp_lname;
     private $emp_fingerprint;
+    private $status;
     private $role_id;
     private $processed_by;
 
-    public function __construct($emp_fname, $emp_mname, $emp_lname, $emp_fingerprint, $role_id, $processed_by)
+    public function __construct($emp_fname, $emp_mname, $emp_lname, $emp_fingerprint,$status, $role_id, $processed_by)
     {
 
         $this->emp_fname = $emp_fname;
         $this->emp_mname = $emp_mname;
         $this->emp_lname = $emp_lname;
         $this->emp_fingerprint = $emp_fingerprint;
+        $this->status = $status;
         $this->role_id = $role_id;
         $this->processed_by = $processed_by;
     }
@@ -33,7 +35,7 @@ class SignupEmpController extends SignupEmp
             header("location: ../pages/employees.php?error=InvalidInputFname");
             exit();
         }
-        if ($this->invalid_input_mnane() == false) {
+        if ($this->valid_input_mname() == false) {
             header("location: ../pages/employees.php?error=InvalidInputMname");
             exit();
         }
@@ -43,13 +45,13 @@ class SignupEmpController extends SignupEmp
         }
 
 
-        $this->setEmp($this->emp_fname, $this->emp_mname, $this->emp_lname, $this->emp_fingerprint, $this->role_id, $this->processed_by);
+        $this->setEmp($this->emp_fname, $this->emp_mname, $this->emp_lname, $this->emp_fingerprint, $this->status ,$this->role_id, $this->processed_by);
     }
 
     private function missing_input()
     {
         $result = "";
-        if ($this->emp_fname == "" || $this->emp_mname == "" || $this->emp_lname == "" || $this->emp_fingerprint == "" || $this->role_id == "" || $this->processed_by == "") {
+        if ($this->emp_fname == ""  || $this->emp_lname == "" || $this->emp_fingerprint == ""|| $this->status == "" || $this->role_id == "" || $this->processed_by == "") {
             $result = false;
         } else {
             $result = true;
@@ -66,15 +68,14 @@ class SignupEmpController extends SignupEmp
         }
         return $result;
     }
-    private function invalid_input_mnane()
+    private function valid_input_mname()
     {
-        $result = "";
-        if (!preg_match('/^[a-zA-Z- ]{1,30}$/', $this->emp_mname)) {
-            $result = false;
+        // Check if emp_mname is null or matches the pattern
+        if ($this->emp_mname === '' || preg_match('/^[a-zA-Z- ]{1,30}$/', $this->emp_mname)) {
+            return true;
         } else {
-            $result = true;
+            return false;
         }
-        return $result;
     }
     private function invalid_input_lname()
     {

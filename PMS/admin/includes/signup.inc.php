@@ -6,6 +6,7 @@ if (isset($_POST['register_employee'])) {
     $emp_lname = ucwords($_POST['lname']);
     $emp_fingerprint = $_POST['fingerprint'];
     $role_id = $_POST['role'];
+    $status = $_POST['status'];
     $processed_by = $_POST['processed-by'];
 
 
@@ -13,7 +14,7 @@ if (isset($_POST['register_employee'])) {
     include "../classes/signup.classes.php";
     include "../controllers/signup.controller.php";
 
-    $signup = new SignupEmpController($emp_fname, $emp_mname, $emp_lname, $emp_fingerprint, $role_id, $processed_by);
+    $signup = new SignupEmpController($emp_fname, $emp_mname, $emp_lname, $emp_fingerprint, $status , $role_id,$processed_by);
 
 
     $signup->signupemphandler();
