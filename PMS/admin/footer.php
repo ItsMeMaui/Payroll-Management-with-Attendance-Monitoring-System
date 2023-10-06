@@ -37,21 +37,25 @@
 
 <!-- edit employee -->
 <script>
-  $(document).ready(function() {
-    $("body").on("click", ".editempbtnclass", function(event) {
-      $tr = $(this).closest('tr');
-      var data = $tr.children("td").map(function() {
-        return $(this).text();
-      }).get();
-      $('#updateUserID').val(data[0]);
-      $('#fnameIDvalue').val(data[1]);
-      $('#mnameIDvalue').val(data[2]);
-      $('#lnameIDvalue').val(data[3]);
-      $('#roleIDvalue').val(data[5]);
-      $('#fingerprintIDvalue').val(data[7]);
-      console.log(data);
-    })
+$(document).ready(function() {
+  // Initialize DataTables
+  var table = $('#employees_table').DataTable();
+
+  // Use DataTables' event delegation
+  $('#employees_table tbody').on('click', '.editempbtnclass', function() {
+    var $tr = $(this).closest('tr');
+    var data = table.row($tr).data(); // Use DataTables API to get row data
+    $('#updateUserID').val(data[0]);
+    $('#fnameIDvalue').val(data[1]);
+    $('#mnameIDvalue').val(data[2]);
+    $('#lnameIDvalue').val(data[3]);
+    $('#empstatusID').val(data[5]);
+    $('#roleIDvalue').val(data[6]);
+    $('#fingerprintIDvalue').val(data[8]);
+    console.log(data);
+    
   });
+});
 </script>
 
 <!-- edit role -->

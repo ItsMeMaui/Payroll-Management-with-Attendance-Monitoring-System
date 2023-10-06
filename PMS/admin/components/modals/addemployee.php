@@ -19,25 +19,25 @@
             <div class="p-6 space-y-6">
                 <form action="../includes/signup.inc.php" method="POST">
                     <div class="mb-6">
-                        <label for="fnameID" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Firstname</label>
+                        <label for="fnameID" class="block mb-2 text-md font-medium text-gray-900 dark:text-white"><span class="text-red-500">*</span> Firstname </label>
                         <input type="text" id="fnameID" name="fname" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
                     <div class="mb-6">
-                        <label for="mnameID" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Middlename</label>
+                        <label for="mnameID" class="block mb-2 text-md font-medium text-gray-900 dark:text-white"> Middlename</label>
                         <input type="text" id="mnameID" name="mname" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
                     <div class="mb-6">
-                        <label for="lnameID" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lastname</label>
+                        <label for="lnameID" class="block mb-2 text-md font-medium text-gray-900 dark:text-white"><span class="text-red-500">*</span> Lastname</label>
                         <input type="text" id="lnameID" name="lname" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
                     <div class="mb-6">
-                        <label for="fingerprintID" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Fingerprint</label>
+                        <label for="fingerprintID" class="block mb-2 text-md font-medium text-gray-900 dark:text-white"><span class="text-red-500">*</span> Your Fingerprint </label>
                         <input type="text" id="fingerprintID" name="fingerprint" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
                     <div class="mb-6">
-                        <label for="roleID" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
+                        <label for="roleID" class="block mb-2 text-md font-medium text-gray-900 dark:text-white"><span class="text-red-500">*</span> Select Role</label>
                         <select id="roleID" name="role" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected disabled value="">Select a Role</option>
+                            <option selected disabled value="">-- Select Role --</option>
                             <?php
                             while ($row = mysqli_fetch_array($result_roles)) { ?>
                                 <option value='<?php echo $row[0] ?>'><?php echo ucwords($row[1]) ?></option>
@@ -45,9 +45,16 @@
                         </select>
 
                     </div>
+                    <div class="mb-6">
+                        <label for="roleIDvalue" class="block mb-2 text-md font-medium text-gray-900 dark:text-white"><span class="text-red-500">*</span> Select Status</label>
+                        <select id="roleIDvalue" name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected disabled value="">-- Select Status --</option>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                    </div>
 
-
-                    <input type="hidden" value="eleazar sumaoi" name="processed-by">
+                    <input type="hidden"value="<?php echo $_SESSION["fname"] . " " . $_SESSION["mname"] . " " . $_SESSION["lname"] ?>" name="processed-by">
                     <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
 
                         <button data-modal-hide="staticModal" name="register_employee" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Employee</button>
