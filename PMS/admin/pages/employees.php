@@ -13,7 +13,7 @@ $get_employees = "SELECT *, DATE_FORMAT(tbl_employees.created_at, '%M %d, %Y') a
                 FROM tbl_employees
                 INNER JOIN tbl_roles
                 ON tbl_employees.role_id = tbl_roles.role_id
-                ORDER BY tbl_employees.created_at DESC;";
+                ORDER BY tbl_employees.emp_id DESC;";
 $result_employees = mysqli_query($conn, $get_employees);
 
 ?>

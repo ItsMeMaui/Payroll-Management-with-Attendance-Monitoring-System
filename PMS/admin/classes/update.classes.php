@@ -3,7 +3,7 @@
 
 class updateEmp extends Db
 {
-    protected function updateEmpAcc($update_emp_fname, $update_emp_mname, $update_emp_lname, $update_emp_fingerprint, $update_emp_status,$update_role_id, $update_processed_by, $updateUser)
+    protected function updateEmpAcc($update_emp_fname, $update_emp_mname, $update_emp_lname, $update_emp_fingerprint, $update_emp_status,$update_role_id, $update_processed_by, $updateUser ,$create)
     {
 
 
@@ -15,13 +15,22 @@ class updateEmp extends Db
             header("location: ../pages/employees.php?error=StatementFailed");
             exit();
         }
+
+        $stmt = $this->connect()->prepare('INSERT INTO tbl_logs (action, processed_by) VALUES (?,?);');
+
+        if (!$stmt->execute(array($create, $update_processed_by))) {
+            $stmt = null;
+            header("location: ../pages/employees.php?error=StatementFailed");
+            exit();
+        }
+
     }
 }
 
 class updateUser extends Db
 {
 
-    protected function updateUserAcc($current_username, $update_username, $update_current_password, $update_new_password, $update_repeat_password, $update_processed_by, $update_user_id)
+    protected function updateUserAcc($current_username, $update_username, $update_current_password, $update_new_password, $update_repeat_password, $update_processed_by, $update_user_id ,$create)
     {
 
         $stmt = $this->connect()->prepare('SELECT tbl_users.user_password FROM tbl_users WHERE tbl_users.user_username=?');
@@ -56,6 +65,14 @@ class updateUser extends Db
                     header("location: ../pages/users.php?error=StatementFailed");
                     exit();
                 }
+
+                $stmt = $this->connect()->prepare('INSERT INTO tbl_logs (action, processed_by) VALUES (?,?);');
+
+                if (!$stmt->execute(array($create, $update_processed_by))) {
+                    $stmt = null;
+                    header("location: ../pages/users.php?error=StatementFailed");
+                    exit();
+                }
                 $stmt = null;
             }
         }
@@ -65,7 +82,7 @@ class updateUser extends Db
 class updateRole extends Db
 {
 
-    protected function updateRole($update_role_name, $update_role_rate, $role_rate_per_hour, $update_processed_by, $update_role_id)
+    protected function updateRole($update_role_name, $update_role_rate, $role_rate_per_hour, $update_processed_by, $update_role_id ,$create)
     {
 
         $stmt = $this->connect()->prepare('UPDATE tbl_roles SET   role_name=?,role_rate=?,role_rate_per_hour=?, processed_by=?,created_at = NOW() WHERE role_id   =?;');
@@ -75,5 +92,31 @@ class updateRole extends Db
             header("location: ../pages/employees.php?error=StatementFailed");
             exit();
         }
+
+        $stmt = $this->connect()->prepare('INSERT INTO tbl_logs (action, processed_by) VALUES (?,?);');
+
+        if (!$stmt->execute(array($create, $update_processed_by))) {
+            $stmt = null;
+            header("location: ../pages/users.php?error=StatementFailed");
+            exit();
+        }
+        $stmt = null;
+    }
+    protected function checkUpdateRoleName($update_role_name)
+    {
+        $stmt = $this->connect()->prepare('SELECT role_id FROM tbl_roles WHERE role_name = ?');
+
+        if (!$stmt->execute(array($update_role_name))) {
+            $stmt = null;
+            header("location: ../pages/users.php?error=StatementFailed");
+            exit();
+        }
+        $resultCheck = '';
+        if ($stmt->rowCount() > 0) {
+            $resultCheck = false;
+        } else {
+            $resultCheck = true;
+        }
+        return $resultCheck;
     }
 }

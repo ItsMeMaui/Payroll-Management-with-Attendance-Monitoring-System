@@ -335,6 +335,33 @@ if (isset($_GET['error'])) {
             });
         </script>";
     };
+    if ($errorMessage == "RoleNameExist") {
+        $modalMessage = "Role Name is already exists";
+        $error = "Error";
+        echo "<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var modal = document.getElementById('modalmoulomo');
+                modal.classList.remove('hidden');
+
+                var modalHeader = modal.querySelector('.modal-header');
+                modalHeader.classList.add( 'dark:text-red-500', 'text-black','text-2xl');
+                modalHeader.textContent = '$error';
+
+                // Update the modal message
+                var modalBody = modal.querySelector('.modal-body');
+                modalBody.classList.add( 'dark:text-white', 'text-black', );
+                modalBody.textContent = '$modalMessage';
+                
+                var closeButton = modal.querySelector('[data-modal-hide]');
+                closeButton.addEventListener('click', function() {
+                    modal.classList.add('hidden');
+                });
+            });
+        </script>";
+    };
+
+
+
     // logout handler
     if ($errorMessage == "logout") {
         $modalMessage = "You have successfully logged out.";
@@ -398,6 +425,155 @@ if (isset($_GET['error'])) {
                 var modalHeader = modal.querySelector('.modal-header');
                 modalHeader.classList.add( 'dark:text-red-500', 'text-black','text-2xl');
                 modalHeader.textContent = '$error';
+
+                // Update the modal message
+                var modalBody = modal.querySelector('.modal-body');
+                modalBody.classList.add( 'dark:text-white', 'text-black', );
+                modalBody.textContent = '$modalMessage';
+                
+                var closeButton = modal.querySelector('[data-modal-hide]');
+                closeButton.addEventListener('click', function() {
+                    modal.classList.add('hidden');
+                });
+            });
+        </script>";
+    };
+
+
+    // created successfully
+    if ($errorMessage == "EmployeeCreatedSuccessfully") {
+        $modalMessage = "Employee has been created successfully";
+        $success = "Success";
+        echo "<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var modal = document.getElementById('modalmoulomo');
+                modal.classList.remove('hidden');
+
+                var modalHeader = modal.querySelector('.modal-header');
+                modalHeader.classList.add( 'dark:text-green-500', 'text-black','text-2xl');
+                modalHeader.textContent = '$success';
+
+                // Update the modal message
+                var modalBody = modal.querySelector('.modal-body');
+                modalBody.classList.add( 'dark:text-white', 'text-black', );
+                modalBody.textContent = '$modalMessage';
+                
+                var closeButton = modal.querySelector('[data-modal-hide]');
+                closeButton.addEventListener('click', function() {
+                    modal.classList.add('hidden');
+                });
+            });
+        </script>";
+    };
+    if ($errorMessage == "UserCreatedSuccessfully") {
+        $modalMessage = "User has been created successfully";
+        $success = "Success";
+        echo "<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var modal = document.getElementById('modalmoulomo');
+                modal.classList.remove('hidden');
+
+                var modalHeader = modal.querySelector('.modal-header');
+                modalHeader.classList.add( 'dark:text-green-500', 'text-black','text-2xl');
+                modalHeader.textContent = '$success';
+
+                // Update the modal message
+                var modalBody = modal.querySelector('.modal-body');
+                modalBody.classList.add( 'dark:text-white', 'text-black', );
+                modalBody.textContent = '$modalMessage';
+                
+                var closeButton = modal.querySelector('[data-modal-hide]');
+                closeButton.addEventListener('click', function() {
+                    modal.classList.add('hidden');
+                });
+            });
+        </script>";
+    };
+    if ($errorMessage == "PositionCreatedSuccessfully") {
+        $modalMessage = "Position has been created successfully";
+        $success = "Success";
+        echo "<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var modal = document.getElementById('modalmoulomo');
+                modal.classList.remove('hidden');
+
+                var modalHeader = modal.querySelector('.modal-header');
+                modalHeader.classList.add( 'dark:text-green-500', 'text-black','text-2xl');
+                modalHeader.textContent = '$success';
+
+                // Update the modal message
+                var modalBody = modal.querySelector('.modal-body');
+                modalBody.classList.add( 'dark:text-white', 'text-black', );
+                modalBody.textContent = '$modalMessage';
+                
+                var closeButton = modal.querySelector('[data-modal-hide]');
+                closeButton.addEventListener('click', function() {
+                    modal.classList.add('hidden');
+                });
+            });
+        </script>";
+    };
+
+    // updated successfully
+    if ($errorMessage == "EmployeeUpdatedSuccessfully") {
+        $modalMessage = "Employee has been updated successfully";
+        $success = "Success";
+        echo "<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var modal = document.getElementById('modalmoulomo');
+                modal.classList.remove('hidden');
+
+                var modalHeader = modal.querySelector('.modal-header');
+                modalHeader.classList.add( 'dark:text-green-500', 'text-black','text-2xl');
+                modalHeader.textContent = '$success';
+
+                // Update the modal message
+                var modalBody = modal.querySelector('.modal-body');
+                modalBody.classList.add( 'dark:text-white', 'text-black', );
+                modalBody.textContent = '$modalMessage';
+                
+                var closeButton = modal.querySelector('[data-modal-hide]');
+                closeButton.addEventListener('click', function() {
+                    modal.classList.add('hidden');
+                });
+            });
+        </script>";
+    };
+    if ($errorMessage == "UserUpdatedSuccessfully") {
+        $modalMessage = "User has been updated successfully";
+        $success = "Success";
+        echo "<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var modal = document.getElementById('modalmoulomo');
+                modal.classList.remove('hidden');
+
+                var modalHeader = modal.querySelector('.modal-header');
+                modalHeader.classList.add( 'dark:text-green-500', 'text-black','text-2xl');
+                modalHeader.textContent = '$success';
+
+                // Update the modal message
+                var modalBody = modal.querySelector('.modal-body');
+                modalBody.classList.add( 'dark:text-white', 'text-black', );
+                modalBody.textContent = '$modalMessage';
+                
+                var closeButton = modal.querySelector('[data-modal-hide]');
+                closeButton.addEventListener('click', function() {
+                    modal.classList.add('hidden');
+                });
+            });
+        </script>";
+    };
+    if ($errorMessage == "PositionUpdatedSuccessfully") {
+        $modalMessage = "Position has been created successfully";
+        $success = "Success";
+        echo "<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var modal = document.getElementById('modalmoulomo');
+                modal.classList.remove('hidden');
+
+                var modalHeader = modal.querySelector('.modal-header');
+                modalHeader.classList.add( 'dark:text-green-500', 'text-black','text-2xl');
+                modalHeader.textContent = '$success';
 
                 // Update the modal message
                 var modalBody = modal.querySelector('.modal-body');

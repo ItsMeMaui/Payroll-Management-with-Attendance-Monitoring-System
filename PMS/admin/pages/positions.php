@@ -41,7 +41,7 @@ $result_roles = mysqli_query($conn, $get_roles);
                 Role
               </th>
               <th scope="col" class="px-6 py-3">
-                Role Rate
+                Role Rate Per Day
               </th>
               <th scope="col" class="px-6 py-3">
                 Created At
