@@ -38,8 +38,9 @@
 <!-- edit employee -->
 <script>
 $(document).ready(function() {
-  // Initialize DataTables
-  var table = $('#employees_table').DataTable();
+  let table = new DataTable('#employees_table', {
+    order: [0, 'desc']
+  });
 
   // Use DataTables' event delegation
   $('#employees_table tbody').on('click', '.editempbtnclass', function() {
@@ -60,6 +61,9 @@ $(document).ready(function() {
 
 <!-- edit role -->
 <script>
+  let table3 = new DataTable('.roles_table', {
+    order: [0, 'desc']
+  });
   $(document).ready(function() {
     $("body").on("click", ".editpositionbtnclass", function(event) {
       $tr = $(this).closest('tr');
@@ -77,6 +81,9 @@ $(document).ready(function() {
 
 <!-- edit user -->
 <script>
+    let table4 = new DataTable('.users_table', {
+    order: [0, 'desc']
+  });
   $(document).ready(function() {
     $("body").on("click", ".edituserbtnclass", function(event) {
       $tr = $(this).closest('tr');
@@ -101,24 +108,16 @@ $(document).ready(function() {
 
 <!-- tables -->
 <script>
-  let table = new DataTable('.employee_table', {
-    order: [9, 'desc']
-  });
+
   let table2 = new DataTable('.attendance_table', {
     order: [6, 'desc']
   });
-  let table3 = new DataTable('.roles_table', {
-    order: [0, 'desc']
-  });
-  let table4 = new DataTable('.users_table', {
-    order: [0, 'desc']
-  });
+  let dashboardTable = new DataTable('.logs_table');
+
   let table5 = new DataTable('.payroll_table', {
     order: [0, 'desc']
   });
 </script>
-
-
 
 
 <!-- jquery -->
@@ -141,6 +140,11 @@ $(document).ready(function() {
 <script>
   // setup block
   var ctx = document.getElementById('donut-chartjs').getContext('2d');
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  // Determine label text color class based on dark/light mode
+  var labelColorClass = isDarkMode ? 'white' : 'text-black';
+
   var myChart = new Chart(ctx, {
     type: 'doughnut',
     data: {
@@ -163,7 +167,10 @@ $(document).ready(function() {
       maintainAspectRatio: false,
       plugins: {
         legend: {
-          position: 'bottom'
+          position: 'bottom',
+          labels: {
+            color: labelColorClass, // Set the label text color class dynamically
+          }
         }
       }
     }
@@ -178,6 +185,7 @@ $(document).ready(function() {
     return color;
   }
 </script>
+
 
 
 <!-- dashboard calendar -->

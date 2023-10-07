@@ -25,22 +25,25 @@ $sql = "SELECT e.*, r.role_name, COUNT(e.emp_id) AS attendance_count
 FROM tbl_employees e
 JOIN tbl_attendances a ON e.emp_id = a.emp_id
 JOIN tbl_roles r ON e.role_id = r.role_id
-WHERE DATE(a.attendance_date) = CURDATE();
+WHERE DATE(a.attendance_date) = CURDATE() and e.emp_status = 'Active';
 ";
 $get_timed_in = mysqli_query($conn, $sql);
 
 $sql = "SELECT COUNT(*) AS total_employees_not_attended
 FROM tbl_employees e
-LEFT JOIN tbl_attendances a ON e.emp_id = a.emp_id AND DATE(a.attendance_date) = '2023-09-23'
-WHERE a.emp_id IS NULL;
+LEFT JOIN tbl_attendances a ON e.emp_id = a.emp_id AND DATE(a.attendance_date) = CURDATE() 
+WHERE a.emp_id IS NULL and e.emp_status = 'Active';
 ";
 $get_not_timed_in = mysqli_query($conn, $sql);
 
-$sql = "SELECT COUNT(emp_id) AS total_employees FROM tbl_employees;";
+$sql = "SELECT COUNT(emp_id) AS total_employees FROM tbl_employees where tbl_employees.emp_status = 'Active';";
 $get_total_employees = mysqli_query($conn, $sql);
 
 $sql = "SELECT COUNT(role_id) AS total_positions FROM tbl_roles;";
 $get_total_positions = mysqli_query($conn, $sql);
+
+$sql = "SELECT *, DATE_FORMAT(tbl_logs.created_at, '%M %d, %Y') as created_date FROM tbl_logs ORDER BY tbl_logs.log_id DESC;;";
+$get_recent_activities = mysqli_query($conn, $sql);
 ?>
 
 
@@ -62,7 +65,7 @@ $get_total_positions = mysqli_query($conn, $sql);
                   <?php
                   while ($row = mysqli_fetch_array($get_timed_in)) {
                   ?>
-                     <h1 class="text-lg font-bold"><?php echo $row[9] ?> employees</h1>
+                     <h1 class="text-lg font-bold"><?php echo $row[10] ?> employees</h1>
                   <?php } ?>
                   <h1 class="text-md uppercase">Timed In Today</h1>
                </div>
@@ -90,7 +93,7 @@ $get_total_positions = mysqli_query($conn, $sql);
                   ?>
                      <h1 class="text-lg font-bold"><?php echo $row[0] ?> employees</h1>
                   <?php } ?>
-                  <h1 class="text-md uppercase">Total Employees</h1>
+                  <h1 class="text-md uppercase">Total Active Employees</h1>
                </div>
             </div>
             <div class="w-full flex gap-5 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 items-center">
@@ -108,49 +111,74 @@ $get_total_positions = mysqli_query($conn, $sql);
             </div>
          </div>
          <div class="flex flex-col md:flex-row gap-5">
-
             <div class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col gap-5">
                <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Calendar / Holidays</h5>
                <div class="flex justify-center items-center">
                   <div class="relative border border-gray-300 rounded-lg">
-                     <iframe src="https://calendar.google.com/calendar/embed?src=en.philippines%23holiday%40group.v.calendar.google.com&ctz=Asia%2FManila" style="border: 0" width="300" height="300" frameborder="0" scrolling="no"></iframe>
-                  </div>
-               </div>
-            </div>
-            <div class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col gap-5">
-               <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Events</h5>
-               <div class="flex justify-center items-center">
-                  <div class="relative border border-gray-300 rounded-lg">
-
+                     <iframe src="https://calendar.google.com/calendar/embed?src=en.philippines%23holiday%40group.v.calendar.google.com&ctz=Asia%2FManila" style="border: 0" width="700" height="400" frameborder="0" scrolling="no"></iframe>
                   </div>
                </div>
             </div>
             <div class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col gap-5">
                <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Employees</h5>
 
-               <div>
-                  <canvas id="donut-chartjs"></canvas>
+               <div class="mt-10">
+                  <canvas id="donut-chartjs" class="w-96"></canvas>
                </div>
             </div>
          </div>
+         <div class="flex justify-center items-center">
+            <div class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col gap-5">
+               <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Recent Activities</h5>
+               <div class="w-full p-6 bg-white  shadow dark:bg-gray-800 dark:border-gray-700">
+                  <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-1">
+                     <table class="w-full text-sm text-gray-500 dark:text-black text-center logs_table">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                           <tr>
+                              <th scope="col" class="hidden">
+                                 Product name
+                              </th>
+                              <th scope="col" class="px-6 py-3">
+                                 Action
+                              </th>
+                              <th scope="col" class="px-6 py-3">
+                                 Processed By
+                              </th>
+                              <th scope="col" class="px-6 py-3">
+                                 Created At
+                              </th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <?php
+                           while ($row = mysqli_fetch_array($get_recent_activities)) {
+                           ?>
+                              <tr>
+                                 <td class="hidden"><?php echo $row['emp_id'] ?></td>
+                                 <td class="text-center"> <?php echo $row['action'] ?></td>
+                                 <td class="text-center"> <?php echo $row['processed_by'] ?></td>
 
+                                 <td class="text-center"><?php echo $row['created_date'] ?> </td>
 
+                              </tr>
+                           <?php } ?>
 
+                        </tbody>
+
+                     </table>
+                  </div>
+
+               </div>
+            </div>
+         </div>
       </div>
+
+
+
    </div>
+</div>
 
-   <!-- <div class="row-span-3 w-[75%] p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <div id="datetimepicker-dashboard"></div>
-      </div>
-      <div class="grid grid-rows-3 grid-flow-col gap-4">
-         <div class="row-span-3 w-[75%] p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <canvas id="donut-chartjs"></canvas>
-         </div>
-         <div class="col-span-2 ...">
-            <div id="datetimepicker-dashboard"></div>
-         </div>
-         <div class="row-span-2 col-span-2 ...">03</div>
-      </div> -->
+
 </div>
 </div>
 

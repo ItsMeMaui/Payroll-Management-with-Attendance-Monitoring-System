@@ -10,16 +10,20 @@ if (isset($_POST['editemp'])) {
     $update_processed_by = $_POST['processed-by'];
     $updateUser = $_POST['empID'];
 
+
+
+    $create = "Updated Employee : " . " " . $update_emp_fname . " " . $update_emp_lname ."";
+
     include "../classes/db.classes.php";
     include "../classes/update.classes.php";
     include "../controllers/update.controller.php";
 
-    $signup = new updateEmpController($update_emp_fname, $update_emp_mname, $update_emp_lname, $update_emp_fingerprint, $update_emp_status,$update_role_id, $update_processed_by, $updateUser);
+    $signup = new updateEmpController($update_emp_fname, $update_emp_mname, $update_emp_lname, $update_emp_fingerprint, $update_emp_status,$update_role_id, $update_processed_by, $updateUser, $create);
 
 
     $signup->empupdate();
 
-    header("location: ../pages/employees.php");
+    header("location: ../pages/employees.php?error=EmployeeUpdatedSuccessfully");
 }
 
 if (isset($_POST['update_user'])) {
@@ -31,16 +35,18 @@ if (isset($_POST['update_user'])) {
     $update_new_password = $_POST['update_user_password'];
     $update_repeat_password = $_POST['update_user_rpt_password'];
     $update_processed_by = $_POST['processed-by'];
-
+    
+    $create = "Updated User : " . " " . $update_username . "";
+    
     include "../classes/db.classes.php";
     include "../classes/update.classes.php";
     include "../controllers/update.controller.php";
 
-    $update_user = new updateUserController($current_username,$update_username, $update_current_password, $update_new_password, $update_repeat_password, $update_processed_by, $update_user_id);
+    $update_user = new updateUserController($current_username,$update_username, $update_current_password, $update_new_password, $update_repeat_password, $update_processed_by, $update_user_id, $create);
 
     $update_user->userupdatehandler();
 
-    header("location: ../pages/users.php");
+    header("location: ../pages/users.php?error=UserUpdatedSuccessfully");
 }
 
 if (isset($_POST['update_role'])) {
@@ -51,13 +57,16 @@ if (isset($_POST['update_role'])) {
     $role_rate_per_hour = (int)$update_role_rate/8;
     $update_processed_by = $_POST['processed-by'];
 
+    $create = "Updated Position : " . " " . $update_role_name . "";
+
+
     include "../classes/db.classes.php";
     include "../classes/update.classes.php";
     include "../controllers/update.controller.php";
 
-    $update_user = new updateRoleController($update_role_name,$update_role_rate, $role_rate_per_hour,$update_processed_by, $update_role_id);
+    $update_user = new updateRoleController($update_role_name,$update_role_rate, $role_rate_per_hour,$update_processed_by, $update_role_id,$create);
 
     $update_user->roleupdatehandler();
 
-    header("location: ../pages/positions.php");
+    header("location: ../pages/positions.php?error=PositionUpdatedSuccessfully");
 }

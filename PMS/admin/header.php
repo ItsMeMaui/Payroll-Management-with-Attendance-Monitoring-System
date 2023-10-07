@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-if (($_SESSION['role_name']) == 'admin') {
+if (($_SESSION['role_name']) == 'Admin') {
 } else {
   header("location: ../index.php?error=loginrequired");
 }
@@ -33,14 +33,12 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/datepicker.min.js"></script>
-<!-- Include Flowbite Modal CSS and JavaScript via CDN -->
+
+
+  <!-- Include Flowbite Modal CSS and JavaScript via CDN -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flowbite@1.1.0/dist/flowbite.css">
   <script src="https://cdn.jsdelivr.net/npm/flowbite@1.1.0/dist/flowbite.js"></script>
-  <!-- datatables.net -->
-  <link href="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-1.13.6/b-2.4.2/b-html5-2.4.2/b-print-2.4.2/datatables.min.css" rel="stylesheet">
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
-  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -52,6 +50,11 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
   <!-- own stylesheet -->
   <link rel="stylesheet" href="./style.css">
 
+  <!-- datatables.net -->
+  <link href="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-1.13.6/b-2.4.2/b-html5-2.4.2/b-print-2.4.2/datatables.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 
 
   <title>Document</title>
@@ -62,86 +65,140 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
     }
 
     @media (prefers-color-scheme: dark) {
-      div.dataTables_wrapper {
+
+      div.dataTables_wrapper,
+      div.dataTables_info,
+      .dataTables_length label,
+      .dataTables_filter,
+      .dataTables_filter label,
+      .paginate_button a,
+      .paging_simple_numbers span {
         color: white !important;
       }
 
-      div.dataTables_info {
+      div.dataTables_paginate.paging_simple_numbers span a.paginate_button {
         color: white !important;
       }
 
-      .dataTables_length {
-        padding: 10px;
-        ;
+      div.dataTables_paginate.paging_simple_numbers span a.paginate_button.current {
+        color: black !important;
+
       }
 
-      .dataTables_length label {
+      #DataTables_Table_0_filter {
+        margin-bottom: 10px;
+      }
+
+      #employees_table_filter {
+        margin-bottom: 10px;
+      }
+
+      #DataTables_Table_0_previous {
         color: white !important;
       }
 
-      .dataTables_filter {
-        padding: 10px;
+      #DataTables_Table_0_next {
+        color: white !important;
+
+      }
+
+      #employees_table_previous {
+        color: white !important;
+
+      }
+
+      #employees_table_next {
         color: white !important;
       }
 
-      .dataTables_filter label {
+      #employees_table_paginate span a.paginate_button.current {
+        color: black !important;
+      }
+
+      #employees_table_paginate span a.paginate_button {
         color: white !important;
       }
 
-      .dataTables_paginate a {
+      #employees_table td,
+      #employees_table thead tr th {
+        color: white !import;
+      }
+
+      #employees_table_previous {
+        color: white !important;
+
+      }
+
+      #employees_table_next {
         color: white !important;
       }
 
-      /* Default text color for light mode */
-      .text-dark-mode-light {
-        color: black;
+      #employees_table_paginate span a.paginate_button.current {
+        color: black !important;
       }
 
-      /* Text color for dark mode */
+      #employees_table_paginate span a.paginate_button {
+        color: white !important;
+      }
+
+      #employees_table td,
+      #employees_table thead tr th {
+        color: white !import;
+      }
+
+      .dataTables_length select {
+        width: 50px;
+
+      }
+
+      .dataTables_length select option {
+        width: 50px;
+        color: black !important;
+      }
+
+      .dataTable thead tr th{ 
+        justify-content: center;
+        text-align: center;
+        color: white !important;
+
+      }
       .dark-mode .text-dark-mode-light {
         color: white;
       }
+
     }
 
     @media (prefers-color-scheme: light) {
-      div.dataTables_wrapper {
+
+      div.dataTables_wrapper,
+      div.dataTables_info,
+      .dataTables_filter {
         color: black !important;
       }
 
-      div.dataTables_info {
+      .dataTables_length,
+      .dataTables_length label,
+      .dataTables_filter label,
+      .dataTables_paginate a,
+      .dataTables_length select {
         color: black !important;
       }
 
       .dataTables_filter {
         padding: 10px;
-
       }
 
       .dataTables_length {
         padding: 10px;
-        ;
       }
 
-      .dataTables_length label {
-        color: black !important;
+      .dataTables_length select {
+        width: 50px;
       }
+      .dataTable thead tr th{ 
+        justify-content: center;
+        text-align: center;
 
-      .dataTables_filter label {
-        color: black !important;
-      }
-
-      .dataTables_paginate a {
-        color: black !important;
-      }
-
-      /* Default text color for light mode */
-      .text-dark-mode-light {
-        color: black;
-      }
-
-      /* Text color for dark mode */
-      .dark-mode .text-dark-mode-light {
-        color: black;
       }
     }
   </style>

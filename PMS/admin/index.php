@@ -36,6 +36,7 @@ include_once './components/modals/errors.php';
 
   <style>
     @media (prefers-color-scheme: dark) {
+
       div.dataTables_wrapper {
         color: white !important;
       }

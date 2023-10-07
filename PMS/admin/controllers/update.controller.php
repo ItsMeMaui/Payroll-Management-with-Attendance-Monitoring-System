@@ -10,8 +10,9 @@ class updateEmpController extends updateEmp
     private $update_role_id;
     private $update_processed_by;
     private $updateUser;
+    private $create;
 
-    public function __construct($update_emp_fname, $update_emp_mname, $update_emp_lname, $update_emp_fingerprint, $update_emp_status , $update_role_id, $update_processed_by, $updateUser)
+    public function __construct($update_emp_fname, $update_emp_mname, $update_emp_lname, $update_emp_fingerprint, $update_emp_status , $update_role_id, $update_processed_by, $updateUser ,$create)
     {
         $this->update_emp_fname = $update_emp_fname;
         $this->update_emp_mname = $update_emp_mname;
@@ -21,6 +22,8 @@ class updateEmpController extends updateEmp
         $this->update_role_id = $update_role_id;
         $this->update_processed_by = $update_processed_by;
         $this->updateUser = $updateUser;
+        $this->create = $create;
+
     }
     public function empupdate()
     {
@@ -42,13 +45,13 @@ class updateEmpController extends updateEmp
             exit();
         }
 
-        $this->updateEmpAcc($this->update_emp_fname, $this->update_emp_mname, $this->update_emp_lname, $this->update_emp_fingerprint, $this->update_emp_status,$this->update_role_id, $this->update_processed_by, $this->updateUser);
+        $this->updateEmpAcc($this->update_emp_fname, $this->update_emp_mname, $this->update_emp_lname, $this->update_emp_fingerprint, $this->update_emp_status,$this->update_role_id, $this->update_processed_by, $this->updateUser, $this->create);
     }
 
     private function missing_input()
     {
         $result = "";
-        if ($this->update_emp_fname == "" || $this->update_emp_mname == "" || $this->update_emp_lname == "" || $this->update_emp_fingerprint == "" || $this->update_emp_status == "" || $this->update_role_id == "" || $this->update_processed_by == "" || $this->updateUser == "") {
+        if ($this->update_emp_fname == ""  || $this->update_emp_lname == "" || $this->update_emp_fingerprint == "" || $this->update_emp_status == "" || $this->update_role_id == "" || $this->update_processed_by == "" || $this->updateUser == "" || $this->create == "") {
             $result = false;
         } else {
             $result = true;
@@ -68,13 +71,11 @@ class updateEmpController extends updateEmp
     }
     private function invalid_input_mnane()
     {
-        $result = "";
-        if (!preg_match('/^[a-zA-Z- ]{1,30}$/', $this->update_emp_mname)) {
-            $result = false;
+        if ($this->update_emp_mname === '' || preg_match('/^[a-zA-Z- ]{1,30}$/', $this->update_emp_mname)) {
+            return true;
         } else {
-            $result = true;
+            return false;
         }
-        return $result;
     }
     private function invalid_input_lname()
     {
@@ -97,8 +98,9 @@ class updateUserController extends updateUser
     private $update_repeat_password;
     private $update_processed_by;
     private $update_user_id;
+    private $create;
 
-    public function __construct($current_username, $update_username, $update_current_password, $update_new_password, $update_repeat_password, $update_processed_by, $update_user_id)
+    public function __construct($current_username, $update_username, $update_current_password, $update_new_password, $update_repeat_password, $update_processed_by, $update_user_id, $create)
     {
         $this->current_username = $current_username;
         $this->update_username = $update_username;
@@ -107,6 +109,7 @@ class updateUserController extends updateUser
         $this->update_repeat_password = $update_repeat_password;
         $this->update_processed_by = $update_processed_by;
         $this->update_user_id = $update_user_id;
+        $this->create = $create;
     }
 
     public function userupdatehandler()
@@ -117,12 +120,12 @@ class updateUserController extends updateUser
             exit();
         }
 
-        $this->updateUserAcc($this->current_username, $this->update_username, $this->update_current_password, $this->update_new_password, $this->update_repeat_password, $this->update_processed_by, $this->update_user_id);
+        $this->updateUserAcc($this->current_username, $this->update_username, $this->update_current_password, $this->update_new_password, $this->update_repeat_password, $this->update_processed_by, $this->update_user_id , $this->create);
     }
     private function missing_input()
     {
         $result = "";
-        if ($this->current_username == "" || $this->update_username == "" || $this->update_current_password == "" || $this->update_new_password == "" || $this->update_repeat_password == "" || $this->update_processed_by == "" || $this->update_user_id == "") {
+        if ($this->current_username == "" || $this->update_username == "" || $this->update_current_password == "" || $this->update_new_password == "" || $this->update_repeat_password == "" || $this->update_processed_by == "" || $this->update_user_id == "" || $this->create == "") {
             $result = false;
         } else {
             $result = true;
@@ -137,21 +140,22 @@ class updateRoleController extends updateRole
     private $update_role_rate;
     private $update_processed_by;
     private $role_rate_per_hour;
-
     private $update_role_id;
+    private $create;
 
-    public function __construct($update_role_name, $update_role_rate, $role_rate_per_hour, $update_processed_by, $update_role_id)
+
+    public function __construct($update_role_name, $update_role_rate, $role_rate_per_hour, $update_processed_by, $update_role_id, $create)
     {
         $this->update_role_name = $update_role_name;
         $this->update_role_rate = $update_role_rate;
         $this->update_processed_by = $update_processed_by;
         $this->role_rate_per_hour = $role_rate_per_hour;
-
         $this->update_role_id = $update_role_id;
+        $this->create = $create;
+
     }
     public function roleupdatehandler()
     {
-
         if ($this->missing_input() == false) {
             header("location: ../pages/positions.php?error=MissingSomeInputFields");
             exit();
@@ -164,12 +168,13 @@ class updateRoleController extends updateRole
             header("location: ../pages/positions.php?error=InvalidInputPositionRate");
             exit();
         }
-        $this->updateRole($this->update_role_name, $this->update_role_rate, $this->role_rate_per_hour, $this->update_processed_by, $this->update_role_id);
+        $this->updateRole($this->update_role_name, $this->update_role_rate, $this->role_rate_per_hour, $this->update_processed_by, $this->update_role_id , $this->create);
     }
+
     private function missing_input()
     {
         $result = "";
-        if ($this->update_role_name == "" || $this->update_role_rate == "" || $this->role_rate_per_hour == "" || $this->update_processed_by == "" ||  $this->update_role_id == "") {
+        if ($this->update_role_name == "" || $this->update_role_rate == "" || $this->role_rate_per_hour == "" || $this->update_processed_by == "" ||  $this->update_role_id == "" ||  $this->create == "") {
             $result = false;
         } else {
             $result = true;
@@ -180,7 +185,7 @@ class updateRoleController extends updateRole
     private function invalid_input_role_name()
     {
         $result = "";
-        if (!preg_match('/^[a-zA-Z- ]{5,30}$/', $this->update_role_name)) {
+        if (!preg_match('/^[a-zA-Z0-9- ]{5,30}$/', $this->update_role_name)) {
             $result = false;
         } else {
             $result = true;
