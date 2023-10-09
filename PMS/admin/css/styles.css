@@ -1,0 +1,141 @@
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  div.dataTables_wrapper,
+  div.dataTables_info,
+  .dataTables_length label,
+  .dataTables_filter,
+  .dataTables_filter label,
+  .paginate_button a,
+  .paging_simple_numbers span {
+    color: white !important;
+  }
+
+  div.dataTables_paginate.paging_simple_numbers span a.paginate_button {
+    color: white !important;
+  }
+
+  div.dataTables_paginate.paging_simple_numbers span a.paginate_button.current {
+    color: black !important;
+
+  }
+
+  #DataTables_Table_0_filter {
+    margin-bottom: 10px;
+  }
+
+  #employees_table_filter {
+    margin-bottom: 10px;
+  }
+
+  #DataTables_Table_0_previous {
+    color: white !important;
+  }
+
+  #DataTables_Table_0_next {
+    color: white !important;
+
+  }
+
+  #employees_table_previous {
+    color: white !important;
+
+  }
+
+  #employees_table_next {
+    color: white !important;
+  }
+
+  #employees_table_paginate span a.paginate_button.current {
+    color: black !important;
+  }
+
+  #employees_table_paginate span a.paginate_button {
+    color: white !important;
+  }
+
+  #employees_table td,
+  #employees_table thead tr th {
+    color: white !import;
+  }
+
+  #employees_table_previous {
+    color: white !important;
+
+  }
+
+  #employees_table_next {
+    color: white !important;
+  }
+
+  #employees_table_paginate span a.paginate_button.current {
+    color: black !important;
+  }
+
+  #employees_table_paginate span a.paginate_button {
+    color: white !important;
+  }
+
+  #employees_table td,
+  #employees_table thead tr th {
+    color: white !import;
+  }
+
+  .dataTables_length select {
+    width: 50px;
+
+  }
+
+  .dataTables_length select option {
+    width: 50px;
+    color: black !important;
+  }
+
+  .dataTable thead tr th{ 
+    justify-content: center;
+    text-align: center;
+    color: white !important;
+
+  }
+  .dark-mode .text-dark-mode-light {
+    color: white;
+  }
+
+}
+
+@media (prefers-color-scheme: light) {
+
+  div.dataTables_wrapper,
+  div.dataTables_info,
+  .dataTables_filter {
+    color: black !important;
+  }
+
+  .dataTables_length,
+  .dataTables_length label,
+  .dataTables_filter label,
+  .dataTables_paginate a,
+  .dataTables_length select {
+    color: black !important;
+  }
+
+  .dataTables_filter {
+    padding: 10px;
+  }
+
+  .dataTables_length {
+    padding: 10px;
+  }
+
+  .dataTables_length select {
+    width: 50px;
+  }
+  .dataTable thead tr th{ 
+    justify-content: center;
+    text-align: center;
+
+  }
+}

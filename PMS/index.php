@@ -17,7 +17,8 @@ $get_employees = "SELECT *, DATE_FORMAT(tbl_attendances.attendance_date, '%M %d,
                 ORDER BY tbl_attendances.created_at DESC;";
 $result_employees = mysqli_query($conn, $get_employees);
 
-$current_hour = date('G');
+$current_day = date('w');
+$current_hour = date('H');
 $current_minute = date('i');
 ?>
 
@@ -54,9 +55,9 @@ $current_minute = date('i');
 
 <body>
 
-    <div class=" h-screen w-full dark:bg-gray-800 flex  justify-evenly items-center">
+    <div class=" h-screen w-full dark:bg-gray-800 flex  justify-evenly items-center ">
 
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg border border-gray-900 ">
+        <div class=" relative overflow-x-auto shadow-md sm:rounded-lg border border-gray-900 ">
             <table class="w-full text-sm  text-gray-500 dark:text-gray-400 text-center">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -99,22 +100,24 @@ $current_minute = date('i');
             </table>
         </div>
 
-        <div class="md:w-[25%] w-[80%] lg:w-[25%] p-6 bg-white border-2 border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 shadow-2xl">
+        <div class=" md:w-[25%] w-[80%] lg:w-[25%] p-6 bg-white border-2 border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 shadow-2xl">
             <form class="flex flex-col gap-5" action="./admin/includes/login.inc.php" method="POST">
                 <p class="text-4xl text-center dark:text-white text-black" id="formattedDate"></p>
                 <p class="text-3xl text-center dark:text-white text-black font-bold" id="currentTime"></p>
                 <?php
-
-                if ($current_hour >= 7 && ($current_hour < 12 || ($current_hour == 12 && $current_minute <= 30))) {
-                    echo "<p class='text-4xl text-center dark:text-white text-black'>Good Morning! </p>
-                    <p class='text-2xl text-center dark:text-white text-black'>Scan your registered fingerprint</p>";
-                } elseif ($current_hour >= 13 && ($current_hour < 18 || ($current_hour == 18 && $current_minute <= 0))) {
-                    echo "<p class='text-4xl text-center dark:text-white text-black'>Good Afternoon! </p>
-                    <p class='text-2xl text-center dark:text-white text-black'>Scan your registered fingerprint</p>";
-                } else {
-                    echo "<p class='text-4xl text-center dark:text-white text-black'>Good Evening! </p>
-                    <p class='text-2xl text-center dark:text-white text-black'>Sorry, login unavailable now. Open from 7:30am to 6:00pm. </p>";
-                }
+                    if ($current_day == 0) { // Sunday
+                        echo "<p class='text-4xl text-center dark:text-white text-black'>We're closed! </p>
+                        <p class='text-2xl text-center dark:text-white text-black'>Sorry, login unavailable now. Open from Monday to Saturday</p>";
+                    } elseif ($current_hour >= 7 && ($current_hour < 12 || ($current_hour == 12 && $current_minute <= 30))) {
+                        echo "<p class='text-4xl text-center dark:text-white text-black'>Good Morning! </p>
+                        <p class='text-2xl text-center dark:text-white text-black'>Scan your registered fingerprint</p>";
+                    } elseif ($current_hour >= 13 && ($current_hour < 18 || ($current_hour == 18 && $current_minute <= 0))) {
+                        echo "<p class='text-4xl text-center dark:text-white text-black'>Good Afternoon! </p>
+                        <p class='text-2xl text-center dark:text-white text-black'>Scan your registered fingerprint</p>";
+                    } else {
+                        echo "<p class='text-4xl text-center dark:text-white text-black'>Good Evening! </p>
+                        <p class='text-2xl text-center dark:text-white text-black'>Sorry, login unavailable now. Open from 7:30 am to 6:00 pm. </p>";
+                    }
                 ?>
                 <!-- <p class="text-2xl text-center dark:text-white text-black">Scan your registered fingerprint</p> -->
                 <select name="action" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">

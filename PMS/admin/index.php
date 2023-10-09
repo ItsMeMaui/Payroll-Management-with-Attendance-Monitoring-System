@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-include_once './components/modals/errors.php';
+include_once './classes/errors.classes.php';
 
 ?>
 
