@@ -1,6 +1,6 @@
 <?php
 if (isset($_POST['editemp'])) {
-
+    $updateImage = $_FILES["updateImage"]['name'];
     $update_emp_fname = ucwords($_POST['fname']);
     $update_emp_mname = ucwords($_POST['mname']);
     $update_emp_lname = ucwords($_POST['lname']);
@@ -18,7 +18,7 @@ if (isset($_POST['editemp'])) {
     include "../classes/update.classes.php";
     include "../controllers/update.controller.php";
 
-    $signup = new updateEmpController($update_emp_fname, $update_emp_mname, $update_emp_lname, $update_emp_fingerprint, $update_emp_status,$update_role_id, $update_processed_by, $updateUser, $create);
+    $signup = new updateEmpController($updateImage,$update_emp_fname, $update_emp_mname, $update_emp_lname, $update_emp_fingerprint, $update_emp_status,$update_role_id, $update_processed_by, $updateUser, $create);
 
 
     $signup->empupdate();

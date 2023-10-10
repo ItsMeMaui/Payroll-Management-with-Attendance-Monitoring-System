@@ -3,13 +3,13 @@
 class SignupEmp extends Db
 {
 
-    protected function setEmp($emp_fname, $emp_mname, $emp_lname, $emp_fingerprint, $status, $role_id ,$processed_by, $create)
+    protected function setEmp($emp_image,$emp_fname, $emp_mname, $emp_lname, $emp_fingerprint, $status, $role_id ,$processed_by, $create)
     {
 
-        $stmt = $this->connect()->prepare('INSERT INTO tbl_employees( emp_fname, emp_mname, emp_lname, emp_fingerprint, emp_status,role_id,processed_by) VALUES  (?,?,?,?,?,?,?);');
+        $stmt = $this->connect()->prepare('INSERT INTO tbl_employees(emp_image, emp_fname, emp_mname, emp_lname, emp_fingerprint, emp_status,role_id,processed_by) VALUES  (?,?,?,?,?,?,?,?);');
 
 
-        if (!$stmt->execute(array($emp_fname, $emp_mname, $emp_lname, $emp_fingerprint, $status,$role_id, $processed_by))) {
+        if (!$stmt->execute(array($emp_image,$emp_fname, $emp_mname, $emp_lname, $emp_fingerprint, $status,$role_id, $processed_by))) {
             $stmt = null;
             header("location: ../pages/employees.php?error=StatementFailed");
             exit();
@@ -21,6 +21,7 @@ class SignupEmp extends Db
             header("location: ../pages/employees.php?error=StatementFailed");
             exit();
         }
+        move_uploaded_file($_FILES["imageInput"]["tmp_name"], "../images/uploads/" . $_FILES["imageInput"]["name"]);
         $stmt = null;
     }
 }

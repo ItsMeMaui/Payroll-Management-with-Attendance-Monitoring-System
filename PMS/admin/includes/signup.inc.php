@@ -1,22 +1,25 @@
 <?php
 if (isset($_POST['register_employee'])) {
+    if($emp_image == ''){
+        $emp_image = 'defaultProfile.jpg';
+    }else{
+        $emp_image = $_FILES['imageInput']['name'];
+    }
+        $emp_fname = ucwords($_POST['fname']);
+        $emp_mname = ucwords($_POST['mname']);
+        $emp_lname = ucwords($_POST['lname']);
+        $emp_fingerprint = $_POST['fingerprint'];
+        $role_id = $_POST['role'];
+        $status = $_POST['status'];
+        $processed_by = $_POST['processed-by'];
 
-    $emp_fname = ucwords($_POST['fname']);
-    $emp_mname = ucwords($_POST['mname']);
-    $emp_lname = ucwords($_POST['lname']);
-    $emp_fingerprint = $_POST['fingerprint'];
-    $role_id = $_POST['role'];
-    $status = $_POST['status'];
-    $processed_by = $_POST['processed-by'];
-
-    $create = "Added Employee : " . " " . $emp_fname . " " . $emp_lname ."";
-
+        $create = "Added Employee : " . " " . $emp_fname . " " . $emp_lname ."";
 
     include "../classes/db.classes.php";
     include "../classes/signup.classes.php";
     include "../controllers/signup.controller.php";
 
-    $signup = new SignupEmpController($emp_fname, $emp_mname, $emp_lname, $emp_fingerprint, $status , $role_id,$processed_by, $create);
+    $signup = new SignupEmpController($emp_image ,$emp_fname, $emp_mname, $emp_lname, $emp_fingerprint, $status , $role_id,$processed_by, $create);
 
 
     $signup->signupemphandler();

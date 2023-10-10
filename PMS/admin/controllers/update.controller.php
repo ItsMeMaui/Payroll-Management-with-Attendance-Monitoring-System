@@ -2,6 +2,7 @@
 
 class updateEmpController extends updateEmp
 {
+    private $updateImage;
     private $update_emp_fname;
     private $update_emp_mname;
     private $update_emp_lname;
@@ -12,8 +13,9 @@ class updateEmpController extends updateEmp
     private $updateUser;
     private $create;
 
-    public function __construct($update_emp_fname, $update_emp_mname, $update_emp_lname, $update_emp_fingerprint, $update_emp_status , $update_role_id, $update_processed_by, $updateUser ,$create)
+    public function __construct($updateImage,$update_emp_fname, $update_emp_mname, $update_emp_lname, $update_emp_fingerprint, $update_emp_status , $update_role_id, $update_processed_by, $updateUser ,$create)
     {
+        $this->updateImage = $updateImage;
         $this->update_emp_fname = $update_emp_fname;
         $this->update_emp_mname = $update_emp_mname;
         $this->update_emp_lname = $update_emp_lname;
@@ -45,7 +47,7 @@ class updateEmpController extends updateEmp
             exit();
         }
 
-        $this->updateEmpAcc($this->update_emp_fname, $this->update_emp_mname, $this->update_emp_lname, $this->update_emp_fingerprint, $this->update_emp_status,$this->update_role_id, $this->update_processed_by, $this->updateUser, $this->create);
+        $this->updateEmpAcc($this->updateImage,$this->update_emp_fname, $this->update_emp_mname, $this->update_emp_lname, $this->update_emp_fingerprint, $this->update_emp_status,$this->update_role_id, $this->update_processed_by, $this->updateUser, $this->create);
     }
 
     private function missing_input()
