@@ -3,7 +3,7 @@
 
 class SignupEmpController extends SignupEmp
 {
-
+    private $emp_image;
     private $emp_fname;
     private $emp_mname;
     private $emp_lname;
@@ -13,9 +13,9 @@ class SignupEmpController extends SignupEmp
     private $processed_by;
     private $create;
 
-    public function __construct($emp_fname, $emp_mname, $emp_lname, $emp_fingerprint,$status, $role_id, $processed_by,$create)
+    public function __construct($emp_image,$emp_fname, $emp_mname, $emp_lname, $emp_fingerprint,$status, $role_id, $processed_by,$create)
     {
-
+        $this->emp_image = $emp_image;
         $this->emp_fname = $emp_fname;
         $this->emp_mname = $emp_mname;
         $this->emp_lname = $emp_lname;
@@ -48,7 +48,7 @@ class SignupEmpController extends SignupEmp
         }
 
 
-        $this->setEmp($this->emp_fname, $this->emp_mname, $this->emp_lname, $this->emp_fingerprint, $this->status ,$this->role_id, $this->processed_by, $this->create);
+        $this->setEmp($this->emp_image,$this->emp_fname, $this->emp_mname, $this->emp_lname, $this->emp_fingerprint, $this->status ,$this->role_id, $this->processed_by, $this->create);
     }
 
     private function missing_input()

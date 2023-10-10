@@ -2,7 +2,7 @@
 
   <nav class="  border-gray-200 dark:bg-gray-800 fixed w-full top-0 border-2 dark:border-slate-700 bg-gray-50 z-50">
     <div class="flex flex-wrap items-center justify-between mx-auto p-4">
-      <a href="https://flowbite.com/" class="flex items-center">
+      <a href="../pages/dashboard.php" class="flex items-center">
         <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white text-logo">Realty and Services</span>
       </a>
 

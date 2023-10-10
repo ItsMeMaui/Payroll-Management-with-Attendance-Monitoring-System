@@ -1,6 +1,12 @@
 <!-- moment js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 
+<!-- flowbite -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+
+
 
 
 <script type="text/javascript">
@@ -35,28 +41,71 @@
   setInterval(updateCurrentTime, 1000);
 </script>
 
+
+<script>
+    imageInput.onchange = (evt) => {
+        const [file] = imageInput.files;
+        if (file) {
+            inIm.src = URL.createObjectURL(file);
+        }
+    };
+</script>
+
+<script>
+    document.getElementById('updateImage').onchange = (evt) => {
+        const [file] = evt.target.files;
+        if (file) {
+            document.getElementById('editImage').src = URL.createObjectURL(file);
+        }
+    };
+</script>
+
 <!-- edit employee -->
 <script>
-$(document).ready(function() {
-  let table = new DataTable('#employees_table', {
+  $(document).ready(function () {
+      $("body").on("click", ".viewempbtnclass", function(event) {
+        $tr = $(this).closest('tr');
+        var data = $tr.children("td").map(function() {
+          return $(this).text();
+        }).get();
+          $('#viewUserID').val(data[0]);
+          $('#viewfnameIDvalue').val(data[1]);
+          $('#viewmnameIDvalue').val(data[2]);
+          $('#viewlnameIDvalue').val(data[3]);
+          $('#viewempstatusID').val(data[5]);
+          $('#viewroleIDvalue').val(data[7]);
+          $('#viewempprocessedby').val(data[9]);
+          $('#viewfingerprintIDvalue').val(data[8]);
+          $('#viewImage').attr('src', '../../admin/images/uploads/'+data[11] );
+
+          console.log(data);
+      });
+  });
+</script>
+
+<script>
+    let table1 = new DataTable('#employees_table', {
     order: [0, 'desc']
   });
+  $(document).ready(function () {
+      $("body").on("click", ".editempbtnclass", function(event) {
+        $tr = $(this).closest('tr');
+        var data = $tr.children("td").map(function() {
+          return $(this).text();
+        }).get();
+          $('#updateUserID').val(data[0]);
+          $('#fnameIDvalue').val(data[1]);
+          $('#mnameIDvalue').val(data[2]);
+          $('#lnameIDvalue').val(data[3]);
+          $('#empstatusID').val(data[5]);
+          var selectedRole = data[7];
+          $('#updateRoleName').find('option[value="' + selectedRole + '"]').prop('selected', true);
+          $('#fingerprintIDvalue').val(data[8]);
+          $('#editImage').attr('src', '../../admin/images/uploads/'+data[11] );
 
-  // Use DataTables' event delegation
-  $('#employees_table tbody').on('click', '.editempbtnclass', function() {
-    var $tr = $(this).closest('tr');
-    var data = table.row($tr).data(); // Use DataTables API to get row data
-    $('#updateUserID').val(data[0]);
-    $('#fnameIDvalue').val(data[1]);
-    $('#mnameIDvalue').val(data[2]);
-    $('#lnameIDvalue').val(data[3]);
-    $('#empstatusID').val(data[5]);
-    $('#roleIDvalue').val(data[6]);
-    $('#fingerprintIDvalue').val(data[8]);
-    console.log(data);
-    
+          console.log(data);
+      });
   });
-});
 </script>
 
 <!-- edit role -->
@@ -73,7 +122,7 @@ $(document).ready(function() {
       $('#updateRoleID').val(data[0]);
       $('#updateRoleName').val(data[1]);
       $('#updateRoleRate').val(data[2]);
-
+      $('#defaultModal').modal('show');
       console.log(data);
     })
   });
@@ -131,8 +180,7 @@ $(document).ready(function() {
 <!-- fontawesome -->
 <script src="https://kit.fontawesome.com/7102b39166.js" crossorigin="anonymous"></script>
 
-<!-- flowbite -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
