@@ -94,15 +94,7 @@ $get_image = mysqli_query($conn, $sql);
                   <span class="flex-1 ml-3 whitespace-nowrap">Positions</span>
                </a>
             </li>
-            <li>
-               <a href="../pages/deductions.php" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-
-                  <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512">
-                     <path d="M176 56V96H336V56c0-4.4-3.6-8-8-8H184c-4.4 0-8 3.6-8 8zM128 96V56c0-30.9 25.1-56 56-56H328c30.9 0 56 25.1 56 56V96v32V480H128V128 96zM64 96H96V480H64c-35.3 0-64-28.7-64-64V160c0-35.3 28.7-64 64-64zM448 480H416V96h32c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64z" />
-                  </svg>
-                  <span class="flex-1 ml-3 whitespace-nowrap">Deductions</span>
-               </a>
-            </li>
+           
             <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
 
             <!-- payroll -->
