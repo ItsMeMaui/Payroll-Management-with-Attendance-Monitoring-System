@@ -185,7 +185,7 @@ $current_minute = date('i');
 </script>
 
 <!-- disabling login form depends on the time and day -->
-<script>
+<!-- <script>
     document.addEventListener("DOMContentLoaded", function() {
 
         function isSunday() {
@@ -215,7 +215,7 @@ $current_minute = date('i');
             submitButton.disabled = true;
         }
     });
-</script>
+</script> -->
 
 <!-- tables -->
 <script>
