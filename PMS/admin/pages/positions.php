@@ -1,4 +1,6 @@
 <?php
+$pageTitle = "Positions";
+
 include_once '../header.php';
 include_once '../components/navbar.php';
 include_once '../components/sidebar.php';

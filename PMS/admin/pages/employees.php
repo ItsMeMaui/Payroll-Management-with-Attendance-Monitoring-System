@@ -1,4 +1,7 @@
 <?php
+
+$pageTitle = "Employees";
+
 include_once '../header.php';
 include_once '../components/navbar.php';
 include_once '../components/sidebar.php';
@@ -20,7 +23,7 @@ $result_employees = mysqli_query($conn, $get_employees);
 
 
 
-<div class="p-4 md:ml-64 overflow-y-auto dark:bg-gray-900 text-black dark:text-white h-screen">
+<div class="block p-4 md:ml-64 overflow-y-auto dark:bg-gray-900 text-black dark:text-white h-screen">
   <div class="p-4 border-2 border-gray-200  mt-16 border-dashed rounded-lg dark:border-gray-700 ">
 
     <nav class="flex" aria-label="Breadcrumb">
@@ -28,7 +31,7 @@ $result_employees = mysqli_query($conn, $get_employees);
         <li class="inline-flex items-center">
           <a href="dashboard.php" class="text-4xl inline-flex items-center  font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
             <svg class="w-8 h-8 mr-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-              <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
+              <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
             </svg>
             Home
           </a>
@@ -36,7 +39,7 @@ $result_employees = mysqli_query($conn, $get_employees);
         <li aria-current="page">
           <div class="flex items-center">
             <svg class="w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
             </svg>
             <span class="ml-1 text-4xl font-medium text-gray-500 md:ml-2 dark:text-gray-400">Employees</span>
           </div>
@@ -50,6 +53,7 @@ $result_employees = mysqli_query($conn, $get_employees);
       <button data-modal-target="staticModal" data-modal-toggle="staticModal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
         Add Employee
       </button>
+
     </div>
 
 
@@ -95,6 +99,12 @@ $result_employees = mysqli_query($conn, $get_employees);
               <th scope="col" class="hidden">
                 Image
               </th>
+              <th scope="col" class="hidden">
+                Gender
+              </th>
+              <th scope="col" class="hidden">
+                Date of Birth
+              </th>
               <th scope="col" class="px-6 py-3">
                 Action
               </th>
@@ -102,39 +112,37 @@ $result_employees = mysqli_query($conn, $get_employees);
             </tr>
           </thead>
 
-          <tbody >
+          <tbody>
             <?php
             while ($row = mysqli_fetch_array($result_employees)) {
             ?>
               <tr>
-                <td class="text-center"><?php echo $row['emp_id']?></td>
-                <td class="hidden"><?php echo $row['emp_fname']?></td>
-                <td class="hidden"><?php echo $row['emp_mname']?></td>
-                <td class="hidden"><?php echo $row['emp_lname']?></td>
-                <td class="text-center"><?php echo $row['emp_fname']?> <?php echo " " ?><?php echo $row['emp_mname'] ?><?php echo " " ?><?php echo " " ?><?php echo $row['emp_lname'] ?></td>
+                <td class="text-center"><?php echo $row['emp_id'] ?></td>
+                <td class="hidden"><?php echo $row['emp_fname'] ?></td>
+                <td class="hidden"><?php echo $row['emp_mname'] ?></td>
+                <td class="hidden"><?php echo $row['emp_lname'] ?></td>
+                <td class="text-center"><?php echo $row['emp_fname'] ?> <?php echo " " ?><?php echo $row['emp_mname'] ?><?php echo " " ?><?php echo " " ?><?php echo $row['emp_lname'] ?></td>
                 <td class="text-center"><?php echo $row['emp_status'] ?></td>
                 <td class="hidden"><?php echo $row['role_id'] ?></td>
                 <td class="text-center"><?php echo ucwords($row['role_name']) ?></td>
-                <td class="hidden"> <?php echo $row['emp_fingerprint'] ?></td>
+                <td class="hidden"><?php echo $row['emp_fingerprint'] ?></td>
                 <td class="text-center"><?php echo $row['processed_by'] ?></td>
                 <td class="text-center"><?php echo $row['created_date'] ?></td>
                 <td class="hidden"><?php echo $row['emp_image'] ?></td>
+                <td class="hidden"><?php echo $row['emp_gender'] ?></td>
+                <td class="hidden"><?php echo $row['emp_dateofbirth'] ?></td>
                 <td class="text-center">
                   <div class="row flex items-center text-center justify-center">
                     <div class="flex gap-2">
-                      <button data-modal-target="viewEmployeeModalID" data-modal-toggle="viewEmployeeModalID"  class="block text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 viewempbtnclass" type="button">
+                      <button data-modal-target="viewEmployeeModalID" data-modal-toggle="viewEmployeeModalID" class="block text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 viewempbtnclass" type="button">
                         View
                       </button>
-                      <button data-modal-target="editEmployeeModalID" data-modal-toggle="editEmployeeModalID"  class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 editempbtnclass " type="button">
+                      <button data-modal-target="editEmployeeModalID" data-modal-toggle="editEmployeeModalID" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 editempbtnclass " type="button">
                         Edit
                       </button>
-
-
                     </div>
-
                   </div>
                 </td>
-
               </tr>
             <?php } ?>
 
@@ -146,8 +154,8 @@ $result_employees = mysqli_query($conn, $get_employees);
 </div>
 
 <?php
-include_once '../components/modals/addemployee.php';
-include_once '../components/modals/editemployee.php';
-include_once '../components/modals/viewemployee.php';
+include '../components/modals/addemployee.php';
+include '../components/modals/editemployee.php';
+include '../components/modals/viewemployee.php';
 include_once '../footer.php';
 ?>

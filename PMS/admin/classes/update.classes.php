@@ -3,7 +3,7 @@
 
 class updateEmp extends Db
 {
-    protected function updateEmpAcc($updateImage, $update_emp_fname, $update_emp_mname, $update_emp_lname, $update_emp_fingerprint, $update_emp_status, $update_role_id, $update_processed_by, $updateUser, $create)
+    protected function updateEmpAcc($updateImage,$update_emp_fname, $update_emp_mname, $update_emp_lname, $update_emp_gender, $update_emp_dateofbirth, $update_emp_fingerprint, $update_emp_status,$update_role_id, $update_processed_by, $updateUser, $create)
     {
         $conn = $this->connect();
 
@@ -16,16 +16,16 @@ class updateEmp extends Db
         move_uploaded_file($tempImage, "../images/uploads/" . $newImage);
 
 
-        $stmt = $conn->prepare('UPDATE tbl_employees SET emp_image=?, emp_fname=?, emp_mname=?, emp_lname=?, emp_fingerprint=?, emp_status=?, role_id=?, processed_by=?, created_at = NOW() WHERE emp_id = ?;');
-        if (!$stmt->execute(array($newImage, $update_emp_fname, $update_emp_mname, $update_emp_lname, $update_emp_fingerprint, $update_emp_status, $update_role_id, $update_processed_by, $updateUser))) {
+        $stmt = $conn->prepare('UPDATE tbl_employees SET emp_image=?, emp_fname=?, emp_mname=?, emp_lname=?,emp_gender=?,emp_dateofbirth=?, emp_fingerprint=?, emp_status=?, role_id=?, processed_by=?, created_at = NOW() WHERE emp_id = ?;');
+        if (!$stmt->execute(array($newImage, $update_emp_fname, $update_emp_mname, $update_emp_lname,$update_emp_gender, $update_emp_dateofbirth, $update_emp_fingerprint, $update_emp_status, $update_role_id, $update_processed_by, $updateUser))) {
             header("location: ../pages/employees.php?error=StatementFailed");
             exit();
         }
     } else {
 
-                $stmt = $conn->prepare('UPDATE tbl_employees SET emp_fname=?, emp_mname=?, emp_lname=?, emp_fingerprint=?, emp_status=?, role_id=?, processed_by=?, created_at = NOW() WHERE emp_id = ?;');
+                $stmt = $conn->prepare('UPDATE tbl_employees SET emp_fname=?, emp_mname=?, emp_lname=?,emp_gender=?,emp_dateofbirth=?, emp_fingerprint=?, emp_status=?, role_id=?, processed_by=?, created_at = NOW() WHERE emp_id = ?;');
 
-                if (!$stmt->execute(array($update_emp_fname, $update_emp_mname, $update_emp_lname, $update_emp_fingerprint, $update_emp_status, $update_role_id, $update_processed_by, $updateUser))) {
+                if (!$stmt->execute(array($update_emp_fname, $update_emp_mname, $update_emp_lname,$update_emp_gender, $update_emp_dateofbirth, $update_emp_fingerprint, $update_emp_status, $update_role_id, $update_processed_by, $updateUser))) {
                     header("location: ../pages/employees.php?error=StatementFailed");
                     exit();
                 }

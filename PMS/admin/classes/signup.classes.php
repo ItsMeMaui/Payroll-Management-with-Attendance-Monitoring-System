@@ -3,13 +3,13 @@
 class SignupEmp extends Db
 {
 
-    protected function setEmp($emp_image,$emp_fname, $emp_mname, $emp_lname, $emp_fingerprint, $status, $role_id ,$processed_by, $create)
+    protected function setEmp($emp_image ,$emp_fname, $emp_mname, $emp_lname,$emp_gender,$emp_dateofbirth, $emp_fingerprint, $status , $role_id,$processed_by, $create)
     {
 
-        $stmt = $this->connect()->prepare('INSERT INTO tbl_employees(emp_image, emp_fname, emp_mname, emp_lname, emp_fingerprint, emp_status,role_id,processed_by) VALUES  (?,?,?,?,?,?,?,?);');
+        $stmt = $this->connect()->prepare('INSERT INTO tbl_employees(emp_image, emp_fname, emp_mname, emp_lname,emp_gender,emp_dateofbirth ,emp_fingerprint, emp_status,role_id,processed_by) VALUES  (?,?,?,?,?,?,?,?,?,?);');
 
 
-        if (!$stmt->execute(array($emp_image,$emp_fname, $emp_mname, $emp_lname, $emp_fingerprint, $status,$role_id, $processed_by))) {
+        if (!$stmt->execute(array($emp_image,$emp_fname, $emp_mname, $emp_lname,$emp_gender,$emp_dateofbirth, $emp_fingerprint, $status,$role_id, $processed_by))) {
             $stmt = null;
             header("location: ../pages/employees.php?error=StatementFailed");
             exit();
@@ -48,6 +48,23 @@ class SignupUser extends Db
             exit();
         }
         $stmt = null;
+    }
+    protected function checkUser($emp_username)
+    {
+        $stmt = $this->connect()->prepare('SELECT user_id FROM tbl_users WHERE  user_username=?');
+
+        if (!$stmt->execute(array($emp_username))) {
+            $stmt = null;
+            header("location: ../admin/index.php?error=StatementFailed");
+            exit();
+        }
+        $resultCheck = "";
+        if ($stmt->rowCount() > 0) {
+            $resultCheck = false;
+        } else {
+            $resultCheck = true;
+        }
+        return $resultCheck;
     }
 }
 

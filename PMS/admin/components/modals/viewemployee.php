@@ -40,6 +40,23 @@
                                     <input disabled type="text" id="viewlnameIDvalue" name="lname" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-not-allowed">
                                 </div>
                             </div>
+                            <div class="flex flex-col md:flex-row gap-5">
+                               <div>
+                                    <label for="lnameID" class="block mb-2 text-md font-medium text-gray-900 dark:text-white">Gender</label>
+                                    <input disabled type="text" id="viewgenderID" name="lname" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-not-allowed">
+                                </div>
+                                <div>
+                                    <label for="" class="block mb-2 text-md font-medium text-gray-900 dark:text-white">Date of Birth <span class="text-xs"> (yyyy-mm-dd)</span> </label>
+                                    <div class="relative max-w-sm">
+                                      <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+                                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                          <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                                        </svg>
+                                      </div>
+                                      <input disabled datepicker type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-not-allowed" id="viewdobIDvalue" placeholder="Select date">
+                                    </div>
+                                </div>
+                            </div>
                             <div class="border-t border-gray-200 rounded-b dark:border-gray-600 md:border-none ">
                                 <h3 class="text-2xl font-bold dark:text-white underline mt-5 uppercase" >additional information</h3>
                             </div>
@@ -64,7 +81,7 @@
                         </div>
                     </div>
                     <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600  mt-10 justify-end">
-                        <button data-modal-hide="viewEmployeeModalID" type="button" class="text-gray-500 bg-white hover:bg-red-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-white-900 focus:z-10 dark:bg-red-700 dark:text-white dark:border-gray-500 dark:hover:text-white dark:hover:bg-red-800 dark:focus:ring-red-800">Close</button>
+                        <button data-modal-hide="viewEmployeeModalID" type="button" class="text-white bg-red-500 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5  focus:z-10 dark:bg-red-700 dark:text-white dark:border-gray-500 dark:hover:text-white dark:hover:bg-red-800 dark:focus:ring-red-800">Close</button>
                     </div>
                 </form>
             </div>

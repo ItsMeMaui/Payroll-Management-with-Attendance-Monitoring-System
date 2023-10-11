@@ -5,6 +5,8 @@ if (isset($_POST['editemp'])) {
     $update_emp_mname = ucwords($_POST['mname']);
     $update_emp_lname = ucwords($_POST['lname']);
     $update_emp_fingerprint = $_POST['fingerprint'];
+    $update_emp_gender = $_POST['gender'];
+    $update_emp_dateofbirth = $_POST['date_of_birth'];
     $update_emp_status = $_POST['edit_status'];
     $update_role_id = $_POST['role'];
     $update_processed_by = $_POST['processed-by'];
@@ -18,7 +20,7 @@ if (isset($_POST['editemp'])) {
     include "../classes/update.classes.php";
     include "../controllers/update.controller.php";
 
-    $signup = new updateEmpController($updateImage,$update_emp_fname, $update_emp_mname, $update_emp_lname, $update_emp_fingerprint, $update_emp_status,$update_role_id, $update_processed_by, $updateUser, $create);
+    $signup = new updateEmpController($updateImage,$update_emp_fname, $update_emp_mname, $update_emp_lname, $update_emp_gender, $update_emp_dateofbirth, $update_emp_fingerprint, $update_emp_status,$update_role_id, $update_processed_by, $updateUser, $create);
 
 
     $signup->empupdate();

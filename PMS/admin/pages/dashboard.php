@@ -1,8 +1,9 @@
 <?php
+$pageTitle = "Dashboard";
+
 include_once '../header.php';
 include_once '../components/navbar.php';
 include_once '../components/sidebar.php';
-
 
 $sql = "SELECT r.role_name, COUNT(e.emp_id) AS total_employees 
 FROM tbl_employees e
@@ -65,7 +66,7 @@ $get_recent_activities = mysqli_query($conn, $sql);
                   <?php
                   while ($row = mysqli_fetch_array($get_timed_in)) {
                   ?>
-                     <h1 class="text-lg font-bold"><?php echo $row[10] ?> employees</h1>
+                     <h1 class="text-lg font-bold"><?php echo $row[11] ?> employees</h1>
                   <?php } ?>
                   <h1 class="text-md uppercase">Timed In Today</h1>
                </div>
@@ -114,8 +115,8 @@ $get_recent_activities = mysqli_query($conn, $sql);
             <div class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col gap-5">
                <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Calendar / Holidays</h5>
                <div class="flex justify-center items-center">
-                  <div class="relative border border-gray-300 rounded-lg">
-                     <iframe src="https://calendar.google.com/calendar/embed?src=en.philippines%23holiday%40group.v.calendar.google.com&ctz=Asia%2FManila" style="border: 0" width="700" height="400" frameborder="0" scrolling="no"></iframe>
+                  <div class="relative border border-gray-300 rounded-lg fle w-full h-96">
+                     <iframe src="https://calendar.google.com/calendar/embed?src=en.philippines%23holiday%40group.v.calendar.google.com&ctz=Asia%2FManila" style="border: 0" class="w-full h-full" frameborder="0" scrolling="no"></iframe>
                   </div>
                </div>
             </div>
@@ -178,9 +179,6 @@ $get_recent_activities = mysqli_query($conn, $sql);
    </div>
 </div>
 
-
-</div>
-</div>
 
 
 

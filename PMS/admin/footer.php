@@ -1,10 +1,13 @@
+
+
+
+
 <!-- moment js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 
 <!-- flowbite -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
 
 
 
@@ -60,7 +63,7 @@
     };
 </script>
 
-<!-- edit employee -->
+<!-- view employee -->
 <script>
   $(document).ready(function () {
       $("body").on("click", ".viewempbtnclass", function(event) {
@@ -74,9 +77,11 @@
           $('#viewlnameIDvalue').val(data[3]);
           $('#viewempstatusID').val(data[5]);
           $('#viewroleIDvalue').val(data[7]);
-          $('#viewempprocessedby').val(data[9]);
           $('#viewfingerprintIDvalue').val(data[8]);
-          $('#viewImage').attr('src', '../../admin/images/uploads/'+data[11] );
+          $('#viewempprocessedby').val(data[9]);
+          $('#viewImage').attr('src', '../../admin/images/uploads/'+data[11] );          
+          $('#viewgenderID').val(data[12]);
+          $('#viewdobIDvalue').val(data[13]);
 
           console.log(data);
       });
@@ -102,6 +107,8 @@
           $('#updateRoleName').find('option[value="' + selectedRole + '"]').prop('selected', true);
           $('#fingerprintIDvalue').val(data[8]);
           $('#editImage').attr('src', '../../admin/images/uploads/'+data[11] );
+          $('#genderIDValue').val(data[12]);
+          $('#dobIDValue').val(data[13]);
 
           console.log(data);
       });

@@ -1,4 +1,11 @@
-<div class="relative flex">
+
+<?php
+
+$sql = "SELECT emp_image  FROM tbl_employees where emp_id = '$session_user_id';";
+$get_image = mysqli_query($conn, $sql);
+
+?>
+<div class=" flex">
    <aside id="default-sidebar" class="fixed  left-0 z-40 w-64 top-[66px] h-screen transition-transform -translate-x-full md:translate-x-0  dark:bg-gray-800">
       <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800 border-2 dark:border-slate-700">
          <button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
@@ -14,7 +21,16 @@
             </svg>
          </button>
          <div class="flex justify-center ">
-            <img class="rounded-full w-50 h-40 mt-5 " src="../images/mrflogo.png" alt="image description">
+            <?php
+            while ($row = mysqli_fetch_array($get_image)) {
+            ?>
+            <img class="rounded-full  w-48 h-48 p-2  mt-5 ring-4 ring-gray-300 dark:ring-gray-500" src="../images/uploads/<?php echo $row[0];?>" alt="image description">
+            <?php } ?>
+         </div>
+         <div class="text-center dark:text-white text-black mt-5">
+            <p class="text-1xl font-bold"><?php echo $_SESSION['fname'] . " " . $_SESSION['mname'] . " " . $_SESSION['lname'] ?></p>
+            <p><?php echo $_SESSION['role_name']?></p>
+
          </div>
          <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
 
@@ -78,7 +94,15 @@
                   <span class="flex-1 ml-3 whitespace-nowrap">Positions</span>
                </a>
             </li>
+            <li>
+               <a href="../pages/deductions.php" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
+                  <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512">
+                     <path d="M176 56V96H336V56c0-4.4-3.6-8-8-8H184c-4.4 0-8 3.6-8 8zM128 96V56c0-30.9 25.1-56 56-56H328c30.9 0 56 25.1 56 56V96v32V480H128V128 96zM64 96H96V480H64c-35.3 0-64-28.7-64-64V160c0-35.3 28.7-64 64-64zM448 480H416V96h32c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64z" />
+                  </svg>
+                  <span class="flex-1 ml-3 whitespace-nowrap">Deductions</span>
+               </a>
+            </li>
             <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
 
             <!-- payroll -->

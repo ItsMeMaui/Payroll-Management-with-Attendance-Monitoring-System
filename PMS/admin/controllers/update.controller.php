@@ -6,6 +6,8 @@ class updateEmpController extends updateEmp
     private $update_emp_fname;
     private $update_emp_mname;
     private $update_emp_lname;
+    private $update_emp_gender;
+    private $update_emp_dateofbirth;
     private $update_emp_fingerprint;
     private $update_emp_status;
     private $update_role_id;
@@ -13,12 +15,14 @@ class updateEmpController extends updateEmp
     private $updateUser;
     private $create;
 
-    public function __construct($updateImage,$update_emp_fname, $update_emp_mname, $update_emp_lname, $update_emp_fingerprint, $update_emp_status , $update_role_id, $update_processed_by, $updateUser ,$create)
+    public function __construct($updateImage,$update_emp_fname, $update_emp_mname, $update_emp_lname, $update_emp_gender, $update_emp_dateofbirth, $update_emp_fingerprint, $update_emp_status,$update_role_id, $update_processed_by, $updateUser, $create)
     {
         $this->updateImage = $updateImage;
         $this->update_emp_fname = $update_emp_fname;
         $this->update_emp_mname = $update_emp_mname;
         $this->update_emp_lname = $update_emp_lname;
+        $this->update_emp_gender = $update_emp_gender;
+        $this->update_emp_dateofbirth = $update_emp_dateofbirth;
         $this->update_emp_fingerprint = $update_emp_fingerprint;
         $this->update_emp_status = $update_emp_status;
         $this->update_role_id = $update_role_id;
@@ -47,13 +51,13 @@ class updateEmpController extends updateEmp
             exit();
         }
 
-        $this->updateEmpAcc($this->updateImage,$this->update_emp_fname, $this->update_emp_mname, $this->update_emp_lname, $this->update_emp_fingerprint, $this->update_emp_status,$this->update_role_id, $this->update_processed_by, $this->updateUser, $this->create);
+        $this->updateEmpAcc($this->updateImage,$this->update_emp_fname, $this->update_emp_mname, $this->update_emp_lname, $this->update_emp_gender, $this->update_emp_dateofbirth, $this->update_emp_fingerprint, $this->update_emp_status,$this->update_role_id, $this->update_processed_by, $this->updateUser, $this->create);
     }
 
     private function missing_input()
     {
         $result = "";
-        if ($this->update_emp_fname == ""  || $this->update_emp_lname == "" || $this->update_emp_fingerprint == "" || $this->update_emp_status == "" || $this->update_role_id == "" || $this->update_processed_by == "" || $this->updateUser == "" || $this->create == "") {
+        if ($this->update_emp_fname == ""  || $this->update_emp_lname == "" || $this->update_emp_gender == "" ||$this->update_emp_dateofbirth == "" ||$this->update_emp_fingerprint == "" || $this->update_emp_status == "" || $this->update_role_id == "" || $this->update_processed_by == "" || $this->updateUser == "" || $this->create == "") {
             $result = false;
         } else {
             $result = true;

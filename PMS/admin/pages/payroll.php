@@ -1,4 +1,7 @@
 <?php
+
+$pageTitle = "Payroll";
+
 include_once '../header.php';
 include_once '../components/navbar.php';
 include_once '../components/sidebar.php';
@@ -85,7 +88,7 @@ $result_reports_name = mysqli_query($conn, $get_reports_name);
                                 <option selected disabled value="">Select an Employee</option>
                                 <?php
                                 while ($row = mysqli_fetch_array($result_reports_name)) { ?>
-                                    <option class="text-1xl " value='<?php echo $row[0] ?>'><?php echo ucwords($row[1]) ?> <?php echo ucwords($row[3]) ?></option>
+                                    <option class="text-1xl " value='<?php echo $row[0] ?>'><?php echo ucwords($row[2]) ?> <?php echo ucwords($row[4]) ?></option>
                                 <?php } ?>
                             </select>
 
@@ -110,7 +113,7 @@ $result_reports_name = mysqli_query($conn, $get_reports_name);
                             </div>
                         </div>
                         <div class="flex justify-center items-center text-center mt-5">
-                            <button type="submit" name="generateSpecificReport" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md md:w-[25%]  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Generate PDF</button>
+                            <button type="submit" name="generateSpecificReport" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md md:w-[25%]  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Generate Payslip</button>
                         </div>
 
                     </form>
@@ -137,7 +140,7 @@ $result_reports_name = mysqli_query($conn, $get_reports_name);
                             </div>
                         </div>
                         <div class="flex justify-center items-center text-center mt-5">
-                            <button type="submit" name="generateBC" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md md:w-[25%]   px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Generate PDF</button>
+                            <button type="submit" name="generateBC" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md md:w-[25%]   px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Generate Payslip</button>
                         </div>
                     </form>
                 </div>
