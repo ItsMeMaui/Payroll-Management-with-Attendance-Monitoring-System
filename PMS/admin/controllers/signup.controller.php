@@ -7,18 +7,22 @@ class SignupEmpController extends SignupEmp
     private $emp_fname;
     private $emp_mname;
     private $emp_lname;
+    private $emp_gender;
+    private $emp_dateofbirth;
     private $emp_fingerprint;
     private $status;
     private $role_id;
     private $processed_by;
     private $create;
 
-    public function __construct($emp_image,$emp_fname, $emp_mname, $emp_lname, $emp_fingerprint,$status, $role_id, $processed_by,$create)
+    public function __construct($emp_image ,$emp_fname, $emp_mname, $emp_lname,$emp_gender,$emp_dateofbirth, $emp_fingerprint, $status , $role_id,$processed_by, $create)
     {
         $this->emp_image = $emp_image;
         $this->emp_fname = $emp_fname;
         $this->emp_mname = $emp_mname;
         $this->emp_lname = $emp_lname;
+        $this->emp_gender = $emp_gender;
+        $this->emp_dateofbirth = $emp_dateofbirth;
         $this->emp_fingerprint = $emp_fingerprint;
         $this->status = $status;
         $this->role_id = $role_id;
@@ -48,13 +52,13 @@ class SignupEmpController extends SignupEmp
         }
 
 
-        $this->setEmp($this->emp_image,$this->emp_fname, $this->emp_mname, $this->emp_lname, $this->emp_fingerprint, $this->status ,$this->role_id, $this->processed_by, $this->create);
+        $this->setEmp($this->emp_image,$this->emp_fname, $this->emp_mname, $this->emp_lname, $this->emp_gender, $this->emp_dateofbirth, $this->emp_fingerprint, $this->status ,$this->role_id, $this->processed_by, $this->create);
     }
 
     private function missing_input()
     {
         $result = "";
-        if ($this->emp_fname == ""  || $this->emp_lname == "" || $this->emp_fingerprint == ""|| $this->status == "" || $this->role_id == "" || $this->processed_by == "" || $this->create == "") {
+        if ($this->emp_fname == ""  || $this->emp_lname == "" || $this->emp_gender == "" || $this->emp_dateofbirth == "" || $this->emp_fingerprint == ""|| $this->status == "" || $this->role_id == "" || $this->processed_by == "" || $this->create == "") {
             $result = false;
         } else {
             $result = true;
@@ -126,7 +130,10 @@ class SignupUserController extends SignupUser
             header("location: ../pages/users.php?error=UsernameAlreadyTaken");
             exit();
         }
-
+        if ($this->uidTakenCheck() == false) {
+            header("location: ../pages/users.php?error=UsernameAlreadyTaken");
+            exit();
+        }
         $this->setUser($this->emp_id, $this->emp_username, $this->emp_password, $this->processed_by,$this->create);
     }
 

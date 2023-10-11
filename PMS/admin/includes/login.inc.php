@@ -153,7 +153,8 @@ if (isset($_POST['login_admin'])) {
 
     if (($_SESSION['role_name']) == 'Admin') {
       header("location: ../pages/dashboard.php?error=loginsuccessfully");
-    } else{
-      header("location: ../index.php");
+    }
+    else{
+      header("location: ../index.php?error=asdlkjfasdl;kjf");
     }
 }

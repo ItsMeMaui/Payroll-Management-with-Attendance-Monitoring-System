@@ -6,14 +6,14 @@ if (($_SESSION['role_name']) == 'Admin') {
   header("location: ../index.php?error=loginrequired");
 }
 
-include_once 'classes/errors.classes.php';
 
 $dbServername = "Localhost";
 $dbUsername = "root";
 $dbPassword = "";
 $dbName = "pmswa";
-
+$session_user_id = $_SESSION['emp_id'];
 $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
+
 
 ?>
 
@@ -25,7 +25,7 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payroll Management System</title>
+    <title><?php echo $pageTitle; ?></title>
 
     <!-- Bootstrap 5 CSS and JavaScript CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -46,7 +46,8 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
 
     <!-- Flowbite Datepicker CSS and JavaScript CDN -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/datepicker.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 

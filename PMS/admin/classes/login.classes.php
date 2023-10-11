@@ -29,7 +29,7 @@ class Login extends Db {
         elseif($checkPwd == true){
 
 
-            $stmt = $this->connect()->prepare('SELECT a.user_id, c.emp_fname, c.emp_mname, c.emp_lname, a.user_username, c.role_id, r.role_name
+            $stmt = $this->connect()->prepare('SELECT c.emp_id ,c.emp_image ,a.user_id, c.emp_fname, c.emp_mname, c.emp_lname, a.user_username, c.role_id, r.role_name
             FROM tbl_employees c
             INNER JOIN tbl_users a ON c.emp_id = a.emp_id
             LEFT JOIN tbl_roles r ON c.role_id = r.role_id
@@ -56,7 +56,9 @@ class Login extends Db {
             $user= $stmt->fetch(PDO::FETCH_ASSOC);
 
             session_start();
-            $_SESSION['image'] = $user['user_id'];
+            $_SESSION['image'] = $user['emp_image'];
+            $_SESSION['user_id'] = $user['user_id'];
+            $_SESSION['emp_id'] = $user['emp_id'];
             $_SESSION['fname'] = $user['emp_fname'];
             $_SESSION['mname'] = $user['emp_mname'];
             $_SESSION['lname'] = $user['emp_lname'];

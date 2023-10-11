@@ -1,6 +1,6 @@
 <?php
 if (isset($_POST['register_employee'])) {
-    if($emp_image == ''){
+    if($_FILES['imageInput']['name'] == ''){
         $emp_image = 'defaultProfile.jpg';
     }else{
         $emp_image = $_FILES['imageInput']['name'];
@@ -8,6 +8,8 @@ if (isset($_POST['register_employee'])) {
         $emp_fname = ucwords($_POST['fname']);
         $emp_mname = ucwords($_POST['mname']);
         $emp_lname = ucwords($_POST['lname']);
+        $emp_gender = $_POST['gender'];
+        $emp_dateofbirth = $_POST['date_of_birth'];
         $emp_fingerprint = $_POST['fingerprint'];
         $role_id = $_POST['role'];
         $status = $_POST['status'];
@@ -19,7 +21,7 @@ if (isset($_POST['register_employee'])) {
     include "../classes/signup.classes.php";
     include "../controllers/signup.controller.php";
 
-    $signup = new SignupEmpController($emp_image ,$emp_fname, $emp_mname, $emp_lname, $emp_fingerprint, $status , $role_id,$processed_by, $create);
+    $signup = new SignupEmpController($emp_image ,$emp_fname, $emp_mname, $emp_lname,$emp_gender,$emp_dateofbirth, $emp_fingerprint, $status , $role_id,$processed_by, $create);
 
 
     $signup->signupemphandler();

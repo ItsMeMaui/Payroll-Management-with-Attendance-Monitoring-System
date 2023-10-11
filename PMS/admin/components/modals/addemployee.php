@@ -1,5 +1,5 @@
 <!-- Main modal -->
-<div id="staticModal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+<div id="staticModal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto  h-[calc(100%-1rem)] max-h-full ">
     <div class="relative w-full max-w-2xl md:max-w-5xl max-h-full">
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -23,14 +23,14 @@
                             <img id="inIm" src="../images/uploads/defaultProfile.jpg" alt="your image" class="rounded-full border-2 w-64 h-64" />
                             <div class="input-file ">
                                 <input style="display: none;" accept="image/*" type="file" name="imageInput" id="imageInput" />
-                                <a  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 cursor-pointer" onclick="document.getElementById('imageInput').click();">
+                                <a class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 cursor-pointer" onclick="document.getElementById('imageInput').click();">
                                     Upload Image
                                 </a>
                             </div>
                         </div>
                         <div class="flex flex-col gap-5 md:ml-10">
                             <div class="border-t border-gray-200 rounded-b dark:border-gray-600 md:border-none">
-                                <h3 class="text-2xl font-bold dark:text-white underline mt-5 uppercase" >basic information</h3>
+                                <h3 class="text-2xl font-bold dark:text-white underline mt-5 uppercase">basic information</h3>
                             </div>
                             <div class="flex flex-col md:flex-row gap-5">
                                 <div>
@@ -46,8 +46,32 @@
                                     <input type="text" id="lnameID" name="lname" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 </div>
                             </div>
+                            <div class="flex flex-col md:flex-row gap-5">
+                                <div>
+                                    <label for="genderLabelID" class="block mb-2 text-md font-medium text-gray-900 dark:text-white"><span class="text-red-500">*</span> Gender</label>
+                                    <select id="genderLabelID" name="gender" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option selected disabled value="">-- Select Gender --</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Prefer Not To Mention">Prefer Not To Mention</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="lnameID" class="block mb-2 text-md font-medium text-gray-900 dark:text-white"><span class="text-red-500">*</span> Date of Birth</label>
+                                    <div class="relative max-w-sm">
+                                        <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+                                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                                            </svg>
+                                        </div>
+                                        <input datepicker type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="date_of_birth" placeholder="Select date">
+                                    </div>
+                                </div>
+
+
+                            </div>
                             <div class="border-t border-gray-200 rounded-b dark:border-gray-600 md:border-none ">
-                                <h3 class="text-2xl font-bold dark:text-white underline mt-5 uppercase" >additional information</h3>
+                                <h3 class="text-2xl font-bold dark:text-white underline mt-5 uppercase">additional information</h3>
                             </div>
                             <div class="flex flex-col md:flex-row gap-5">
                                 <div>
@@ -64,7 +88,7 @@
                                         <?php } ?>
                                     </select>
                                 </div>
-                                <div >
+                                <div>
                                     <label for="roleIDvalue" class="block mb-2 text-md font-medium text-gray-900 dark:text-white"><span class="text-red-500">*</span> Select Status</label>
                                     <select id="roleIDvalue" name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                         <option selected disabled value="">-- Select Status --</option>
@@ -78,7 +102,7 @@
                     <input type="hidden" value="<?php echo $_SESSION["fname"] . " " . $_SESSION["mname"] . " " . $_SESSION["lname"] ?>" name="processed-by">
                     <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600 md:mt-10 justify-end">
                         <button data-modal-hide="staticModal" name="register_employee" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Employee</button>
-                        <button data-modal-hide="staticModal" type="button" class="text-gray-500 bg-white hover:bg-red-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-white-900 focus:z-10 dark:bg-red-700 dark:text-white dark:border-gray-500 dark:hover:text-white dark:hover:bg-red-800 dark:focus:ring-red-800">Close</button>
+                        <button data-modal-hide="staticModal" type="button" class="text-white bg-red-500 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5  focus:z-10 dark:bg-red-700 dark:text-white dark:border-gray-500 dark:hover:text-white dark:hover:bg-red-800 dark:focus:ring-red-800">Close</button>
                     </div>
                 </form>
             </div>

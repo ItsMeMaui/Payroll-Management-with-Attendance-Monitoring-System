@@ -1,4 +1,5 @@
 <?php
+$pageTitle = "Attendance";
 
 include_once '../header.php';
 include_once '../components/navbar.php';
