@@ -24,7 +24,7 @@ $get_image = mysqli_query($conn, $sql);
             <?php
             while ($row = mysqli_fetch_array($get_image)) {
             ?>
-            <img class="rounded-full  w-48 h-48 p-2  mt-5 ring-4 ring-gray-300 dark:ring-gray-500" src="../images/uploads/<?php echo $row[0];?>" alt="image description">
+            <img draggable="false" class="rounded-full  w-48 h-48 p-2  mt-5 ring-4 ring-gray-300 dark:ring-gray-500" src="../images/uploads/<?php echo $row[0];?>" alt="image description">
             <?php } ?>
          </div>
          <div class="text-center dark:text-white text-black mt-5">

@@ -83,10 +83,13 @@ $result_roles = mysqli_query($conn, $get_roles);
                 <td class="text-center"><?php echo $row['role_rate'] ?></td>
                 <td class="text-center"><?php echo $row['created_date'] ?></td>
                 <td class="text-center">
-                  <div class="row flex items-center text-center justify-center">
-                    <div class="col-6 ">
+                 <div class="row flex items-center text-center justify-center">
+                    <div class="flex gap-2">
                       <button data-modal-target="editpositionModal" data-modal-toggle="editpositionModal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 editpositionbtnclass" type="button">
                         Edit
+                      </button>
+                      <button data-modal-target="deletepositionModal" data-modal-toggle="deletepositionModal" class="block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 deletepositionbtnclass" type="button">
+                        Delete
                       </button>
                     </div>
                   </div>
@@ -104,5 +107,6 @@ $result_roles = mysqli_query($conn, $get_roles);
 <?php
 include_once '../components/modals/addposition.php';
 include_once '../components/modals/editposition.php';
+include_once '../components/modals/deleteposition.php';
 include_once '../footer.php';
 ?>

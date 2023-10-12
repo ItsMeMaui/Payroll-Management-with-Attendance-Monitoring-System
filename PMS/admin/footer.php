@@ -135,6 +135,22 @@
   });
 </script>
 
+<!-- delete role -->
+<script>
+    $(document).ready(function() {
+        $('body').on('click', '.deletepositionbtnclass', function() {
+            $tr = $(this).closest('tr');
+            var data = $tr.children("td").map(function() {
+                return $(this).text();
+            }).get();
+            $('#deletepositionID').val(data[0]);
+            console.log(data);
+
+        });
+    });
+</script>
+
+
 <!-- edit user -->
 <script>
     let table4 = new DataTable('.users_table', {
