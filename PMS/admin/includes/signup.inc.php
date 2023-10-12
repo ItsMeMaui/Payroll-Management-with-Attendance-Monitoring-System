@@ -33,6 +33,7 @@ if (isset($_POST['register_user'])) {
     $emp_id = $_POST['emp_id'];
     $emp_username = $_POST['emp_username'];
     $emp_password = $_POST['emp_password'];
+    $emp_rpt_pwd = $_POST['emp_rpt_pwd'];
     $processed_by = $_POST['processed-by'];
 
     $create = "Added User : " . " " . $emp_username . " Employee ID:" . $emp_id ."";
@@ -42,7 +43,7 @@ if (isset($_POST['register_user'])) {
     include "../classes/signup.classes.php";
     include "../controllers/signup.controller.php";
 
-    $signup = new SignupUserController($emp_id, $emp_username, $emp_password, $processed_by, $create);
+    $signup = new SignupUserController($emp_id, $emp_username, $emp_password, $emp_rpt_pwd,$processed_by, $create);
 
 
     $signup->signupuserhandler();

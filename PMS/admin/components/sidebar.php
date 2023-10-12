@@ -1,7 +1,10 @@
 
 <?php
 
-$sql = "SELECT emp_image  FROM tbl_employees where emp_id = '$session_user_id';";
+$sql = "SELECT e.emp_image, e.emp_fname, e.emp_mname, e.emp_lname, r.role_name
+         FROM tbl_employees e
+         JOIN tbl_roles r ON e.role_id = r.role_id
+         WHERE e.emp_id = '$session_user_id';";
 $get_image = mysqli_query($conn, $sql);
 
 ?>
@@ -20,18 +23,20 @@ $get_image = mysqli_query($conn, $sql);
                <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
             </svg>
          </button>
+         <?php
+         while ($row = mysqli_fetch_array($get_image)) {
+         ?>
          <div class="flex justify-center ">
-            <?php
-            while ($row = mysqli_fetch_array($get_image)) {
-            ?>
-            <img draggable="false" class="rounded-full  w-48 h-48 p-2  mt-5 ring-4 ring-gray-300 dark:ring-gray-500" src="../images/uploads/<?php echo $row[0];?>" alt="image description">
-            <?php } ?>
+            <img draggable="false" class="rounded-full w-48 h-48 p-2 mt-5 ring-4 ring-gray-300 dark:ring-gray-500" src="../images/uploads/<?php echo $row[0];?>" alt="image description">
          </div>
          <div class="text-center dark:text-white text-black mt-5">
-            <p class="text-1xl font-bold"><?php echo $_SESSION['fname'] . " " . $_SESSION['mname'] . " " . $_SESSION['lname'] ?></p>
-            <p><?php echo $_SESSION['role_name']?></p>
-
+            <p class="text-1xl font-bold"><?php echo $row[1] . ' ' . $row[2] . ' ' . $row[3]; ?></p>
+            <p><?php echo $row[4]; ?></p>
          </div>
+         <?php
+         }
+         ?>
+            
          <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
 
 

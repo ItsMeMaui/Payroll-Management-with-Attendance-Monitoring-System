@@ -102,15 +102,17 @@ class SignupUserController extends SignupUser
     private $emp_id;
     private $emp_username;
     private $emp_password;
+    private $emp_rpt_pwd;
     private $processed_by;
     private $create;
 
-    public function __construct($emp_id, $emp_username, $emp_password, $processed_by,$create)
+    public function __construct($emp_id, $emp_username, $emp_password ,$emp_rpt_pwd,$processed_by, $create)
     {
 
         $this->emp_id = $emp_id;
         $this->emp_username = $emp_username;
         $this->emp_password = $emp_password;
+        $this->emp_rpt_pwd = $emp_rpt_pwd;
         $this->processed_by = $processed_by;
         $this->create = $create;
 
@@ -134,13 +136,13 @@ class SignupUserController extends SignupUser
             header("location: ../pages/users.php?error=UsernameAlreadyTaken");
             exit();
         }
-        $this->setUser($this->emp_id, $this->emp_username, $this->emp_password, $this->processed_by,$this->create);
+        $this->setUser($this->emp_id, $this->emp_username, $this->emp_password, $this->emp_rpt_pwd, $this->processed_by,$this->create);
     }
 
     private function missing_input()
     {
         $result = "";
-        if ($this->emp_id == "" || $this->emp_username == "" || $this->emp_password == "" || $this->processed_by == "" || $this->create == "") {
+        if ($this->emp_id == "" || $this->emp_username == "" || $this->emp_password == "" || $this->emp_rpt_pwd == "" || $this->processed_by == "" || $this->create == "") {
             $result = false;
         } else {
             $result = true;

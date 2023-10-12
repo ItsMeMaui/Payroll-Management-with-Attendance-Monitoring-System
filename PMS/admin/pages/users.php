@@ -11,11 +11,11 @@ include_once '../components/sidebar.php';
 $get_users = "SELECT *, 
 		        DATE_FORMAT(tbl_users.created_at, '%M %d, %Y') as created_date,
 		        tbl_roles.role_name as employee_role
-				FROM tbl_employees
-				INNER JOIN tbl_users ON tbl_employees.emp_id = tbl_users.emp_id
-				INNER JOIN tbl_roles ON tbl_employees.role_id = tbl_roles.role_id
-				WHERE tbl_employees.role_id = 1 OR tbl_roles.role_name = 'admin|Admin'
-				ORDER BY tbl_employees.created_at DESC;";
+    				FROM tbl_employees
+    				INNER JOIN tbl_users ON tbl_employees.emp_id = tbl_users.emp_id
+    				INNER JOIN tbl_roles ON tbl_employees.role_id = tbl_roles.role_id
+    				WHERE tbl_employees.role_id = 1 OR tbl_roles.role_name = 'admin|Admin'
+    				ORDER BY tbl_employees.emp_id DESC;";
 $result_users = mysqli_query($conn, $get_users);
 
 
@@ -24,7 +24,7 @@ $get_employees = "SELECT *, DATE_FORMAT(tbl_employees.created_at, '%M %d, %Y') a
               INNER JOIN tbl_roles ON tbl_employees.role_id = tbl_roles.role_id
               LEFT JOIN tbl_users ON tbl_employees.emp_id = tbl_users.emp_id
               WHERE tbl_employees.role_id = 1 AND role_name = 'admin' AND tbl_users.emp_id IS NULL
-              ORDER BY tbl_employees.created_at DESC;
+              ORDER BY tbl_employees.emp_id DESC;
 ";
 $result_employees = mysqli_query($conn, $get_employees);
 ?>
@@ -80,7 +80,7 @@ $result_employees = mysqli_query($conn, $get_employees);
                 Username
               </th>
               <th scope="col" class="hidden">
-                Username
+                Password
               </th>
               <th scope="col" class="px-6 py-3">
                 Processed By
@@ -109,10 +109,13 @@ $result_employees = mysqli_query($conn, $get_employees);
                 <td class="text-center"><?php echo $row['processed_by'] ?></td>
                 <td class="text-center"><?php echo $row['created_date'] ?></td>
                 <td class="text-center">
-                  <div class="row flex items-center text-center justify-center">
-                    <div class="col-6 ">
+                 <div class=" flex items-center text-center justify-center">
+                    <div class="flex gap-2">
                       <button data-modal-target="editUserModal" data-modal-toggle="editUserModal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 edituserbtnclass" type="button">
                         Edit
+                      </button>
+                      <button data-modal-target="deleteuserModal" data-modal-toggle="deleteuserModal" class="block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 deleteuserbtnclass" type="button">
+                      Delete
                       </button>
                     </div>
 
@@ -136,6 +139,7 @@ $result_employees = mysqli_query($conn, $get_employees);
 <?php
 include_once '../components/modals/adduser.php';
 include_once '../components/modals/edituser.php';
+include_once '../components/modals/deleteuser.php';
 
 include_once '../footer.php';
 ?>
