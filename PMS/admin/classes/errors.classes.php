@@ -587,4 +587,31 @@ if (isset($_GET['error'])) {
             });
         </script>";
     };
+
+
+    // if ($errorMessage == "CantDeleteData") {
+    //     $modalMessage = "We're sorry, but we can't delete this data at the moment. Deleting this record would affect other related data in our system, which could disrupt important processes and cause data inconsistencies.";
+    //     $error = "Cannot Delete Data";
+    //     echo "<script>
+    //         document.addEventListener('DOMContentLoaded', function() {
+    //             var modal = document.getElementById('modalmoulomo');
+    //             modal.classList.remove('hidden');
+
+    //             var modalHeader = modal.querySelector('.modal-header');
+    //             modalHeader.classList.add( 'dark:text-red-500', 'text-black','text-2xl');
+    //             modalHeader.textContent = '$error';
+
+    //             // Update the modal message
+    //             var modalBody = modal.querySelector('.modal-body');
+    //             modalBody.classList.add( 'dark:text-white', 'text-black', );
+    //             modalBody.textContent = '$modalMessage';
+                
+    //             var closeButton = modal.querySelector('[data-modal-hide]');
+    //             closeButton.addEventListener('click', function() {
+    //                 modal.classList.add('hidden');
+    //             });
+    //         });
+    //     </script>";
+    // };
+    
 }

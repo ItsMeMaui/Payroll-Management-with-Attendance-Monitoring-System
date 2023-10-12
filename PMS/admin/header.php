@@ -46,7 +46,7 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
 
     <!-- Flowbite Datepicker CSS and JavaScript CDN -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/datepicker.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
