@@ -103,12 +103,12 @@
           $('#mnameIDvalue').val(data[2]);
           $('#lnameIDvalue').val(data[3]);
           $('#empstatusID').val(data[5]);
-          var selectedRole = data[7];
-          $('#updateRoleName').find('option[value="' + selectedRole + '"]').prop('selected', true);
+          $('#editroleID').val(data[6]);
           $('#fingerprintIDvalue').val(data[8]);
           $('#editImage').attr('src', '../../admin/images/uploads/'+data[11] );
           $('#genderIDValue').val(data[12]);
           $('#dobIDValue').val(data[13]);
+
 
           console.log(data);
       });
@@ -150,7 +150,20 @@
     });
 </script>
 
+<script>
+    $(document).ready(function() {
+        $('body').on('click', '.deleteuserbtnclass', function() {
+            $tr = $(this).closest('tr');
+            var data = $tr.children("td").map(function() {
+                return $(this).text();
+            }).get();
+            $('#deleteuserID').val(data[7]);
+            $('#deletepasswordID').val(data[3]);
+            console.log(data);
 
+        });
+    });
+</script>
 <!-- edit user -->
 <script>
     let table4 = new DataTable('.users_table', {

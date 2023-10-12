@@ -28,26 +28,32 @@ class SignupEmp extends Db
 
 class SignupUser extends Db
 {
-    protected function setUser($emp_id, $emp_username, $emp_password, $processed_by, $create)
+    protected function setUser($emp_id, $emp_username, $emp_password,$emp_rpt_pwd,$processed_by, $create)
     {
+        if ($emp_password != $emp_rpt_pwd) {
+                $stmt = null;
+                header("location: ../pages/users.php?error=PasswordnotMatched");
+                exit();
+        } else {
+            $stmt = $this->connect()->prepare('INSERT INTO tbl_users( emp_id, user_username, user_password, processed_by) VALUES  (?,?,?,?);');
 
-        $stmt = $this->connect()->prepare('INSERT INTO tbl_users( emp_id, user_username, user_password, processed_by) VALUES  (?,?,?,?);');
+            $pwdHashed = password_hash($emp_password, PASSWORD_DEFAULT);
+            if (!$stmt->execute(array($emp_id, $emp_username, $pwdHashed, $processed_by))) {
+                $stmt = null;
+                header("location: ../pages/users.php?error=StatementFailed");
+                exit();
+            }
 
-        $pwdHashed = password_hash($emp_password, PASSWORD_DEFAULT);
-        if (!$stmt->execute(array($emp_id, $emp_username, $pwdHashed, $processed_by))) {
+            $stmt = $this->connect()->prepare('INSERT INTO tbl_logs (action, processed_by) VALUES (?,?);');
+
+            if (!$stmt->execute(array($create, $processed_by))) {
+                $stmt = null;
+                header("location: ../pages/users.php?error=StatementFailed");
+                exit();
+            }
             $stmt = null;
-            header("location: ../pages/users.php?error=StatementFailed");
-            exit();
-        }
-
-        $stmt = $this->connect()->prepare('INSERT INTO tbl_logs (action, processed_by) VALUES (?,?);');
-
-        if (!$stmt->execute(array($create, $processed_by))) {
-            $stmt = null;
-            header("location: ../pages/users.php?error=StatementFailed");
-            exit();
-        }
-        $stmt = null;
+         }
+        
     }
     protected function checkUser($emp_username)
     {

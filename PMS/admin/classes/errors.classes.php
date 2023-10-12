@@ -589,29 +589,79 @@ if (isset($_GET['error'])) {
     };
 
 
-    // if ($errorMessage == "CantDeleteData") {
-    //     $modalMessage = "We're sorry, but we can't delete this data at the moment. Deleting this record would affect other related data in our system, which could disrupt important processes and cause data inconsistencies.";
-    //     $error = "Cannot Delete Data";
-    //     echo "<script>
-    //         document.addEventListener('DOMContentLoaded', function() {
-    //             var modal = document.getElementById('modalmoulomo');
-    //             modal.classList.remove('hidden');
+    if ($errorMessage == "CantDeleteData") {
+        $modalMessage = "Data Deletion Not Possible";
+        $error = "Error";
+        echo "<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var modal = document.getElementById('modalmoulomo');
+                modal.classList.remove('hidden');
 
-    //             var modalHeader = modal.querySelector('.modal-header');
-    //             modalHeader.classList.add( 'dark:text-red-500', 'text-black','text-2xl');
-    //             modalHeader.textContent = '$error';
+                var modalHeader = modal.querySelector('.modal-header');
+                modalHeader.classList.add( 'dark:text-red-500', 'text-black','text-2xl');
+                modalHeader.textContent = '$error';
 
-    //             // Update the modal message
-    //             var modalBody = modal.querySelector('.modal-body');
-    //             modalBody.classList.add( 'dark:text-white', 'text-black', );
-    //             modalBody.textContent = '$modalMessage';
+                // Update the modal message
+                var modalBody = modal.querySelector('.modal-body');
+                modalBody.classList.add( 'dark:text-white', 'text-black', );
+                modalBody.textContent = '$modalMessage';
                 
-    //             var closeButton = modal.querySelector('[data-modal-hide]');
-    //             closeButton.addEventListener('click', function() {
-    //                 modal.classList.add('hidden');
-    //             });
-    //         });
-    //     </script>";
-    // };
+                var closeButton = modal.querySelector('[data-modal-hide]');
+                closeButton.addEventListener('click', function() {
+                    modal.classList.add('hidden');
+                });
+            });
+        </script>";
+    };
+
+    if ($errorMessage == "RequiredPassword") {
+        $modalMessage = "Required User Password to Delete";
+        $error = "Error";
+        echo "<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var modal = document.getElementById('modalmoulomo');
+                modal.classList.remove('hidden');
+
+                var modalHeader = modal.querySelector('.modal-header');
+                modalHeader.classList.add( 'dark:text-red-500', 'text-black','text-2xl');
+                modalHeader.textContent = '$error';
+
+                // Update the modal message
+                var modalBody = modal.querySelector('.modal-body');
+                modalBody.classList.add( 'dark:text-white', 'text-black', );
+                modalBody.textContent = '$modalMessage';
+                
+                var closeButton = modal.querySelector('[data-modal-hide]');
+                closeButton.addEventListener('click', function() {
+                    modal.classList.add('hidden');
+                });
+            });
+        </script>";
+    };
+
+    if ($errorMessage == "UserDeletedSuccessfully") {
+        $modalMessage = "User Account was successfully deleted.";
+        $success = "Success";
+        echo "<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var modal = document.getElementById('modalmoulomo');
+                modal.classList.remove('hidden');
+
+                var modalHeader = modal.querySelector('.modal-header');
+                modalHeader.classList.add( 'dark:text-green-500', 'text-black','text-2xl');
+                modalHeader.textContent = '$success';
+
+                // Update the modal message
+                var modalBody = modal.querySelector('.modal-body');
+                modalBody.classList.add( 'dark:text-white', 'text-black', );
+                modalBody.textContent = '$modalMessage';
+                
+                var closeButton = modal.querySelector('[data-modal-hide]');
+                closeButton.addEventListener('click', function() {
+                    modal.classList.add('hidden');
+                });
+            });
+        </script>";
+    };
     
 }
