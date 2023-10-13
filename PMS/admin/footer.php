@@ -202,6 +202,9 @@
   let table5 = new DataTable('.payroll_table', {
     order: [0, 'desc']
   });
+  let table7 = new DataTable('.deduction_table', {
+    order: [0, 'desc']
+  });
 </script>
 
 
