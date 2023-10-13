@@ -32,9 +32,12 @@
                         <label for="" class="block mb-2 text-md font-medium text-gray-900 dark:text-white"><span class="text-red-500">*</span> Username</label>
                         <input type="text" name="emp_username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
-                    <div class="mb-6">
+                    <div class="mb-6 relative">
                         <label for="" class="block mb-2 text-md font-medium text-gray-900 dark:text-white"><span class="text-red-500">*</span> Password</label>
-                        <input type="password"  name="emp_password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <input type="password"  name="emp_password" id="add_user_rpt_password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <span id="passwordToggleEditUser" class="absolute top-10 right-4 flex items-center px-3 cursor-pointer dark:text-white text-black">
+                          
+                        </span>
                     </div>
                     <div class="mb-6">
                         <label for="" class="block mb-2 text-md font-medium text-gray-900 dark:text-white"><span class="text-red-500">*</span>Confirm Password</label>
@@ -52,3 +55,21 @@
         </div>
     </div>
 </div>
+<script>
+    const passwordInput = document.getElementById('add_user_rpt_password');
+    const passwordToggle = document.getElementById('passwordToggleEditUser');
+    const hidePasswordText = 'Show';
+    const showPasswordText = 'Hidden';
+
+    passwordToggle.innerHTML = hidePasswordText;
+
+    passwordToggle.addEventListener('click', () => {
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            passwordToggle.innerHTML = showPasswordText;
+        } else {
+            passwordInput.type = 'password';
+            passwordToggle.innerHTML = hidePasswordText;
+        }
+    });
+</script>

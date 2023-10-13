@@ -105,25 +105,25 @@ $current_minute = date('i');
                 <p class="text-4xl text-center dark:text-white text-black" id="formattedDate"></p>
                 <p class="text-3xl text-center dark:text-white text-black font-bold" id="currentTime"></p>
                 <?php
-                    if ($current_day == 0) { // Sunday
+                if ($current_day == 0) { // Sunday
                     echo "<p class='text-4xl text-center dark:text-white text-black'>We're closed! </p>
                     <p class='text-2xl text-center dark:text-white text-black'>Sorry, login unavailable now. Open from Monday to Saturday</p>";
-                    } elseif ($current_hour < 7 || ($current_hour == 7 && $current_minute < 30)) {
-                        echo "<p class='text-4xl text-center dark:text-white text-black'>Good Morning! </p>
+                } elseif ($current_hour < 7 || ($current_hour == 7 && $current_minute < 30)) {
+                    echo "<p class='text-4xl text-center dark:text-white text-black'>Good Morning! </p>
                         <p class='text-2xl text-center dark:text-white text-black'>Sorry, login unavailable now. Open from 7:30 am to 4:30 pm.</p>";
-                    } elseif ($current_hour < 12) {
-                        echo "<p class='text-4xl text-center dark:text-white text-black'>Good Morning! </p>
+                } elseif ($current_hour < 12) {
+                    echo "<p class='text-4xl text-center dark:text-white text-black'>Good Morning! </p>
                         <p class='text-2xl text-center dark:text-white text-black'>Scan your registered fingerprint</p>";
-                    } elseif ($current_hour < 17 || ($current_hour == 17 && $current_minute <= 59)) {
-                        echo "<p class='text-4xl text-center dark:text-white text-black'>Good Afternoon! </p>
+                } elseif ($current_hour < 17 || ($current_hour == 17 && $current_minute <= 59)) {
+                    echo "<p class='text-4xl text-center dark:text-white text-black'>Good Afternoon! </p>
                         <p class='text-2xl text-center dark:text-white text-black'>Scan your registered fingerprint</p>";
-                    } elseif ($current_hour < 18) {
-                        echo "<p class='text-4xl text-center dark:text-white text-black'>Good Afternoon! </p>
+                } elseif ($current_hour < 18) {
+                    echo "<p class='text-4xl text-center dark:text-white text-black'>Good Afternoon! </p>
                         <p class='text-2xl text-center dark:text-white text-black'>Sorry, login unavailable now. Open from 7:30 am to 4:30 pm.</p>";
-                    } else {
-                        echo "<p class='text-4xl text-center dark:text-white text-black'>Good Evening! </p>
+                } else {
+                    echo "<p class='text-4xl text-center dark:text-white text-black'>Good Evening! </p>
                         <p class='text-2xl text-center dark:text-white text-black'>Sorry, login unavailable now. Open from 7:30 am to 4:30 pm.</p>";
-                    }
+                }
                 ?>
                 <!-- <p class="text-2xl text-center dark:text-white text-black">Scan your registered fingerprint</p> -->
                 <select name="action" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -191,7 +191,7 @@ $current_minute = date('i');
 </script>
 
 <!-- disabling login form depends on the time and day -->
-<script>
+<!-- <script>
     document.addEventListener("DOMContentLoaded", function() {
 
         function isSunday() {
@@ -221,7 +221,7 @@ $current_minute = date('i');
             submitButton.disabled = true;
         }
     });
-</script>
+</script> -->
 
 <!-- tables -->
 <script>
