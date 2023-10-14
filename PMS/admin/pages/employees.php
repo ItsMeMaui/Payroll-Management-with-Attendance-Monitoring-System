@@ -12,7 +12,7 @@ $result_employees = mysqli_query($conn, $get_employees);
 $get_roles = "SELECT * FROM pmswa.tbl_roles;";
 $result_roles = mysqli_query($conn, $get_roles);
 
-$get_employees = "SELECT *, DATE_FORMAT(tbl_employees.created_at, '%M %d, %Y') as created_date
+$get_employees = "SELECT *, DATE_FORMAT(tbl_employees.created_at, '%M %d, %Y') as created_date, tbl_employees.processed_by as emp_processed_by
                 FROM tbl_employees
                 INNER JOIN tbl_roles
                 ON tbl_employees.role_id = tbl_roles.role_id
@@ -126,7 +126,7 @@ $result_employees = mysqli_query($conn, $get_employees);
                 <td class="hidden"><?php echo $row['role_id'] ?></td>
                 <td class="text-center"><?php echo $row['role_name'] ?></td>
                 <td class="hidden"><?php echo $row['emp_fingerprint'] ?></td>
-                <td class="text-center"><?php echo $row['processed_by'] ?></td>
+                <td class="text-center"><?php echo $row['emp_processed_by'] ?></td>
                 <td class="text-center"><?php echo $row['created_date'] ?></td>
                 <td class="hidden"><?php echo $row['emp_image'] ?></td>
                 <td class="hidden"><?php echo $row['emp_gender'] ?></td>
