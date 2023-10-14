@@ -50,7 +50,7 @@ $get_recent_activities = mysqli_query($conn, $sql);
 
 <div class="p-4 md:ml-64 overflow-y-auto dark:bg-gray-900 h-screen dark:text-white text-black">
    <div class="p-4 border-2 border-gray-200 mt-16 border-dashed rounded-lg dark:border-gray-700">
-      <h1 class="text-4xl">Dashboard</h1>
+      <h1 class="text-3xl md:text-4xl">Dashboard</h1>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
       <div class="flex flex-col gap-5">
          <div class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -66,7 +66,7 @@ $get_recent_activities = mysqli_query($conn, $sql);
                   <?php
                   while ($row = mysqli_fetch_array($get_timed_in)) {
                   ?>
-                     <h1 class="text-lg font-bold"><?php echo $row[11] ?> employees</h1>
+                     <h1 class="text-lg font-bold"><?php echo $row[13] ?> employees</h1>
                   <?php } ?>
                   <h1 class="text-md uppercase">Timed In Today</h1>
                </div>
