@@ -16,7 +16,7 @@ if (isset($_GET['error'])) {
                 modal.classList.remove('hidden');
 
                 var modalHeader = modal.querySelector('.modal-header');
-                modalHeader.classList.add( 'dark:text-red-500', 'text-black','text-2xl');
+                modalHeader.classList.add( 'dark:text-red-500', 'text-red-500','text-2xl');
                 modalHeader.textContent = '$error';
 
                 // Update the modal message
@@ -40,7 +40,7 @@ if (isset($_GET['error'])) {
                 modal.classList.remove('hidden');
 
                 var modalHeader = modal.querySelector('.modal-header');
-                modalHeader.classList.add( 'dark:text-red-500', 'text-black','text-2xl');
+                modalHeader.classList.add( 'dark:text-red-500', 'text-red-500','text-2xl');
                 modalHeader.textContent = '$error';
 
                 // Update the modal message
@@ -68,7 +68,7 @@ if (isset($_GET['error'])) {
                 modal.classList.remove('hidden');
 
                 var modalHeader = modal.querySelector('.modal-header');
-                modalHeader.classList.add( 'dark:text-red-500', 'text-black','text-2xl');
+                modalHeader.classList.add( 'dark:text-red-500', 'text-red-500','text-2xl');
                 modalHeader.textContent = '$error';
 
                 // Update the modal message
@@ -94,7 +94,7 @@ if (isset($_GET['error'])) {
                 modal.classList.remove('hidden');
 
                 var modalHeader = modal.querySelector('.modal-header');
-                modalHeader.classList.add( 'dark:text-red-500', 'text-black','text-2xl');
+                modalHeader.classList.add( 'dark:text-red-500', 'text-red-500','text-2xl');
                 modalHeader.textContent = '$error';
 
                 // Update the modal message
@@ -120,7 +120,7 @@ if (isset($_GET['error'])) {
                 modal.classList.remove('hidden');
 
                 var modalHeader = modal.querySelector('.modal-header');
-                modalHeader.classList.add( 'dark:text-red-500', 'text-black','text-2xl');
+                modalHeader.classList.add( 'dark:text-red-500', 'text-red-500','text-2xl');
                 modalHeader.textContent = '$error';
 
                 // Update the modal message
@@ -145,7 +145,7 @@ if (isset($_GET['error'])) {
                 modal.classList.remove('hidden');
 
                 var modalHeader = modal.querySelector('.modal-header');
-                modalHeader.classList.add( 'dark:text-red-500', 'text-black','text-2xl');
+                modalHeader.classList.add( 'dark:text-red-500', 'text-red-500','text-2xl');
                 modalHeader.textContent = '$error';
 
                 // Update the modal message
@@ -170,7 +170,7 @@ if (isset($_GET['error'])) {
                 modal.classList.remove('hidden');
 
                 var modalHeader = modal.querySelector('.modal-header');
-                modalHeader.classList.add( 'dark:text-red-500', 'text-black','text-2xl');
+                modalHeader.classList.add( 'dark:text-red-500', 'text-red-500','text-2xl');
                 modalHeader.textContent = '$error';
 
                 // Update the modal message
@@ -195,7 +195,7 @@ if (isset($_GET['error'])) {
                 modal.classList.remove('hidden');
 
                 var modalHeader = modal.querySelector('.modal-header');
-                modalHeader.classList.add( 'dark:text-green-500', 'text-black','text-2xl');
+                modalHeader.classList.add( 'dark:text-green-500', 'text-green-500','text-2xl');
                 modalHeader.textContent = '$success';
 
                 // Update the modal message
@@ -222,7 +222,7 @@ if (isset($_GET['error'])) {
                 modal.classList.remove('hidden');
 
                 var modalHeader = modal.querySelector('.modal-header');
-                modalHeader.classList.add( 'dark:text-red-500', 'text-black','text-2xl');
+                modalHeader.classList.add( 'dark:text-red-500', 'text-red-500','text-2xl');
                 modalHeader.textContent = '$error';
 
                 // Update the modal message
@@ -246,7 +246,7 @@ if (isset($_GET['error'])) {
                 modal.classList.remove('hidden');
 
                 var modalHeader = modal.querySelector('.modal-header');
-                modalHeader.classList.add( 'dark:text-red-500', 'text-black','text-2xl');
+                modalHeader.classList.add( 'dark:text-red-500', 'text-red-500','text-2xl');
                 modalHeader.textContent = '$error';
 
                 // Update the modal message
@@ -270,7 +270,7 @@ if (isset($_GET['error'])) {
                 modal.classList.remove('hidden');
 
                 var modalHeader = modal.querySelector('.modal-header');
-                modalHeader.classList.add( 'dark:text-red-500', 'text-black','text-2xl');
+                modalHeader.classList.add( 'dark:text-red-500', 'text-red-500','text-2xl');
                 modalHeader.textContent = '$error';
 
                 // Update the modal message
@@ -296,7 +296,7 @@ if (isset($_GET['error'])) {
                 modal.classList.remove('hidden');
 
                 var modalHeader = modal.querySelector('.modal-header');
-                modalHeader.classList.add( 'dark:text-red-500', 'text-black','text-2xl');
+                modalHeader.classList.add( 'dark:text-red-500', 'text-red-500','text-2xl');
                 modalHeader.textContent = '$error';
 
                 // Update the modal message
@@ -320,7 +320,7 @@ if (isset($_GET['error'])) {
                 modal.classList.remove('hidden');
 
                 var modalHeader = modal.querySelector('.modal-header');
-                modalHeader.classList.add( 'dark:text-red-500', 'text-black','text-2xl');
+                modalHeader.classList.add( 'dark:text-red-500', 'text-red-500','text-2xl');
                 modalHeader.textContent = '$error';
 
                 // Update the modal message
@@ -344,7 +344,7 @@ if (isset($_GET['error'])) {
                 modal.classList.remove('hidden');
 
                 var modalHeader = modal.querySelector('.modal-header');
-                modalHeader.classList.add( 'dark:text-red-500', 'text-black','text-2xl');
+                modalHeader.classList.add( 'dark:text-red-500', 'text-red-500','text-2xl');
                 modalHeader.textContent = '$error';
 
                 // Update the modal message
@@ -372,7 +372,7 @@ if (isset($_GET['error'])) {
                 modal.classList.remove('hidden');
 
                 var modalHeader = modal.querySelector('.modal-header');
-                modalHeader.classList.add( 'dark:text-green-500', 'text-black','text-2xl');
+                modalHeader.classList.add( 'dark:text-green-500', 'text-green-500','text-2xl');
                 modalHeader.textContent = '$success';
 
                 // Update the modal message
@@ -398,7 +398,7 @@ if (isset($_GET['error'])) {
                 modal.classList.remove('hidden');
 
                 var modalHeader = modal.querySelector('.modal-header');
-                modalHeader.classList.add( 'dark:text-green-500', 'text-black','text-2xl');
+                modalHeader.classList.add( 'dark:text-green-500', 'text-green-500','text-2xl');
                 modalHeader.textContent = '$success';
 
                 // Update the modal message
@@ -423,7 +423,7 @@ if (isset($_GET['error'])) {
                 modal.classList.remove('hidden');
 
                 var modalHeader = modal.querySelector('.modal-header');
-                modalHeader.classList.add( 'dark:text-red-500', 'text-black','text-2xl');
+                modalHeader.classList.add( 'dark:text-red-500', 'text-red-500','text-2xl');
                 modalHeader.textContent = '$error';
 
                 // Update the modal message
@@ -450,7 +450,7 @@ if (isset($_GET['error'])) {
                 modal.classList.remove('hidden');
 
                 var modalHeader = modal.querySelector('.modal-header');
-                modalHeader.classList.add( 'dark:text-green-500', 'text-black','text-2xl');
+                modalHeader.classList.add( 'dark:text-green-500', 'text-green-500','text-2xl');
                 modalHeader.textContent = '$success';
 
                 // Update the modal message
@@ -474,7 +474,7 @@ if (isset($_GET['error'])) {
                 modal.classList.remove('hidden');
 
                 var modalHeader = modal.querySelector('.modal-header');
-                modalHeader.classList.add( 'dark:text-green-500', 'text-black','text-2xl');
+                modalHeader.classList.add( 'dark:text-green-500', 'text-green-500','text-2xl');
                 modalHeader.textContent = '$success';
 
                 // Update the modal message
@@ -498,7 +498,7 @@ if (isset($_GET['error'])) {
                 modal.classList.remove('hidden');
 
                 var modalHeader = modal.querySelector('.modal-header');
-                modalHeader.classList.add( 'dark:text-green-500', 'text-black','text-2xl');
+                modalHeader.classList.add( 'dark:text-green-500', 'text-green-500','text-2xl');
                 modalHeader.textContent = '$success';
 
                 // Update the modal message
@@ -524,7 +524,7 @@ if (isset($_GET['error'])) {
                 modal.classList.remove('hidden');
 
                 var modalHeader = modal.querySelector('.modal-header');
-                modalHeader.classList.add( 'dark:text-green-500', 'text-black','text-2xl');
+                modalHeader.classList.add( 'dark:text-green-500', 'text-green-500','text-2xl');
                 modalHeader.textContent = '$success';
 
                 // Update the modal message
@@ -548,7 +548,7 @@ if (isset($_GET['error'])) {
                 modal.classList.remove('hidden');
 
                 var modalHeader = modal.querySelector('.modal-header');
-                modalHeader.classList.add( 'dark:text-green-500', 'text-black','text-2xl');
+                modalHeader.classList.add( 'dark:text-green-500', 'text-green-500','text-2xl');
                 modalHeader.textContent = '$success';
 
                 // Update the modal message
@@ -572,7 +572,7 @@ if (isset($_GET['error'])) {
                 modal.classList.remove('hidden');
 
                 var modalHeader = modal.querySelector('.modal-header');
-                modalHeader.classList.add( 'dark:text-green-500', 'text-black','text-2xl');
+                modalHeader.classList.add( 'dark:text-green-500', 'text-green-500','text-2xl');
                 modalHeader.textContent = '$success';
 
                 // Update the modal message
@@ -598,7 +598,7 @@ if (isset($_GET['error'])) {
                 modal.classList.remove('hidden');
 
                 var modalHeader = modal.querySelector('.modal-header');
-                modalHeader.classList.add( 'dark:text-red-500', 'text-black','text-2xl');
+                modalHeader.classList.add( 'dark:text-red-500', 'text-red-500','text-2xl');
                 modalHeader.textContent = '$error';
 
                 // Update the modal message
@@ -623,7 +623,7 @@ if (isset($_GET['error'])) {
                 modal.classList.remove('hidden');
 
                 var modalHeader = modal.querySelector('.modal-header');
-                modalHeader.classList.add( 'dark:text-red-500', 'text-black','text-2xl');
+                modalHeader.classList.add( 'dark:text-red-500', 'text-red-500','text-2xl');
                 modalHeader.textContent = '$error';
 
                 // Update the modal message
@@ -648,7 +648,7 @@ if (isset($_GET['error'])) {
                 modal.classList.remove('hidden');
 
                 var modalHeader = modal.querySelector('.modal-header');
-                modalHeader.classList.add( 'dark:text-green-500', 'text-black','text-2xl');
+                modalHeader.classList.add( 'dark:text-green-500', 'text-green-500','text-2xl');
                 modalHeader.textContent = '$success';
 
                 // Update the modal message
