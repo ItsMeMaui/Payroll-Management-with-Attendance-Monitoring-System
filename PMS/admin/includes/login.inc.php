@@ -22,7 +22,10 @@ if (isset($_POST['login'])) {
   if ($code == "time-in") {
     $fingerprint = $_POST['fingerprint'];
     if (!empty($fingerprint)) {
-      $query = "SELECT * FROM tbl_employees WHERE emp_fingerprint = '$fingerprint'";
+      $query = "SELECT *
+                FROM tbl_fingerprints 
+                INNER JOIN tbl_employees
+                WHERE tbl_fingerprints.fingerprint_string = '$fingerprint'";
       $result = mysqli_query($conn, $query);
       if ($row1 = mysqli_fetch_assoc($result)) {
         $emp_id = $row1['emp_id'];
@@ -69,7 +72,7 @@ if (isset($_POST['login'])) {
                               VALUES ('$emp_id', '$date', '$in', '$out', '$int')";
             $result3 = mysqli_query($conn, $sql4);
             $_SESSION['mess'] = '<div class="relative z-0">
-                  <input type="text" id="standard_error" aria-describedby="standard_error_help" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-green-600 appearance-none dark:text-white dark:border-green-500 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer" placeholder=" " />
+                  <input disabled type="text" id="standard_error" aria-describedby="standard_error_help" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-green-600 appearance-none dark:text-white dark:border-green-500 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer" placeholder=" " />
                   <label for="standard_error" class="absolute text-sm text-green-600 dark:text-green-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Standard success</label>
               </div>
               <p id="standard_error_help" class="mt-2 text-xs text-green-600 dark:text-green-400"><span class="font-medium"></span> Well done! Time in: ' . $fullname . ' </p>';
@@ -79,10 +82,10 @@ if (isset($_POST['login'])) {
             $sql3 = "SELECT * FROM tbl_attendances WHERE emp_id = '$emp_id' AND attendance_date = '$date'";
             $result3 = mysqli_query($conn, $sql3);
             if (!$row2 = $result3->fetch_assoc()) {
-              $fname = $row['emp_fname'];
-              $lname = $row['emp_lname'];
+              $fname = $row1['emp_fname'];
+              $lname = $row1['emp_lname'];
               $full = $lname . ', ' . $fname;
-              $fullname = $fname . ', ' . $lname;
+              $fullname = $fname . ' ' . $mname . ' ' . $lname;
 
               $first = new DateTime($in);
               $second = new DateTime($out);
@@ -95,7 +98,7 @@ if (isset($_POST['login'])) {
                               VALUES ('$emp_id', '$date', '$in', '$out', '$int')";
               $result3 = mysqli_query($conn, $sql4);
               $_SESSION['mess'] = '<div class="relative z-0">
-                  <input type="text" id="standard_error" aria-describedby="standard_error_help" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-green-600 appearance-none dark:text-white dark:border-green-500 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer" placeholder=" " />
+                  <input disabled type="text" id="standard_error" aria-describedby="standard_error_help" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-green-600 appearance-none dark:text-white dark:border-green-500 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer" placeholder=" " />
                   <label for="standard_error" class="absolute text-sm text-green-600 dark:text-green-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Standard success</label>
               </div>
               <p id="standard_error_help" class="mt-2 text-xs text-green-600 dark:text-green-400"><span class="font-medium"></span> Well done! Time in: ' . $fullname . ' </p>';
@@ -103,7 +106,7 @@ if (isset($_POST['login'])) {
               exit();
             } else {
               $_SESSION['mess'] = '<div class="relative z-0">
-                <input type="text" id="standard_error" aria-describedby="standard_error_help" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-yellow-600 appearance-none dark:text-white dark:border-yellow-500 dark:focus:border-yellow-500 focus:outline-none focus:ring-0 focus:border-yellow-600 peer" placeholder=" " />
+                <input disabled type="text" id="standard_error" aria-describedby="standard_error_help" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-yellow-600 appearance-none dark:text-white dark:border-yellow-500 dark:focus:border-yellow-500 focus:outline-none focus:ring-0 focus:border-yellow-600 peer" placeholder=" " />
                 <label for="standard_error" class="absolute text-sm text-yellow-600 dark:text-yellow-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Standard error</label>
                 </div>
                 <p id="standard_error_help" class="mt-2 text-xs text-yellow-600 dark:text-yellow-400"><span class="font-medium">Opss!</span> You are already timed in!</p>';
@@ -113,7 +116,7 @@ if (isset($_POST['login'])) {
         }
       } else {
         $_SESSION['mess'] = '<div class="relative z-0">
-            <input type="text" id="standard_error" aria-describedby="standard_error_help" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-red-600 appearance-none dark:text-white dark:border-red-500 dark:focus:border-red-500 focus:outline-none focus:ring-0 focus:border-red-600 peer" placeholder=" " />
+            <input disabled type="text" id="standard_error" aria-describedby="standard_error_help" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-red-600 appearance-none dark:text-white dark:border-red-500 dark:focus:border-red-500 focus:outline-none focus:ring-0 focus:border-red-600 peer" placeholder=" " />
             <label for="standard_error" class="absolute text-sm text-red-600 dark:text-red-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Standard error</label>
         </div>
         <p id="standard_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium">Opss!</span> Fingerprint is not registered!</p>';
@@ -121,7 +124,7 @@ if (isset($_POST['login'])) {
       }
     } else {
       $_SESSION['mess'] = '<div class="relative z-0">
-            <input type="text" id="standard_error" aria-describedby="standard_error_help" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-red-600 appearance-none dark:text-white dark:border-red-500 dark:focus:border-red-500 focus:outline-none focus:ring-0 focus:border-red-600 peer" placeholder=" " />
+            <input disabled type="text" id="standard_error" aria-describedby="standard_error_help" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-red-600 appearance-none dark:text-white dark:border-red-500 dark:focus:border-red-500 focus:outline-none focus:ring-0 focus:border-red-600 peer" placeholder=" " />
             <label for="standard_error" class="absolute text-sm text-red-600 dark:text-red-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Standard error</label>
         </div>
         <p id="standard_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium">Opss!</span> Fingerprint is required</p>';
@@ -133,11 +136,14 @@ if (isset($_POST['login'])) {
 
     $fingerprint = $_POST['fingerprint'];
     if (!$fingerprint == "") {
-      $sql = "SELECT * FROM tbl_employees WHERE emp_fingerprint = '$fingerprint' ";
+      $sql = "SELECT *
+                FROM tbl_fingerprints 
+                INNER JOIN tbl_employees
+                WHERE tbl_fingerprints.fingerprint_string = '$fingerprint'";;
       $result = mysqli_query($conn, $sql);
       if (!$row = $result->fetch_assoc()) {
         $_SESSION['mess'] = '<div class="relative z-0">
-            <input type="text" id="standard_error" aria-describedby="standard_error_help" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-red-600 appearance-none dark:text-white dark:border-red-500 dark:focus:border-red-500 focus:outline-none focus:ring-0 focus:border-red-600 peer" placeholder=" " />
+            <input disabled type="text" id="standard_error" aria-describedby="standard_error_help" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-red-600 appearance-none dark:text-white dark:border-red-500 dark:focus:border-red-500 focus:outline-none focus:ring-0 focus:border-red-600 peer" placeholder=" " />
             <label for="standard_error" class="absolute text-sm text-red-600 dark:text-red-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Standard error</label>
         </div>
         <p id="standard_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium">Opss!</span> Fingerprint is not registered!</p>';
@@ -149,7 +155,7 @@ if (isset($_POST['login'])) {
 
         if (!$row = $result->fetch_assoc()) {
           $_SESSION['mess'] = '<div class="relative z-0">
-            <input type="text" id="standard_error" aria-describedby="standard_error_help" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-red-600 appearance-none dark:text-white dark:border-red-500 dark:focus:border-red-500 focus:outline-none focus:ring-0 focus:border-red-600 peer" placeholder=" " />
+            <input disabled type="text" id="standard_error" aria-describedby="standard_error_help" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-red-600 appearance-none dark:text-white dark:border-red-500 dark:focus:border-red-500 focus:outline-none focus:ring-0 focus:border-red-600 peer" placeholder=" " />
             <label for="standard_error" class="absolute text-sm text-red-600 dark:text-red-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Standard error</label>
               </div>
               <p id="standard_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium">Oh, snapp!</span> You did not timed in.</p>';
@@ -174,14 +180,14 @@ if (isset($_POST['login'])) {
             $result2 = mysqli_query($conn, $sql2);
 
             $_SESSION['mess'] =  '<div class="relative z-0">
-              <input type="text" id="standard_error" aria-describedby="standard_error_help" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-green-600 appearance-none dark:text-white dark:border-green-500 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer" placeholder=" " />
+              <input disabled type="text" id="standard_error" aria-describedby="standard_error_help" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-green-600 appearance-none dark:text-white dark:border-green-500 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer" placeholder=" " />
               <label for="standard_error" class="absolute text-sm text-green-600 dark:text-green-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Standard error</label>
               </div>
               <p id="standard_error_help" class="mt-2 text-xs text-green-600 dark:text-green-400"><span class="font-medium">Well done!</span> You are now timed out!</p>';
             header("Location: ../../index.php");
           } else {
             $_SESSION['mess'] =  '<div class="relative z-0">
-                <input type="text" id="standard_error" aria-describedby="standard_error_help" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-yellow-600 appearance-none dark:text-white dark:border-yellow-500 dark:focus:border-yellow-500 focus:outline-none focus:ring-0 focus:border-yellow-600 peer" placeholder=" " />
+                <input disabled type="text" id="standard_error" aria-describedby="standard_error_help" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-yellow-600 appearance-none dark:text-white dark:border-yellow-500 dark:focus:border-yellow-500 focus:outline-none focus:ring-0 focus:border-yellow-600 peer" placeholder=" " />
                 <label for="standard_error" class="absolute text-sm text-yellow-600 dark:text-yellow-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Standard error</label>
                 </div>
                 <p id="standard_error_help" class="mt-2 text-xs text-yellow-600 dark:text-yellow-400"><span class="font-medium">Opss!</span> You are already timed out!</p>';
@@ -191,7 +197,7 @@ if (isset($_POST['login'])) {
       }
     } else {
       $_SESSION['mess'] = '<div class="relative z-0">
-            <input type="text" id="standard_error" aria-describedby="standard_error_help" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-red-600 appearance-none dark:text-white dark:border-red-500 dark:focus:border-red-500 focus:outline-none focus:ring-0 focus:border-red-600 peer" placeholder=" " />
+            <input disabled type="text" id="standard_error" aria-describedby="standard_error_help" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-red-600 appearance-none dark:text-white dark:border-red-500 dark:focus:border-red-500 focus:outline-none focus:ring-0 focus:border-red-600 peer" placeholder=" " />
             <label for="standard_error" class="absolute text-sm text-red-600 dark:text-red-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Standard error</label>
         </div>
         <p id="standard_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium">Opss!</span> Fingerprint is required</p>';
