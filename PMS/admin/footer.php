@@ -63,6 +63,7 @@
     };
 </script>
 
+
 <!-- view employee -->
 <script>
   $(document).ready(function () {
@@ -205,8 +206,11 @@
   let table7 = new DataTable('.deduction_table', {
     order: [0, 'desc']
   });
-</script>
+  let table8 = new DataTable('.fingerprints_table', {
+    order: [0, 'desc']
+  });
 
+</script>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>

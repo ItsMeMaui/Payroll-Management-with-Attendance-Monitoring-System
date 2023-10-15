@@ -6,18 +6,20 @@ include_once '../header.php';
 include_once '../components/navbar.php';
 include_once '../components/sidebar.php';
 
+
 $get_employees = "SELECT * FROM pmswa.tbl_employees ORDER BY emp_id DESC ;";
 $result_employees = mysqli_query($conn, $get_employees);
 
 $get_roles = "SELECT * FROM pmswa.tbl_roles;";
 $result_roles = mysqli_query($conn, $get_roles);
 
-$get_employees = "SELECT *, DATE_FORMAT(tbl_employees.created_at, '%M %d, %Y') as created_date, tbl_employees.processed_by as emp_processed_by
-                FROM tbl_employees
-                INNER JOIN tbl_roles
-                ON tbl_employees.role_id = tbl_roles.role_id
-                ORDER BY tbl_employees.emp_id DESC;";
+$get_employees = "SELECT *, DATE_FORMAT(tbl_employees.created_at, '%M %d, %Y') as created_date, tbl_employees.processed_by as emp_processed_by FROM tbl_employees 
+                INNER JOIN tbl_roles ON tbl_employees.role_id = tbl_roles.role_id 
+                INNER JOIN tbl_fingerprints ON tbl_fingerprints.fingerprint_id = tbl_employees.fingerprint_id ORDER BY tbl_employees.emp_id DESC;";
 $result_employees = mysqli_query($conn, $get_employees);
+$get_fingerprints = "SELECT *, DATE_FORMAT(tbl_fingerprints.created_at, '%M %d, %Y %H:%i:%s') as created_date FROM pmswa.tbl_fingerprints;";
+$result_fingerprints = mysqli_query($conn, $get_fingerprints);
+
 
 ?>
 
@@ -125,7 +127,7 @@ $result_employees = mysqli_query($conn, $get_employees);
                 <td class="text-center"><?php echo $row['emp_status'] ?></td>
                 <td class="hidden"><?php echo $row['role_id'] ?></td>
                 <td class="text-center"><?php echo $row['role_name'] ?></td>
-                <td class="hidden"><?php echo $row['emp_fingerprint'] ?></td>
+                <td class="hidden"><?php echo $row['fingerprint_string'] ?></td>
                 <td class="text-center"><?php echo $row['emp_processed_by'] ?></td>
                 <td class="text-center"><?php echo $row['created_date'] ?></td>
                 <td class="hidden"><?php echo $row['emp_image'] ?></td>

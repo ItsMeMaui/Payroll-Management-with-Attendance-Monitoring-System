@@ -36,8 +36,6 @@ $result_reports_name = mysqli_query($conn, $get_reports_name);
 
 
 
-
-
 <div class="p-4 md:ml-64 overflow-y-auto dark:bg-gray-900 h-screen dark:text-white text-black">
     <div class="p-4 border-2 border-gray-200 mt-16 border-dashed rounded-lg dark:border-gray-700">
         <nav class="flex" aria-label="Breadcrumb">
