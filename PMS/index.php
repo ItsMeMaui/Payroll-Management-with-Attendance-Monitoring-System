@@ -16,7 +16,11 @@ $get_employees = "SELECT *, DATE_FORMAT(tbl_attendances.attendance_date, '%M %d,
                 WHERE tbl_attendances.attendance_date = '$current_date'
                 ORDER BY tbl_attendances.created_at DESC;";
 $result_employees = mysqli_query($conn, $get_employees);
-
+$get_latest_fingerprint = "SELECT fingerprint_string
+                            FROM tbl_fingerprints
+                            ORDER BY fingerprint_id DESC
+                            LIMIT 1;";
+$result_fingerprints = mysqli_query($conn, $get_latest_fingerprint);
 $current_day = date('w');
 $current_hour = date('H');
 $current_minute = date('i');
@@ -130,7 +134,13 @@ $current_minute = date('i');
                     <option value="time-in" selected>Time In</option>
                     <option value="time-out">Time Out</option>
                 </select>
-                <input type="text" name="fingerprint" class="block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Scan Fingerprint">
+                            <?php
+            while ($row = mysqli_fetch_array($result_fingerprints)) {
+            ?>
+                
+                <input type="text" name="fingerprint"  class="block w-full  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Scan Fingerprint">
+
+               <?php } ?>
                 <?php
                 if (isset($_SESSION['mess'])) {
                     echo $_SESSION['mess'];
@@ -152,7 +162,11 @@ $current_minute = date('i');
             </form>
         </div>
     </div>
-
+<!-- <script>
+    window.setTimeout( function() {
+  window.location.reload();
+}, 5000);
+</script> -->
 </body>
 
 

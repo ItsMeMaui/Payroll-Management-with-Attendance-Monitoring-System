@@ -20,9 +20,9 @@
                 <form action="../includes/signup.inc.php" method="POST" enctype="multipart/form-data">
                     <div class="flex flex-col md:flex-row gap-5">
                         <div class="flex justify-center items-center flex-col gap-5">
-                            <img id="inIm" src="../images/uploads/defaultProfile.jpg" alt="your image" class="rounded-full border-2 w-64 h-64" />
+                            <img draggable="false" id="inIm" src="../images/uploads/defaultProfile.jpg" alt="your image" class="rounded-full border-2 w-64 h-64" />
                             <div class="input-file ">
-                                <input style="display: none;" accept="image/*" type="file" name="imageInput" id="imageInput" />
+                                <input  style="display: none;" accept="image/*" type="file" name="imageInput" id="imageInput" />
                                 <a class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 cursor-pointer" onclick="document.getElementById('imageInput').click();">
                                     Upload Image
                                 </a>
@@ -75,8 +75,8 @@
                             </div>
                             <div class="flex flex-col md:flex-row gap-5">
                                 <div class="flex flex-col">
-                                    <label for="fingerprintID" class="block mb-2 text-md font-medium text-gray-900 dark:text-white"><span class="text-red-500">*</span> Your Fingerprint </label>
-                                    <input readonly type="text" id="fingerprintID" name="fingerprint" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <label for="fingerprintID" class="block mb-2 text-md font-medium text-gray-900 dark:text-white"><span class="text-red-500">*</span>Fingerprint ID</label>
+                                    <input type="text" id="fingerprintID" name="fingerprint" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     <div class="mt-5">
                                          <a href="fingerprints.php" target="_blank" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Get Fingerprint</a>
                                     </div>

@@ -5,6 +5,7 @@ if (isset($_POST['register_employee'])) {
     }else{
         $emp_image = $_FILES['imageInput']['name'];
     }
+    
         $emp_fname = ucwords($_POST['fname']);
         $emp_mname = ucwords($_POST['mname']);
         $emp_lname = ucwords($_POST['lname']);

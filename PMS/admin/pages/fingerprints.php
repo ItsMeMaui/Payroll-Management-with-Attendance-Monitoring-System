@@ -10,9 +10,10 @@ $dbPassword = "";
 $dbName = "pmswa";
 
 $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
-$get_fingerprints = "SELECT *,DATE_FORMAT(tbl_fingerprints.created_at, '%M %d, %Y')  as created_date
-				FROM tbl_fingerprints
-                ORDER BY tbl_fingerprints.fingerprint_id DESC;";
+$get_fingerprints = "SELECT f.fingerprint_id, f.fingerprint_string,DATE_FORMAT(f.created_at, '%M %d, %Y - %H:%i:%s') as created_date
+FROM tbl_fingerprints f
+LEFT JOIN tbl_employees e ON f.fingerprint_id = e.fingerprint_id
+WHERE e.fingerprint_id IS NULL ORDER BY f.fingerprint_id DESC LIMIT 5;";
 $result_fingerprints = mysqli_query($conn, $get_fingerprints);
 ?>
 
@@ -78,7 +79,7 @@ $result_fingerprints = mysqli_query($conn, $get_fingerprints);
     </div>
 </div>
 <script>
-	window.setTimeout( function() {
+    window.setTimeout( function() {
   window.location.reload();
 }, 5000);
 </script>

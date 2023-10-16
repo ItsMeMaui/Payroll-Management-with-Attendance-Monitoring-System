@@ -663,5 +663,29 @@ if (isset($_GET['error'])) {
             });
         </script>";
     };
-    
+
+    if ($errorMessage == "NoFingerprintIDFound") {
+        $modalMessage = "No Fingerprint ID Found";
+        $error = "Error";
+        echo "<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var modal = document.getElementById('modalmoulomo');
+                modal.classList.remove('hidden');
+
+                var modalHeader = modal.querySelector('.modal-header');
+                modalHeader.classList.add( 'dark:text-red-500', 'text-red-500','text-2xl');
+                modalHeader.textContent = '$error';
+
+                // Update the modal message
+                var modalBody = modal.querySelector('.modal-body');
+                modalBody.classList.add( 'dark:text-white', 'text-black', );
+                modalBody.textContent = '$modalMessage';
+                
+                var closeButton = modal.querySelector('[data-modal-hide]');
+                closeButton.addEventListener('click', function() {
+                    modal.classList.add('hidden');
+                });
+            });
+        </script>";
+    };
 }
