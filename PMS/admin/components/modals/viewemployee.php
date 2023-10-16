@@ -19,7 +19,7 @@
                 <form action="../includes/signup.inc.php" method="POST" enctype="multipart/form-data">
                     <div class="flex flex-col md:flex-row gap-5">
                         <div class="flex justify-center items-center flex-col gap-5">
-                            <img id="viewImage"   alt="your image" class="border-2 w-64 h-64 rounded-full" />
+                            <img draggable="false" id="viewImage"   alt="your image" class="border-2 w-64 h-64 rounded-full" />
 
                         </div>
                         <div class="flex flex-col gap-5 md:ml-10">
@@ -75,8 +75,8 @@
                                 </div>
                             </div>
                             <div>
-                            	<label for="lnameID" class="block mb-2 text-md font-medium text-gray-900 dark:text-white">Processed By</label>
-                    			<input disabled type="text" id="viewempprocessedby" name="lname" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-not-allowed">
+                                <label for="lnameID" class="block mb-2 text-md font-medium text-gray-900 dark:text-white">Processed By</label>
+                                <input disabled type="text" id="viewempprocessedby" name="lname" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-not-allowed">
                             </div>
                         </div>
                     </div>

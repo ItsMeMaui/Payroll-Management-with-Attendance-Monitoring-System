@@ -1,45 +1,65 @@
 <?php
 
 
-class updateEmp extends Db
+class UpdateEmp extends Db
 {
-    protected function updateEmpAcc($updateImage,$update_emp_fname, $update_emp_mname, $update_emp_lname, $update_emp_gender, $update_emp_dateofbirth, $update_emp_fingerprint, $update_emp_status,$update_role_id, $update_processed_by, $updateUser, $create)
+    protected function updateEmpAcc($updateImage, $update_emp_fname, $update_emp_mname, $update_emp_lname, $update_emp_gender, $update_emp_dateofbirth, $update_emp_fingerprint, $update_emp_status, $update_role_id, $update_processed_by, $updateUser, $create)
     {
-        $conn = $this->connect();
+        $conn = $this->connect(); // Assuming the connect method is part of the Db class.
 
+        // Check if the fingerprint exists
+        $checkFingerprintID = "SELECT fingerprint_id FROM tbl_fingerprints WHERE fingerprint_id = :fingerprint_id";
+        $stmt = $conn->prepare($checkFingerprintID);
+        $stmt->bindValue(':fingerprint_id', $update_emp_fingerprint);
+        $stmt->execute();
+        $result_FI = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($_FILES['updateImage']['error'] === UPLOAD_ERR_OK) { 
-        $newImage = $_FILES['updateImage']['name'];
-        $tempImage = $_FILES['updateImage']['tmp_name'];
+        if ($result_FI) {
+            // Fingerprint exists, proceed with the update
+            $updateImageQuery = $_FILES['updateImage']['error'] === UPLOAD_ERR_OK ? 'emp_image = :emp_image,' : '';
+            
+            $updateStmt = $conn->prepare("UPDATE tbl_employees SET $updateImageQuery emp_fname = :emp_fname, emp_mname = :emp_mname, emp_lname = :emp_lname, emp_gender = :emp_gender, emp_dateofbirth = :emp_dateofbirth, fingerprint_id = :fingerprint_id, emp_status = :emp_status, role_id = :role_id, processed_by = :processed_by, created_at = NOW() WHERE emp_id = :emp_id");
 
+            if ($_FILES['updateImage']['error'] === UPLOAD_ERR_OK) {
+                $newImage = $_FILES['updateImage']['name'];
+                $tempImage = $_FILES['updateImage']['tmp_name'];
+                move_uploaded_file($tempImage, "../images/uploads/" . $newImage);
+                $updateStmt->bindValue(':emp_image', $newImage);
+            }
+            
+            $updateStmt->bindValue(':emp_fname', $update_emp_fname);
+            $updateStmt->bindValue(':emp_mname', $update_emp_mname);
+            $updateStmt->bindValue(':emp_lname', $update_emp_lname);
+            $updateStmt->bindValue(':emp_gender', $update_emp_gender);
+            $updateStmt->bindValue(':emp_dateofbirth', $update_emp_dateofbirth);
+            $updateStmt->bindValue(':fingerprint_id', $update_emp_fingerprint);
+            $updateStmt->bindValue(':emp_status', $update_emp_status);
+            $updateStmt->bindValue(':role_id', $update_role_id);
+            $updateStmt->bindValue(':processed_by', $update_processed_by);
+            $updateStmt->bindValue(':emp_id', $updateUser);
 
-        move_uploaded_file($tempImage, "../images/uploads/" . $newImage);
+            if ($updateStmt->execute()) {
+                // Insert a log record
+                $logStmt = $conn->prepare('INSERT INTO tbl_logs (action, processed_by) VALUES (:action, :processed_by)');
+                $logStmt->bindValue(':action', $create);
+                $logStmt->bindValue(':processed_by', $update_processed_by);
 
-
-        $stmt = $conn->prepare('UPDATE tbl_employees SET emp_image=?, emp_fname=?, emp_mname=?, emp_lname=?,emp_gender=?,emp_dateofbirth=?, emp_fingerprint=?, emp_status=?, role_id=?, processed_by=?, created_at = NOW() WHERE emp_id = ?;');
-        if (!$stmt->execute(array($newImage, $update_emp_fname, $update_emp_mname, $update_emp_lname,$update_emp_gender, $update_emp_dateofbirth, $update_emp_fingerprint, $update_emp_status, $update_role_id, $update_processed_by, $updateUser))) {
-            header("location: ../pages/employees.php?error=StatementFailed");
-            exit();
-        }
-    } else {
-
-                $stmt = $conn->prepare('UPDATE tbl_employees SET emp_fname=?, emp_mname=?, emp_lname=?,emp_gender=?,emp_dateofbirth=?, emp_fingerprint=?, emp_status=?, role_id=?, processed_by=?, created_at = NOW() WHERE emp_id = ?;');
-
-                if (!$stmt->execute(array($update_emp_fname, $update_emp_mname, $update_emp_lname,$update_emp_gender, $update_emp_dateofbirth, $update_emp_fingerprint, $update_emp_status, $update_role_id, $update_processed_by, $updateUser))) {
+                if (!$logStmt->execute()) {
                     header("location: ../pages/employees.php?error=StatementFailed");
                     exit();
                 }
-            }
-
-
-            $stmt = $conn->prepare('INSERT INTO tbl_logs (action, processed_by) VALUES (?, ?);');
-
-            if (!$stmt->execute(array($create, $update_processed_by))) {
+            } else {
                 header("location: ../pages/employees.php?error=StatementFailed");
                 exit();
             }
+        } else {
+            header("location: ../pages/employees.php?error=NoFingerprintIDFound");
+            exit();
         }
     }
+}
+
+
 
 
 class updateUser extends Db

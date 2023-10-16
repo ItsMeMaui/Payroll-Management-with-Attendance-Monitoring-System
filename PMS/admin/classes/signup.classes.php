@@ -5,24 +5,37 @@ class SignupEmp extends Db
 
     protected function setEmp($emp_image ,$emp_fname, $emp_mname, $emp_lname,$emp_gender,$emp_dateofbirth, $emp_fingerprint, $status , $role_id,$processed_by, $create)
     {
+        $dbServername = "Localhost";
+        $dbUsername = "root";
+        $dbPassword = "";
+        $dbName = "pmswa";
 
-        $stmt = $this->connect()->prepare('INSERT INTO tbl_employees(emp_image, emp_fname, emp_mname, emp_lname,emp_gender,emp_dateofbirth ,emp_fingerprint, emp_status,role_id,processed_by) VALUES  (?,?,?,?,?,?,?,?,?,?);');
+        $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 
+        $checkFingerprintID = "SELECT fingerprint_id FROM tbl_fingerprints where fingerprint_id =".$emp_fingerprint."";
+        $result_FI = mysqli_query($conn, $checkFingerprintID);
+        if ($row = mysqli_fetch_assoc($result_FI)) {
+            $stmt = $this->connect()->prepare('INSERT INTO tbl_employees(emp_image, emp_fname, emp_mname, emp_lname,emp_gender,emp_dateofbirth ,fingerprint_id, emp_status,role_id,processed_by) VALUES  (?,?,?,?,?,?,?,?,?,?);');
 
-        if (!$stmt->execute(array($emp_image,$emp_fname, $emp_mname, $emp_lname,$emp_gender,$emp_dateofbirth, $emp_fingerprint, $status,$role_id, $processed_by))) {
+            if (!$stmt->execute(array($emp_image,$emp_fname, $emp_mname, $emp_lname,$emp_gender,$emp_dateofbirth, $emp_fingerprint, $status,$role_id, $processed_by))) {
+                $stmt = null;
+                header("location: ../pages/employees.php?error=StatementFailed");
+                exit();
+            }
+            $stmt = $this->connect()->prepare('INSERT INTO tbl_logs (action, processed_by) VALUES (?,?);');
+    
+            if (!$stmt->execute(array($create, $processed_by))) {
+                $stmt = null;
+                header("location: ../pages/employees.php?error=StatementFailed");
+                exit();
+            }
+            move_uploaded_file($_FILES["imageInput"]["tmp_name"], "../images/uploads/" . $_FILES["imageInput"]["name"]);
             $stmt = null;
-            header("location: ../pages/employees.php?error=StatementFailed");
+        }else{
+            header("location: ../pages/employees.php?error=NoFingerprintIDFound");
             exit();
         }
-        $stmt = $this->connect()->prepare('INSERT INTO tbl_logs (action, processed_by) VALUES (?,?);');
 
-        if (!$stmt->execute(array($create, $processed_by))) {
-            $stmt = null;
-            header("location: ../pages/employees.php?error=StatementFailed");
-            exit();
-        }
-        move_uploaded_file($_FILES["imageInput"]["tmp_name"], "../images/uploads/" . $_FILES["imageInput"]["name"]);
-        $stmt = null;
     }
 }
 

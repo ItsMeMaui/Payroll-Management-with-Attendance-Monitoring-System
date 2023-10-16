@@ -18,7 +18,7 @@
             <!-- Modal body -->
             <div class="p-6 space-y-6">
                 <form action="../includes/update.inc.php" method="POST">
-                	<input type="hidden" id="updateuserIDvalue" name="update_user_id">
+                    <input type="hidden" id="updateuserIDvalue" name="update_user_id">
                     <input type="hidden" id="update_current_username" name="update_current_username">
 
                     <div class="mb-6">

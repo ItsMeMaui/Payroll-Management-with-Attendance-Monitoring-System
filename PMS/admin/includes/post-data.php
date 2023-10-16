@@ -9,10 +9,10 @@ $api_key_value = "tPmAT5Ab3j7F9";
 
 $api_key = $fingerprint = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") { 
+if ($_SERVER["REQUEST_METHOD"] == "GET") { 
 
-    if (isset($_GET["fingerprint"])) { 
-        $fingerprint = test_input($_GET["fingerprint"]);
+    if (isset($_GET["id"])) { 
+        $id = test_input($_GET["id"]);
 
         $conn = mysqli_connect($servername, $username, $password, $dbname);
 
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         $sql = "INSERT INTO tbl_fingerprints (fingerprint_string)
-        VALUES ('" . $fingerprint . "')"; 
+        VALUES ('pmswa_".$id."')"; 
 
         if ($conn->query($sql) === TRUE) {
             echo "New record created successfully";

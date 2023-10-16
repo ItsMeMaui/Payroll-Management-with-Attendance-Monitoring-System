@@ -9,13 +9,13 @@ include_once '../components/sidebar.php';
 
 
 $get_users = "SELECT *, 
-		        DATE_FORMAT(tbl_users.created_at, '%M %d, %Y') as created_date,
-		        tbl_roles.role_name as employee_role
-    				FROM tbl_employees
-    				INNER JOIN tbl_users ON tbl_employees.emp_id = tbl_users.emp_id
-    				INNER JOIN tbl_roles ON tbl_employees.role_id = tbl_roles.role_id
-    				WHERE tbl_employees.role_id = 1 OR tbl_roles.role_name = 'admin|Admin'
-    				ORDER BY tbl_employees.emp_id DESC;";
+            DATE_FORMAT(tbl_users.created_at, '%M %d, %Y') as created_date,
+            tbl_roles.role_name as employee_role
+            FROM tbl_employees
+            INNER JOIN tbl_users ON tbl_employees.emp_id = tbl_users.emp_id
+            INNER JOIN tbl_roles ON tbl_employees.role_id = tbl_roles.role_id
+            WHERE tbl_employees.role_id = 1 OR tbl_roles.role_name = 'admin|Admin'
+            ORDER BY tbl_employees.emp_id DESC;";
 $result_users = mysqli_query($conn, $get_users);
 
 

@@ -25,17 +25,18 @@ if (isset($_POST['login'])) {
       $query = "SELECT *
                 FROM tbl_fingerprints 
                 INNER JOIN tbl_employees
-                WHERE tbl_fingerprints.fingerprint_string = '$fingerprint'";
+                WHERE tbl_fingerprints.fingerprint_string = '$fingerprint' and tbl_employees.fingerprint_id = tbl_fingerprints.fingerprint_id";
       $result = mysqli_query($conn, $query);
       if ($row1 = mysqli_fetch_assoc($result)) {
         $emp_id = $row1['emp_id'];
-        $sql = "SELECT MAX(a.attendance_timeout) AS last_timeout, a.attendance_id, a.emp_id, a.attendance_timein
+        $sql = "SELECT MAX(a.attendance_timeout) AS last_timeout, a.attendance_id, a.emp_id, a.attendance_timein,a.attendance_date
                 FROM tbl_attendances a
                 WHERE a.emp_id = $emp_id";
         $check_timeout = mysqli_query($conn, $sql);
         if ($row = mysqli_fetch_assoc($check_timeout)) {
+          $last_attendance_date = $row['attendance_date'];
           $last_timeout = $row['last_timeout'];
-          if ($last_timeout == "00:00:00") {
+          if ($last_timeout == "00:00:00" && $last_attendance_date != date("Y-m-d")) {
             $last_timeout = '15:00:00';
             $last_timein = $row['attendance_timein'];
             $last_emp_id = $row['emp_id'];
@@ -137,9 +138,9 @@ if (isset($_POST['login'])) {
     $fingerprint = $_POST['fingerprint'];
     if (!$fingerprint == "") {
       $sql = "SELECT *
-                FROM tbl_fingerprints 
-                INNER JOIN tbl_employees
-                WHERE tbl_fingerprints.fingerprint_string = '$fingerprint'";;
+      FROM tbl_fingerprints 
+      INNER JOIN tbl_employees
+      WHERE tbl_fingerprints.fingerprint_string = '$fingerprint' and tbl_employees.fingerprint_id = tbl_fingerprints.fingerprint_id";;
       $result = mysqli_query($conn, $sql);
       if (!$row = $result->fetch_assoc()) {
         $_SESSION['mess'] = '<div class="relative z-0">
